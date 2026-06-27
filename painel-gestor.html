@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no">
-<title>EventLink · Profissional</title>
-<link rel="manifest" href="manifest-profissional.json">
-<meta name="theme-color" content="#D946EF">
+<title>EventLink · Gestor</title>
+<link rel="manifest" href="manifest-gestor.json">
+<meta name="theme-color" content="#1E293B">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -63,7 +63,7 @@ button{padding:.65rem 1.25rem;border:none;border-radius:10px;font-size:.9rem;fon
 .btn-logout{background:none;color:var(--danger);font-weight:700;padding:.4rem .7rem;min-height:36px;font-size:.8rem}
 
 /* ── MAIN / CONTENT ── */
-#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#appShell{flex:1;flex-direction:column;overflow:hidden}
 .content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:860px;margin:0 auto;width:100%}
 section{display:none}
 section.active{display:block}
@@ -244,21 +244,24 @@ td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
 }
 .desktop-sidebar{display:none}
 </style>
+<style>
+.stat-card.dark{background:linear-gradient(135deg,var(--dark-light),var(--dark-lighter))}
+</style>
 </head>
 <body>
 <div id="configBanner">⚠️ Firebase não configurado.</div>
 
-<header>
+<header style="background:var(--dark-light);border-bottom-color:#334155">
   <div class="header-container">
-    <a href="index.html" class="logo">
-      <div class="logo-icon" style="background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%)">⚡</div>
+    <a href="index.html" class="logo" style="color:#e2e8f0">
+      <div class="logo-icon" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary-dark))">⚡</div>
       <span>EventLink</span>
-      <span class="role-pill professional">Profissional</span>
+      <span class="role-pill admin">Gestor</span>
     </a>
     <div class="header-right">
       <span class="conn-dot" id="connDot"></span>
-      <div class="user-avatar" style="background:linear-gradient(135deg,var(--secondary),var(--primary))" id="userAvatarHeader">E</div>
-      <button class="btn-logout" onclick="app.logout()">Sair</button>
+      <div class="user-avatar" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary))" id="userAvatarHeader">G</div>
+      <button class="btn-logout" onclick="app.logout()" style="color:#94a3b8">Sair</button>
     </div>
   </div>
 </header>
@@ -267,212 +270,157 @@ td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
 <div class="auth-shell" id="authShell">
   <div class="auth-card">
     <div class="auth-brand">
-      <div class="auth-logo" style="background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%)">💼</div>
-      <h1 style="font-size:1.5rem;font-weight:800;font-family:'Sora',sans-serif;color:var(--dark)">Área do Profissional</h1>
-      <p style="color:var(--gray-600);margin-top:.4rem;font-size:.9rem">Monte seu perfil e receba solicitações de clientes</p>
+      <div class="auth-logo" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary-dark))">👨‍💼</div>
+      <h1 style="font-size:1.5rem;font-weight:800;font-family:'Sora',sans-serif;color:var(--dark)">Painel Gerencial</h1>
+      <p style="color:var(--gray-600);margin-top:.4rem;font-size:.9rem">Gerencie a plataforma EventLink</p>
     </div>
     <div class="card" id="loginCard">
-      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="gestor@email.com" autocomplete="email"></div>
       <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-      <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--secondary),var(--primary))">Entrar</button>
-      <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta de profissional</button>
+      <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Entrar</button>
+      <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta de gestor</button>
     </div>
     <div class="card" id="signupCard" style="display:none">
-      <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
-      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
-      <div class="form-group"><label>Telefone (requer aprovação do gestor)</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
-      <div class="form-group"><label>Cidade / Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
-      <div class="form-group"><label>Descrição profissional</label><textarea id="signupDescription" placeholder="Fale sobre você e seus serviços..."></textarea></div>
-      <div class="form-group"><label>Especialidades</label>
-        <div class="specialties-grid">
-          <div class="specialty-badge" data-specialty="Fotografia">📷 Fotografia</div>
-          <div class="specialty-badge" data-specialty="Filmagem">🎬 Filmagem</div>
-          <div class="specialty-badge" data-specialty="DJ">🎵 DJ</div>
-          <div class="specialty-badge" data-specialty="Catering">🍽️ Catering</div>
-          <div class="specialty-badge" data-specialty="Decoração">🎨 Decoração</div>
-          <div class="specialty-badge" data-specialty="Locação">🏢 Locação</div>
-          <div class="specialty-badge" data-specialty="Maquiagem">💄 Maquiagem</div>
-          <div class="specialty-badge" data-specialty="Floricultura">🌹 Floricultura</div>
-          <div class="specialty-badge" data-specialty="Cerimonial">👰 Cerimonial</div>
-          <div class="specialty-badge" data-specialty="Buffet">🍰 Buffet</div>
-        </div>
+      <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="gestor@email.com"></div>
+      <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••"></div>
+      <div class="form-group"><label>Código de Gestor</label><input type="password" id="signupAdminCode" placeholder="Código de acesso">
+        <small style="color:var(--gray-600);margin-top:.25rem;display:block">Padrão: EVENTLINK-ADMIN (altere no HTML)</small>
       </div>
-      <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--secondary),var(--primary))">Criar conta</button>
+      <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Criar conta</button>
       <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar ao login</button>
     </div>
   </div>
 </div>
 
 <!-- APP -->
-<div id="appShell" style="display:none;flex:1;flex-direction:column">
-  <div class="desktop-sidebar" id="desktopSidebar">
-    <div class="sidebar-title">Profissional</div>
-    <div class="sidebar-item active" data-section="profDashboard">📊 Dashboard</div>
-    <div class="sidebar-item" data-section="profRequests">📨 Solicitações</div>
-    <div class="sidebar-item" data-section="profAds">📢 Anúncios</div>
-    <div class="sidebar-item" data-section="editProfile">✏️ Perfil</div>
-    <div class="sidebar-item" data-section="portfolio">🖼️ Portfólio</div>
-    <div class="sidebar-item" data-section="messages">💬 Mensagens</div>
+<div id="appShell" style="display:none">
+  <div class="desktop-sidebar" id="desktopSidebar" style="background:#1e293b;border-right-color:#334155">
+    <div class="sidebar-title" style="color:#64748b">Gestor</div>
+    <div class="sidebar-item active" data-section="adminDashboard" style="color:#94a3b8">📊 Dashboard</div>
+    <div class="sidebar-item" data-section="adminUsers" style="color:#94a3b8">👥 Usuários</div>
+    <div class="sidebar-item" data-section="adminAds" style="color:#94a3b8">📢 Anúncios</div>
+    <div class="sidebar-item" data-section="adminAnalytics" style="color:#94a3b8">📈 Análises</div>
   </div>
 
   <div class="content-area" id="contentArea">
 
     <!-- DASHBOARD -->
-    <section id="profDashboard" class="active">
+    <section id="adminDashboard" class="active">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Olá, <span id="profName">Profissional</span>! 💼</h1>
-          <p class="page-subtitle">Gerencie seu perfil e solicitações</p>
-        </div>
+        <div><h1 class="page-title">Painel Gerencial 👨‍💼</h1><p class="page-subtitle">Visão geral da plataforma</p></div>
       </div>
-      <div id="phoneStatusBadge" style="margin-bottom:.75rem"></div>
       <div class="stats-row">
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--secondary),var(--primary))"><div class="stat-label">Visualizações</div><div class="stat-number" id="profViews">0</div></div>
-        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="profRequests">0</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--accent),var(--primary))"><div class="stat-label">Fotos</div><div class="stat-number" id="profPhotos">0</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--warning),#d97706)"><div class="stat-label">Avaliação</div><div class="stat-number" id="profRating">5.0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Acessos Totais</div><div class="stat-number" id="adminTotalAccess">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Usuários</div><div class="stat-number" id="adminTotalUsers">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Profissionais</div><div class="stat-number" id="adminActiveProfessionals">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Solicitações</div><div class="stat-number" id="adminBudgets">0</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📱 Telefones Pendentes de Aprovação</div>
+        <div id="pendingPhonesList">
+          <div class="empty-state" style="padding:1.5rem 0"><p>Nenhum telefone pendente</p></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🕐 Atividades Recentes</div>
+        <div id="adminActivityList" style="max-height:320px;overflow-y:auto">
+          <div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- USUÁRIOS -->
+    <section id="adminUsers">
+      <div class="page-header"><div><h1 class="page-title">Usuários 👥</h1><p class="page-subtitle">Gerencie todos os usuários</p></div></div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Nome</th><th>Tipo</th><th>Região</th><th>Telefone</th><th>Ação</th>
+            </tr></thead>
+            <tbody id="adminUsersList">
+              <tr><td colspan="5" style="text-align:center;padding:2rem">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANÚNCIOS -->
+    <section id="adminAds">
+      <div class="page-header">
+        <div><h1 class="page-title">Anúncios 📢</h1><p class="page-subtitle">Gerencie todos os anúncios da plataforma</p></div>
+        <button class="btn-primary btn-small" onclick="app.openAdModal()" style="background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">+ Novo</button>
+      </div>
+      <!-- Anúncios globais do gestor -->
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-title">Anúncios Globais (criados pelo Gestor)</div>
+        <div id="adminAdsList" class="history-list" style="margin-top:.75rem">
+          <div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>
+        </div>
+      </div>
+      <!-- Anúncios de profissionais -->
+      <div class="card">
+        <div class="card-title">Anúncios de Profissionais</div>
+        <div id="profAdsAdminList" class="history-list" style="margin-top:.75rem">
+          <div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANÁLISES -->
+    <section id="adminAnalytics">
+      <div class="page-header"><h1 class="page-title">Análises 📈</h1></div>
+      <div class="stats-row" style="margin-bottom:1rem">
+        <div class="stat-card dark"><div class="stat-label">Acessos Hoje</div><div class="stat-number" id="statsVisualizacoes">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Cadastros Hoje</div><div class="stat-number" id="statsRegistros">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Solicitações Hoje</div><div class="stat-number" id="statsSolicitacoes">0</div></div>
+        <div class="stat-card dark"><div class="stat-label">Anúncios Ativos</div><div class="stat-number" id="statsAds">0</div></div>
       </div>
       <div class="card">
-        <div class="card-title">Acesso rápido</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
-          <button class="btn-secondary" onclick="app.showSection('profRequests')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">📨</span><span style="font-size:.8rem">Solicitações</span>
-          </button>
-          <button class="btn-secondary" onclick="app.showSection('profAds')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">📢</span><span style="font-size:.8rem">Meus Anúncios</span>
-          </button>
-          <button class="btn-secondary" onclick="app.showSection('editProfile')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">✏️</span><span style="font-size:.8rem">Editar Perfil</span>
-          </button>
-          <button class="btn-secondary" onclick="app.showSection('portfolio')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">🖼️</span><span style="font-size:.8rem">Portfólio</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOLICITAÇÕES -->
-    <section id="profRequests">
-      <div class="page-header"><div><h1 class="page-title">Solicitações 📨</h1><p class="page-subtitle">Propostas de clientes para você</p></div></div>
-      <div class="history-list" id="profRequestsList">
-        <div class="empty-state"><div class="empty-icon">📨</div><p>Nenhuma solicitação ainda</p><p style="font-size:.85rem;margin-top:.5rem">Complete seu perfil para aparecer nas buscas</p></div>
-      </div>
-    </section>
-
-    <!-- ANÚNCIOS DO PROFISSIONAL -->
-    <section id="profAds">
-      <div class="page-header">
-        <div><h1 class="page-title">Meus Anúncios 📢</h1><p class="page-subtitle">Divulgue seus serviços para mais clientes</p></div>
-        <button class="btn-primary btn-small" onclick="app.openAdModal()" style="background:linear-gradient(135deg,var(--secondary),var(--primary))">+ Anúncio</button>
-      </div>
-      <div id="profAdsList">
-        <div class="empty-state"><div class="empty-icon">📢</div><p>Nenhum anúncio criado</p><p style="font-size:.85rem;margin-top:.5rem">Anúncios aparecem na busca de contratantes e no início da plataforma</p></div>
-      </div>
-    </section>
-
-    <!-- EDITAR PERFIL -->
-    <section id="editProfile">
-      <div class="page-header"><div><h1 class="page-title">Editar Perfil ✏️</h1></div></div>
-      <div class="card">
-        <div class="form-group"><label>Nome</label><input type="text" id="editName" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="editEmail" disabled style="opacity:.6"></div>
-        <div class="form-group"><label>Telefone</label><input type="tel" id="editPhone" placeholder="(00) 99999-9999"></div>
-        <div class="form-group"><label>Cidade / Região</label><input type="text" id="editRegion" placeholder="Maceió, AL"></div>
-        <div class="form-group"><label>Descrição</label><textarea id="editDescription" placeholder="Fale sobre você..."></textarea></div>
-        <div class="form-group"><label>Especialidades</label>
-          <div class="specialties-grid">
-            <div class="specialty-badge" data-specialty="Fotografia">📷 Fotografia</div>
-            <div class="specialty-badge" data-specialty="Filmagem">🎬 Filmagem</div>
-            <div class="specialty-badge" data-specialty="DJ">🎵 DJ</div>
-            <div class="specialty-badge" data-specialty="Catering">🍽️ Catering</div>
-            <div class="specialty-badge" data-specialty="Decoração">🎨 Decoração</div>
-            <div class="specialty-badge" data-specialty="Locação">🏢 Locação</div>
-            <div class="specialty-badge" data-specialty="Maquiagem">💄 Maquiagem</div>
-            <div class="specialty-badge" data-specialty="Floricultura">🌹 Floricultura</div>
-            <div class="specialty-badge" data-specialty="Cerimonial">👰 Cerimonial</div>
-            <div class="specialty-badge" data-specialty="Buffet">🍰 Buffet</div>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="app.saveProfile()" style="width:100%;background:linear-gradient(135deg,var(--secondary),var(--primary))">💾 Salvar Perfil</button>
-      </div>
-    </section>
-
-    <!-- PORTFÓLIO -->
-    <section id="portfolio">
-      <div class="page-header">
-        <div><h1 class="page-title">Portfólio 🖼️</h1><p class="page-subtitle">Suas melhores fotos de eventos</p></div>
-        <button class="btn-primary btn-small" onclick="app.openPortfolioModal()" style="background:linear-gradient(135deg,var(--secondary),var(--primary))">+ Foto</button>
-      </div>
-      <div class="portfolio-grid" id="portfolioGrid">
-        <div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📷</div><p>Portfólio vazio</p><p style="font-size:.85rem;margin-top:.5rem">Adicione fotos para atrair mais clientes</p></div>
-      </div>
-    </section>
-
-    <!-- MENSAGENS -->
-    <section id="messages">
-      <div class="page-header"><h1 class="page-title">Mensagens 💬</h1></div>
-      <div id="convListView">
-        <div class="card"><div class="card-title">Conversas com Clientes</div>
-          <div id="conversationsList"><div class="empty-state" style="padding:1.5rem 0"><p>Nenhuma conversa ainda</p></div></div>
-        </div>
-      </div>
-      <div id="chatView" style="display:none">
-        <button class="btn-secondary btn-small" onclick="app.backToConvList()" style="margin-bottom:.75rem">← Conversas</button>
-        <div class="chat-window" style="height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 130px)">
-          <div class="chat-header-bar" id="chatPeerName">Chat</div>
-          <div class="chat-messages" id="chatMessages"><div class="empty-state" style="padding:2rem 1rem"><div class="empty-icon">💬</div><p>Diga olá!</p></div></div>
-          <div class="chat-input-bar"><input type="text" id="messageInput" placeholder="Mensagem…"><button class="btn-primary" onclick="app.sendMessage()">Enviar</button></div>
+        <div class="card-title">Últimas Atividades</div>
+        <div id="lastActivities" style="max-height:400px;overflow-y:auto;margin-top:.75rem">
+          <div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>
         </div>
       </div>
     </section>
 
   </div>
 
-  <nav class="bottom-nav">
-    <div class="nav-item active" data-section="profDashboard"><span class="nav-icon">📊</span><span>Início</span></div>
-    <div class="nav-item" data-section="profRequests" style="position:relative">
-      <span class="nav-icon">📨</span><span>Pedidos</span>
-      <span class="nav-badge" id="reqBadge">0</span>
+  <nav class="bottom-nav" style="background:#1e293b;border-top-color:#334155">
+    <div class="nav-item active" data-section="adminDashboard" style="color:#94a3b8">
+      <span class="nav-icon">📊</span><span>Início</span>
     </div>
-    <div class="nav-item" data-section="profAds"><span class="nav-icon">📢</span><span>Anúncios</span></div>
-    <div class="nav-item" data-section="editProfile"><span class="nav-icon">✏️</span><span>Perfil</span></div>
-    <div class="nav-item" data-section="messages"><span class="nav-icon">💬</span><span>Chat</span></div>
+    <div class="nav-item" data-section="adminUsers" style="color:#94a3b8" id="navUsers">
+      <span class="nav-icon">👥</span><span>Usuários</span>
+      <span class="nav-badge" id="phoneBadge">0</span>
+    </div>
+    <div class="nav-item" data-section="adminAds" style="color:#94a3b8"><span class="nav-icon">📢</span><span>Anúncios</span></div>
+    <div class="nav-item" data-section="adminAnalytics" style="color:#94a3b8"><span class="nav-icon">📈</span><span>Análises</span></div>
   </nav>
 </div>
 
-<!-- MODAL: PORTFÓLIO -->
-<div class="modal" id="portfolioModal">
+<!-- MODAL: NOVO ANÚNCIO GLOBAL -->
+<div class="modal" id="newAdModal">
   <div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title">📷 Adicionar Foto</h2><button class="modal-close" onclick="app.closeModal('portfolioModal')">✕</button></div>
-    <div class="form-group"><label>Título</label><input type="text" id="portfolioTitle" placeholder="Ex: Casamento na praia"></div>
-    <div class="form-group"><label>Descrição</label><textarea id="portfolioDescription" placeholder="Descreva o evento..." style="min-height:70px"></textarea></div>
-    <div class="form-group"><label>Foto</label>
-      <div class="file-upload" onclick="document.getElementById('portfolioImage').click()">
-        <div style="font-size:2rem;margin-bottom:.5rem">📷</div>
-        <p style="font-size:.9rem;color:var(--gray-600)">Toque para selecionar (máx 900KB)</p>
-        <input type="file" id="portfolioImage" accept="image/*">
-      </div>
-      <div id="imagePreview" style="display:none;margin-top:.75rem"><img id="previewImg" style="width:100%;border-radius:10px;max-height:200px;object-fit:cover"></div>
+    <div class="modal-header"><h2 class="modal-title">📢 Criar Anúncio Global</h2><button class="modal-close" onclick="app.closeModal('newAdModal')">✕</button></div>
+    <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem">Anúncios globais aparecem para todos os usuários: contratantes, profissionais e na página inicial.</p>
+    <div class="form-group"><label>Título</label><input type="text" id="adTitle" placeholder="Ex: Promoção especial de verão"></div>
+    <div class="form-group"><label>Conteúdo</label><textarea id="adContent" placeholder="Descreva o anúncio..."></textarea></div>
+    <div class="form-group"><label>Posição</label>
+      <select id="adPosition">
+        <option value="top">Topo (todos os painéis)</option>
+        <option value="search">Busca de profissionais</option>
+        <option value="bottom">Rodapé</option>
+      </select>
     </div>
+    <div class="form-group"><label>Expira em</label><input type="date" id="adExpire"></div>
     <div class="modal-footer">
-      <button class="btn-secondary" onclick="app.closeModal('portfolioModal')">Cancelar</button>
-      <button class="btn-primary" onclick="app.uploadPortfolioImage()" style="background:linear-gradient(135deg,var(--secondary),var(--primary))">Adicionar</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: ANÚNCIO DO PROFISSIONAL -->
-<div class="modal" id="profAdModal">
-  <div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title">📢 Criar Anúncio</h2><button class="modal-close" onclick="app.closeModal('profAdModal')">✕</button></div>
-    <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem">Seu anúncio aparecerá na busca de contratantes e na página inicial da plataforma.</p>
-    <div class="form-group"><label>Título do anúncio</label><input type="text" id="profAdTitle" placeholder="Ex: Fotógrafo disponível para eventos"></div>
-    <div class="form-group"><label>Descrição</label><textarea id="profAdContent" placeholder="Descreva seus serviços, preços e diferenciais..." style="min-height:80px"></textarea></div>
-    <div class="form-group"><label>Válido até</label><input type="date" id="profAdExpire"></div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="app.closeModal('profAdModal')">Cancelar</button>
-      <button class="btn-primary" onclick="app.createProfAd()" style="background:linear-gradient(135deg,var(--secondary),var(--primary))">Publicar</button>
+      <button class="btn-secondary" onclick="app.closeModal('newAdModal')">Cancelar</button>
+      <button class="btn-primary" onclick="app.createAd()" style="background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Publicar</button>
     </div>
   </div>
 </div>
@@ -520,8 +468,7 @@ window.EventDB = EventDB;
 class BaseApp {
   constructor(role) {
     this.role = role; this.currentUser = null; this.selectedSpecialties = [];
-    this.currentChat = null; this.currentChatName = null;
-    this._subs = []; this._chatMsgUnsub = null; this._convUnsub = null;
+    this.currentChat = null; this._subs = []; this._chatMsgUnsub = null; this._convUnsub = null;
   }
   async boot() {
     this.wireConnectionIndicator(); this.setupCommonListeners();
@@ -563,20 +510,17 @@ class BaseApp {
     const name=(document.getElementById('signupName')?.value||'').trim();
     const email=(document.getElementById('signupEmail')?.value||'').trim().toLowerCase();
     const password=document.getElementById('signupPassword')?.value||'';
-    const phone=document.getElementById('signupPhone')?.value||'';
-    const region=document.getElementById('signupRegion')?.value||'';
     if(!name||!email||!password){this.showToast('Preencha nome, email e senha','error');return;}
+    if(this.role==='admin'){
+      const code=document.getElementById('signupAdminCode')?.value||'';
+      if(code!==(window.EVENTLINK_ADMIN_CODE||'')){this.showToast('❌ Código de gestor inválido','error');return;}
+    }
     try {
       const users=await EventDB.getAll('users');
       if(users.some(u=>(u.email||'').toLowerCase()===email)){this.showToast('❌ Email já cadastrado','error');return;}
       const id=Date.now().toString();
-      const user={id,name,email,phone,region,password,userType:this.role,createdAt:new Date().toISOString(),phoneApproved:false,
-        specialties:this.role==='professional'?this.selectedSpecialties:[],
-        description:this.role==='professional'?(document.getElementById('signupDescription')?.value||''):'',
-        portfolio:[],rating:5.0,views:0};
+      const user={id,name,email,password,userType:this.role,createdAt:new Date().toISOString(),phoneApproved:false,specialties:[],portfolio:[],rating:5.0,views:0};
       await EventDB.set('users',user);
-      if(this.role==='professional') await EventDB.set('professionals',user);
-      if(phone){const pid=id+'_phone'; await EventDB.set('phones',{id:pid,userId:id,phone,approved:false,createdAt:new Date().toISOString()});}
       this.currentUser=user; this.saveSession(); this.enterDashboard(); this.showToast('✨ Conta criada!','success');
     } catch(err){this.showToast('❌ Erro: '+(err?.message||err),'error');}
   }
@@ -589,11 +533,11 @@ class BaseApp {
   enterDashboard() {
     document.getElementById('authShell').style.display='none';
     document.getElementById('appShell').style.display='flex';
-    const av=document.getElementById('userAvatarHeader'); if(av) av.textContent=(this.currentUser.name||'?').charAt(0).toUpperCase();
+    const av=document.getElementById('userAvatarHeader'); if(av) av.textContent=(this.currentUser.name||'G').charAt(0).toUpperCase();
     const first=document.querySelector('.sidebar-item,.nav-item');
     const target=first?.getAttribute('data-section');
-    this.showSection(target||document.querySelector('section')?.id);
-    this.attachRealtime(); this.subscribeConversations(); this.onDashboardReady?.();
+    this.showSection(target||'adminDashboard');
+    this.attachRealtime(); this.onDashboardReady?.();
   }
   showSection(sectionId) {
     document.querySelectorAll('.content-area section').forEach(s=>s.classList.remove('active'));
@@ -604,80 +548,9 @@ class BaseApp {
     this.onSectionShown?.(sectionId);
   }
   attachRealtime() {}
-  detachRealtime() {
-    this._subs.forEach(u=>{try{u()}catch(_){}});this._subs=[];
-    if(this._chatMsgUnsub){this._chatMsgUnsub();this._chatMsgUnsub=null;}
-    if(this._convUnsub){this._convUnsub();this._convUnsub=null;}
-  }
+  detachRealtime() { this._subs.forEach(u=>{try{u()}catch(_){}});this._subs=[]; }
   track(unsub){if(typeof unsub==='function') this._subs.push(unsub);}
-  chatIdFor(a,b){return [a,b].sort().join('__');}
-  async openChatWith(otherId,otherName) {
-    if(!otherId||otherId===this.currentUser.id) return;
-    const chatId=this.chatIdFor(this.currentUser.id,otherId);
-    this.currentChat=chatId; this.currentChatName=otherName;
-    await EventDB.update(`chats/${chatId}/meta`,{participants:{[this.currentUser.id]:this.currentUser.name,[otherId]:otherName},updatedAt:Date.now()});
-    await EventDB.update(`userChats/${this.currentUser.id}/${chatId}`,{chatId,otherId,otherName,updatedAt:Date.now()});
-    await EventDB.update(`userChats/${otherId}/${chatId}`,{chatId,otherId:this.currentUser.id,otherName:this.currentUser.name,updatedAt:Date.now()});
-    const h=document.getElementById('chatPeerName'); if(h) h.textContent=otherName;
-    this.subscribeMessages(chatId); this.showSection('messages'); this.showChatView();
-  }
-  showChatView(){const cl=document.getElementById('convListView');const cv=document.getElementById('chatView');if(cl)cl.style.display='none';if(cv)cv.style.display='block';}
-  backToConvList(){const cl=document.getElementById('convListView');const cv=document.getElementById('chatView');if(cl)cl.style.display='block';if(cv)cv.style.display='none';}
-  subscribeMessages(chatId) {
-    if(this._chatMsgUnsub) this._chatMsgUnsub();
-    this._chatMsgUnsub=EventDB.subscribe(`chats/${chatId}/messages`,(val)=>{
-      const list=Object.values(val||{}).sort((a,b)=>a.timestamp-b.timestamp); this.renderMessages(list);
-    });
-  }
-  renderMessages(list) {
-    const box=document.getElementById('chatMessages'); if(!box) return;
-    if(!list.length){box.innerHTML='<div class="empty-state" style="padding:2rem 1rem"><div class="empty-icon">💬</div><p>Diga olá!</p></div>';return;}
-    box.innerHTML=list.map(m=>{
-      const mine=m.senderId===this.currentUser.id;
-      const time=new Date(m.timestamp).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-      return `<div class="message ${mine?'sent':'received'}"><div><div class="message-content">${this.escape(m.text)}</div><div class="message-time">${mine?'Você':this.escape(m.senderName)} · ${time}</div></div></div>`;
-    }).join('');
-    box.scrollTop=box.scrollHeight;
-  }
-  async sendMessage() {
-    const input=document.getElementById('messageInput'); const text=input.value.trim();
-    if(!text) return; if(!this.currentChat){this.showToast('Selecione uma conversa','error');return;}
-    const msg={senderId:this.currentUser.id,senderName:this.currentUser.name,text,timestamp:Date.now()};
-    await EventDB.push(`chats/${this.currentChat}/messages`,msg);
-    await EventDB.update(`chats/${this.currentChat}/meta`,{lastMessage:text,updatedAt:Date.now()});
-    const meta=await EventDB.get(`chats/${this.currentChat}`,'meta'); const parts=meta?.participants||{};
-    Object.keys(parts).forEach(uid=>EventDB.update(`userChats/${uid}/${this.currentChat}`,{lastMessage:text,updatedAt:Date.now()}));
-    input.value='';
-  }
-  subscribeConversations() {
-    if(this._convUnsub) this._convUnsub();
-    this._convUnsub=EventDB.subscribe(`userChats/${this.currentUser.id}`,(val)=>{
-      const convs=Object.values(val||{}).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)); this.renderConversations(convs);
-    });
-  }
-  openConversation(otherId){const c=(this._convByOther||{})[otherId]; if(c) this.openChatWith(c.otherId,c.otherName);}
-  renderConversations(convs) {
-    const box=document.getElementById('conversationsList'); if(!box) return;
-    this._convByOther={}; convs.forEach(c=>{this._convByOther[c.otherId]=c;});
-    if(!convs.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><p>Nenhuma conversa ainda</p></div>';return;}
-    box.innerHTML=convs.map(c=>`
-      <div class="conv-item" onclick="app.openConversation('${c.otherId}')">
-        <div class="conv-avatar">${(c.otherName||'?').charAt(0).toUpperCase()}</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:600;font-size:.9rem">${this.escape(c.otherName)}</div>
-          <div style="color:var(--gray-600);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${this.escape(c.lastMessage||'Nova conversa')}</div>
-        </div>
-        <span style="font-size:.7rem;color:var(--gray-500)">›</span>
-      </div>`).join('');
-  }
   setupCommonListeners() {
-    document.querySelectorAll('.specialty-badge').forEach(b=>{
-      b.addEventListener('click',()=>{
-        b.classList.toggle('selected');
-        this.selectedSpecialties=Array.from(document.querySelectorAll('.specialty-badge.selected')).map(el=>el.dataset.specialty);
-      });
-    });
-    document.getElementById('messageInput')?.addEventListener('keypress',(e)=>{if(e.key==='Enter') this.sendMessage();});
     document.querySelectorAll('[data-section]').forEach(item=>{
       item.addEventListener('click',()=>this.showSection(item.getAttribute('data-section')));
     });
@@ -701,187 +574,147 @@ class BaseApp {
   toggleUserMenu(){}
 }
 
-class ProfessionalApp extends BaseApp {
-  constructor() { super('professional'); this.myRequests = []; this.myAds = []; }
-  attachRealtime() {
-    this.track(EventDB.subscribeList('requests',(list)=>{
-      this.myRequests=list.filter(r=>r.professionalId===this.currentUser.id);
-      this.refreshDashboard();
-      if(document.getElementById('profRequests')?.classList.contains('active')) this.renderRequests();
-      const badge=document.getElementById('reqBadge');
-      const pending=this.myRequests.filter(r=>r.status==='pending').length;
-      if(badge){badge.textContent=pending; badge.classList.toggle('show',pending>0);}
-    }));
-    this.track(EventDB.subscribe(`users/${this.currentUser.id}`,(val)=>{
-      if(val){this.currentUser=val; this.saveSession(); this.refreshDashboard();}
-    }));
-    // Anúncios do próprio profissional
-    this.track(EventDB.subscribeList('profAds',(list)=>{
-      this.myAds=list.filter(a=>a.professionalId===this.currentUser.id);
-      if(document.getElementById('profAds')?.classList.contains('active')) this.renderProfAds();
-    }));
+class AdminApp extends BaseApp {
+  constructor() {
+    super('admin');
+    this.users=[]; this.requests=[]; this.phones=[]; this.ads=[]; this.profAds=[]; this.analytics=[];
   }
-  onDashboardReady(){this.refreshDashboard();}
+  attachRealtime() {
+    this.track(EventDB.subscribeList('users',(l)=>{ this.users=l; this.refreshDashboard(); if(document.getElementById('adminUsers')?.classList.contains('active')) this.renderUsers(); }));
+    this.track(EventDB.subscribeList('requests',(l)=>{ this.requests=l; this.refreshDashboard(); }));
+    this.track(EventDB.subscribeList('phones',(l)=>{ this.phones=l; this.renderPendingPhones(); const pending=l.filter(p=>!p.approved).length; const b=document.getElementById('phoneBadge'); if(b){b.textContent=pending; b.classList.toggle('show',pending>0);} }));
+    this.track(EventDB.subscribeList('ads',(l)=>{ this.ads=l.filter(a=>a.position!=='profissional'); if(document.getElementById('adminAds')?.classList.contains('active')) this.renderAds(); }));
+    this.track(EventDB.subscribeList('profAds',(l)=>{ this.profAds=l; if(document.getElementById('adminAds')?.classList.contains('active')) this.renderProfAdsAdmin(); }));
+    this.track(EventDB.subscribeList('analytics',(l)=>{ this.analytics=l; this.refreshDashboard(); this.renderActivity(); if(document.getElementById('adminAnalytics')?.classList.contains('active')) this.renderAnalytics(); }));
+  }
+  onDashboardReady(){ this.refreshDashboard(); }
   onSectionShown(id){
-    if(id==='editProfile') this.loadEditProfile();
-    if(id==='portfolio') this.renderPortfolio();
-    if(id==='profRequests') this.renderRequests();
-    if(id==='profAds') this.renderProfAds();
-    if(id==='messages'){const cv=document.getElementById('chatView');const cl=document.getElementById('convListView');if(cv&&!this.currentChat){cv.style.display='none';cl.style.display='block';}}
+    if(id==='adminUsers') this.renderUsers();
+    if(id==='adminAds'){ this.renderAds(); this.renderProfAdsAdmin(); }
+    if(id==='adminAnalytics') this.renderAnalytics();
   }
   refreshDashboard() {
-    const pn=document.getElementById('profName'); if(pn) pn.textContent=this.currentUser.name;
-    const pv=document.getElementById('profViews'); if(pv) pv.textContent=this.currentUser.views||0;
-    const pp=document.getElementById('profPhotos'); if(pp) pp.textContent=(this.currentUser.portfolio||[]).length;
-    const pr=document.getElementById('profRating'); if(pr) pr.textContent=(this.currentUser.rating||5.0);
-    const preq=document.getElementById('profRequests'); if(preq) preq.textContent=this.myRequests.length;
-    const badge=document.getElementById('phoneStatusBadge');
-    if(badge) badge.innerHTML=this.currentUser.phoneApproved
-      ?'<span class="badge badge-success">✓ Telefone aprovado — clientes podem te ver</span>'
-      :'<span class="badge badge-warning">⏳ Telefone aguardando aprovação do gestor</span>';
+    const profs=this.users.filter(u=>u.userType==='professional');
+    const ta=document.getElementById('adminTotalAccess'); if(ta) ta.textContent=this.analytics.length;
+    const tu=document.getElementById('adminTotalUsers'); if(tu) tu.textContent=this.users.length;
+    const ap=document.getElementById('adminActiveProfessionals'); if(ap) ap.textContent=profs.length;
+    const ab=document.getElementById('adminBudgets'); if(ab) ab.textContent=this.requests.length;
   }
-  loadEditProfile() {
-    document.getElementById('editName').value=this.currentUser.name||'';
-    document.getElementById('editEmail').value=this.currentUser.email||'';
-    document.getElementById('editPhone').value=this.currentUser.phone||'';
-    document.getElementById('editRegion').value=this.currentUser.region||'';
-    document.getElementById('editDescription').value=this.currentUser.description||'';
-    document.querySelectorAll('#editProfile .specialty-badge').forEach(b=>{
-      const on=(this.currentUser.specialties||[]).includes(b.dataset.specialty);
-      b.classList.toggle('selected',on);
-    });
-    this.selectedSpecialties=[...(this.currentUser.specialties||[])];
-  }
-  async saveProfile() {
-    const name=document.getElementById('editName').value;
-    const phone=document.getElementById('editPhone').value;
-    const region=document.getElementById('editRegion').value;
-    const description=document.getElementById('editDescription').value;
-    if(!name||!region||!description){this.showToast('Preencha nome, região e descrição','error');return;}
-    const patch={name,phone,region,description,specialties:this.selectedSpecialties};
-    Object.assign(this.currentUser,patch);
-    await EventDB.update(`users/${this.currentUser.id}`,patch);
-    await EventDB.update(`professionals/${this.currentUser.id}`,patch);
-    this.saveSession(); document.getElementById('userAvatarHeader').textContent=name.charAt(0).toUpperCase();
-    this.showToast('✨ Perfil atualizado! Já aparece na busca dos clientes.','success');
-  }
-  openPortfolioModal() {
-    ['portfolioTitle','portfolioDescription','portfolioImage'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('imagePreview').style.display='none'; this.openModal('portfolioModal');
-  }
-  async uploadPortfolioImage() {
-    const file=document.getElementById('portfolioImage').files[0];
-    if(!file){this.showToast('Selecione uma imagem','error');return;}
-    if(file.size>900*1024){this.showToast('Imagem muito grande (máx ~900KB)','error');return;}
-    const title=document.getElementById('portfolioTitle').value||'Sem título';
-    const description=document.getElementById('portfolioDescription').value||'';
-    const reader=new FileReader();
-    reader.onload=async(e)=>{
-      const portfolio=this.currentUser.portfolio||[];
-      portfolio.push({id:Date.now().toString(),title,description,image:e.target.result,createdAt:new Date().toISOString()});
-      this.currentUser.portfolio=portfolio;
-      await EventDB.update(`users/${this.currentUser.id}`,{portfolio});
-      await EventDB.update(`professionals/${this.currentUser.id}`,{portfolio});
-      this.saveSession(); this.showToast('✨ Foto adicionada!','success');
-      this.closeModal('portfolioModal'); this.renderPortfolio(); this.refreshDashboard();
-    };
-    reader.readAsDataURL(file);
-  }
-  renderPortfolio() {
-    const grid=document.getElementById('portfolioGrid'); const portfolio=this.currentUser.portfolio||[];
-    if(!portfolio.length){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📷</div><p>Portfólio vazio</p><p style="font-size:.85rem;margin-top:.5rem">Adicione fotos para atrair mais clientes</p></div>';return;}
-    grid.innerHTML=portfolio.map(it=>`
-      <div class="portfolio-item"><img src="${it.image}" alt="${this.escape(it.title)}" loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="portfolio-info"><div class="portfolio-title">${this.escape(it.title)}</div></div>
-          <button class="portfolio-remove" onclick="app.removePortfolioItem('${it.id}')">✕</button>
-        </div></div>`).join('');
-  }
-  async removePortfolioItem(itemId) {
-    if(!confirm('Remover esta foto?')) return;
-    const portfolio=(this.currentUser.portfolio||[]).filter(p=>p.id!==itemId);
-    this.currentUser.portfolio=portfolio;
-    await EventDB.update(`users/${this.currentUser.id}`,{portfolio});
-    await EventDB.update(`professionals/${this.currentUser.id}`,{portfolio});
-    this.saveSession(); this.showToast('Foto removida','info'); this.renderPortfolio(); this.refreshDashboard();
-  }
-  renderRequests() {
-    const box=document.getElementById('profRequestsList');
-    if(!this.myRequests.length){box.innerHTML='<div class="empty-state"><div class="empty-icon">📨</div><p>Nenhuma solicitação ainda</p><p style="font-size:.85rem;margin-top:.5rem">Complete seu perfil para aparecer nas buscas</p></div>';return;}
-    const labels={pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
-    const colors={pending:'var(--warning)',active:'var(--primary)',cancelled:'var(--danger)',completed:'var(--success)'};
-    const sorted=[...this.myRequests].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-    box.innerHTML=sorted.map(r=>`
-      <div class="history-item">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
-          <div class="history-title">${this.escape(r.description)}</div>
-          <span class="badge" style="background:${colors[r.status]};color:#fff;flex-shrink:0">${labels[r.status]||r.status}</span>
+  renderPendingPhones() {
+    const box=document.getElementById('pendingPhonesList');
+    const pending=this.phones.filter(p=>!p.approved);
+    if(!pending.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><p>Nenhum telefone pendente ✓</p></div>';return;}
+    box.innerHTML=pending.map(p=>{
+      const user=this.users.find(u=>u.id===p.userId);
+      return `<div style="padding:.9rem;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;gap:.75rem">
+        <div>
+          <div style="font-weight:600;font-size:.9rem">${this.escape(user?.name||'Usuário')}</div>
+          <div style="color:var(--gray-600);font-size:.85rem">📞 ${this.escape(p.phone)}</div>
+          <div style="color:var(--gray-500);font-size:.78rem">${user?.email||''} · ${user?.region||''}</div>
         </div>
-        <div class="history-meta">
-          <span>👤 ${this.escape(r.clientName)}</span>
-          <span>📍 ${this.escape(r.location)}</span>
-          <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
-          <span>💰 R$ ${this.escape(r.budget)}</span>
+        <div style="display:flex;gap:.4rem;flex-shrink:0">
+          <button class="btn-success btn-small" onclick="app.approvePhone('${p.id}','${p.userId}')">✓ Aprovar</button>
+          <button class="btn-danger btn-small" onclick="app.rejectPhone('${p.id}')">✕</button>
         </div>
-        <div class="history-actions">
-          ${r.status==='pending'?`<button class="btn-success btn-small" onclick="app.respond('${r.id}','active')">✓ Aceitar</button><button class="btn-danger btn-small" onclick="app.respond('${r.id}','cancelled')">✕ Recusar</button>`:''}
-          ${r.status==='active'?`<button class="btn-primary btn-small" onclick="app.respond('${r.id}','completed')">🏁 Concluir</button>`:''}
-          <button class="btn-secondary btn-small" onclick="app.messageClient('${r.id}')">💬 Conversar</button>
-        </div>
+      </div>`;
+    }).join('');
+  }
+  async approvePhone(phoneId,userId) {
+    await EventDB.update(`phones/${phoneId}`,{approved:true,approvedAt:new Date().toISOString()});
+    await EventDB.update(`users/${userId}`,{phoneApproved:true});
+    await EventDB.update(`professionals/${userId}`,{phoneApproved:true});
+    this.showToast('✓ Telefone aprovado — profissional liberado','success');
+  }
+  async rejectPhone(phoneId) {
+    await EventDB.delete('phones',phoneId); this.showToast('✕ Telefone rejeitado','info');
+  }
+  renderActivity() {
+    const box=document.getElementById('adminActivityList'); if(!box) return;
+    if(!this.analytics.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>';return;}
+    const recent=[...this.analytics].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,12);
+    box.innerHTML=recent.map(l=>`
+      <div style="padding:.65rem 0;border-bottom:1px solid var(--gray-100)">
+        <div style="color:var(--gray-500);font-size:.75rem">${new Date(l.timestamp).toLocaleString('pt-BR')}</div>
+        <div style="font-size:.88rem;font-weight:500;margin-top:.15rem">${this.escape(l.action||'Atividade')} <span style="color:var(--gray-500);font-weight:400">(${this.escape(l.role||'')})</span></div>
       </div>`).join('');
   }
-  async respond(requestId,status) {
-    await EventDB.update(`requests/${requestId}`,{status});
-    const msg={active:'✓ Solicitação aceita!',cancelled:'✕ Solicitação recusada',completed:'🏁 Serviço concluído!'};
-    this.showToast(msg[status]||'Atualizado',status==='cancelled'?'info':'success');
+  renderUsers() {
+    const tbody=document.getElementById('adminUsersList');
+    if(!this.users.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem">Nenhum usuário</td></tr>';return;}
+    const tipo={client:'👤 Contratante',professional:'💼 Profissional',admin:'👨‍💼 Gestor'};
+    tbody.innerHTML=this.users.map(u=>`
+      <tr>
+        <td><strong>${this.escape(u.name)}</strong><div style="color:var(--gray-500);font-size:.75rem">${this.escape(u.email)}</div></td>
+        <td><span class="badge badge-primary" style="font-size:.72rem">${tipo[u.userType]||u.userType}</span></td>
+        <td style="font-size:.85rem">${this.escape(u.region||'—')}</td>
+        <td>${u.phoneApproved?'<span class="badge badge-success">✓</span>':'<span class="badge badge-warning">⏳</span>'}</td>
+        <td><button class="btn-danger btn-small" onclick="app.removeUser('${u.id}','${u.userType}')">Remover</button></td>
+      </tr>`).join('');
   }
-  messageClient(requestId) { const r=this.myRequests.find(x=>x.id===requestId); if(r) this.openChatWith(r.clientId,r.clientName); }
+  async removeUser(id,type) {
+    if(!confirm('Remover este usuário? Esta ação é irreversível.')) return;
+    await EventDB.delete('users',id);
+    if(type==='professional') await EventDB.delete('professionals',id);
+    this.showToast('Usuário removido','info');
+  }
 
-  /* ── ANÚNCIOS DO PROFISSIONAL ── */
-  openAdModal() {
-    ['profAdTitle','profAdContent','profAdExpire'].forEach(i=>document.getElementById(i).value='');
-    this.openModal('profAdModal');
-  }
-  async createProfAd() {
-    const title=document.getElementById('profAdTitle').value.trim();
-    const content=document.getElementById('profAdContent').value.trim();
-    const expire=document.getElementById('profAdExpire').value;
-    if(!title||!content||!expire){this.showToast('Preencha todos os campos','error');return;}
-    const ad={
-      id:Date.now().toString(),
-      title,content,expire,
-      professionalId:this.currentUser.id,
-      professionalName:this.currentUser.name,
-      specialties:this.currentUser.specialties||[],
-      region:this.currentUser.region||'',
-      position:'profissional', // marca como anúncio de profissional
-      createdAt:new Date().toISOString()
-    };
-    await EventDB.set('profAds',ad);
-    // Também salva na coleção 'ads' global para aparecer em todos os painéis
-    await EventDB.set('ads',{...ad,position:'profissional'});
-    this.showToast('✨ Anúncio publicado! Aparecerá na busca dos clientes.','success');
-    this.closeModal('profAdModal');
-  }
-  async deleteProfAd(id) {
-    if(!confirm('Remover este anúncio?')) return;
-    await EventDB.delete('profAds',id); await EventDB.delete('ads',id);
-    this.showToast('Anúncio removido','info');
-  }
-  renderProfAds() {
-    const box=document.getElementById('profAdsList');
-    if(!this.myAds.length){box.innerHTML='<div class="empty-state"><div class="empty-icon">📢</div><p>Nenhum anúncio criado</p><p style="font-size:.85rem;margin-top:.5rem">Anúncios aparecem na busca de contratantes e no início da plataforma</p></div>';return;}
+  /* ── ANÚNCIOS GLOBAIS ── */
+  renderAds() {
+    const box=document.getElementById('adminAdsList'); if(!box) return;
+    if(!this.ads.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>';return;}
     const now=new Date();
-    box.innerHTML=this.myAds.map(ad=>{
+    box.innerHTML=this.ads.map(ad=>{
       const expired=new Date(ad.expire)<now;
-      return `<div class="card" style="border-left:4px solid ${expired?'var(--danger)':'var(--success)'}">
+      return `<div class="history-item" style="border-left-color:${expired?'var(--danger)':'var(--success)'}">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem">
           <div style="flex:1">
-            <div style="font-weight:700;margin-bottom:.25rem">${this.escape(ad.title)}</div>
-            <p style="color:var(--gray-600);font-size:.88rem;margin-bottom:.5rem">${this.escape(ad.content)}</p>
-            <div style="font-size:.8rem;color:var(--gray-500)">
-              ${expired?'<span style="color:var(--danger);font-weight:600">⚠️ Expirado</span>':'<span style="color:var(--success);font-weight:600">✓ Ativo</span>'}
-              · Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}
+            <div class="history-title">${this.escape(ad.title)}</div>
+            <p style="color:var(--gray-600);font-size:.85rem;margin:.25rem 0">${this.escape(ad.content)}</p>
+            <div class="history-meta">
+              <span>📍 ${this.escape(ad.position)}</span>
+              <span>${expired?'<span style="color:var(--danger)">⚠️ Expirado</span>':'<span style="color:var(--success)">✓ Ativo</span>'}</span>
+              <span>Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
+            </div>
+          </div>
+          <button class="btn-danger btn-small" onclick="app.deleteAd('${ad.id}')">Remover</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  openAdModal() {
+    ['adTitle','adContent','adExpire'].forEach(i=>document.getElementById(i).value='');
+    this.openModal('newAdModal');
+  }
+  async createAd() {
+    const title=document.getElementById('adTitle').value.trim();
+    const content=document.getElementById('adContent').value.trim();
+    const position=document.getElementById('adPosition').value;
+    const expire=document.getElementById('adExpire').value;
+    if(!title||!content||!expire){this.showToast('Preencha todos os campos','error');return;}
+    await EventDB.set('ads',{id:Date.now().toString(),title,content,position,expire,createdAt:new Date().toISOString()});
+    this.showToast('✨ Anúncio publicado em todos os painéis!','success'); this.closeModal('newAdModal');
+  }
+  async deleteAd(id) {
+    if(!confirm('Remover este anúncio?')) return;
+    await EventDB.delete('ads',id); this.showToast('Anúncio removido','info');
+  }
+
+  /* ── ANÚNCIOS DE PROFISSIONAIS (visão do gestor) ── */
+  renderProfAdsAdmin() {
+    const box=document.getElementById('profAdsAdminList'); if(!box) return;
+    if(!this.profAds.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>';return;}
+    const now=new Date();
+    box.innerHTML=this.profAds.map(ad=>{
+      const expired=new Date(ad.expire)<now;
+      return `<div class="history-item" style="border-left-color:${expired?'var(--gray-300)':'var(--secondary)'}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem">
+          <div style="flex:1">
+            <div class="history-title">${this.escape(ad.title)}</div>
+            <p style="color:var(--gray-600);font-size:.85rem;margin:.25rem 0">${this.escape(ad.content)}</p>
+            <div class="history-meta">
+              <span>💼 ${this.escape(ad.professionalName||'Profissional')}</span>
+              <span>${expired?'<span style="color:var(--danger)">⚠️ Expirado</span>':'<span style="color:var(--success)">✓ Ativo</span>'}</span>
+              <span>Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
             </div>
           </div>
           <button class="btn-danger btn-small" onclick="app.deleteProfAd('${ad.id}')">Remover</button>
@@ -889,17 +722,31 @@ class ProfessionalApp extends BaseApp {
       </div>`;
     }).join('');
   }
+  async deleteProfAd(id) {
+    if(!confirm('Remover este anúncio do profissional?')) return;
+    await EventDB.delete('profAds',id); await EventDB.delete('ads',id);
+    this.showToast('Anúncio removido','info');
+  }
+
+  /* ── ANÁLISES ── */
+  renderAnalytics() {
+    const today=new Date().toDateString();
+    const todays=this.analytics.filter(a=>new Date(a.timestamp).toDateString()===today);
+    const sv=document.getElementById('statsVisualizacoes'); if(sv) sv.textContent=todays.length;
+    const sr=document.getElementById('statsRegistros'); if(sr) sr.textContent=this.users.filter(u=>new Date(u.createdAt).toDateString()===today).length;
+    const ss=document.getElementById('statsSolicitacoes'); if(ss) ss.textContent=this.requests.filter(r=>new Date(r.createdAt).toDateString()===today).length;
+    const now=new Date();
+    const activeAds=[...this.ads,...this.profAds].filter(a=>new Date(a.expire)>now).length;
+    const sa=document.getElementById('statsAds'); if(sa) sa.textContent=activeAds;
+    const box=document.getElementById('lastActivities');
+    const recent=[...this.analytics].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,20);
+    box.innerHTML=recent.length
+      ? recent.map(l=>`<div style="padding:.6rem 0;border-bottom:1px solid var(--gray-100)"><div style="font-size:.75rem;color:var(--gray-500)">${new Date(l.timestamp).toLocaleString('pt-BR')}</div><div style="font-size:.88rem;font-weight:500;margin-top:.1rem">${this.escape(l.action||'Atividade')} <span style="color:var(--gray-500)">(${this.escape(l.role||'')})</span></div></div>`).join('')
+      : '<div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>';
+  }
 }
-const app = new ProfessionalApp();
+const app = new AdminApp();
 app.boot();
-</script>
-<script>
-document.getElementById('portfolioImage').addEventListener('change',(e)=>{
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=(ev)=>{ document.getElementById('previewImg').src=ev.target.result; document.getElementById('imagePreview').style.display='block'; };
-  reader.readAsDataURL(file);
-});
 </script>
 <script src="pwa-bootstrap.js"></script>
 <script>
