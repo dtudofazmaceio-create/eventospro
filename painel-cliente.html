@@ -1549,18 +1549,23 @@ class BaseApp {
     const password = document.getElementById('loginPassword').value;
     if (!email || !password) { this.showToast('Preencha email e senha', 'error'); return; }
 
-    const users = await EventDB.getAll('users');
-    const user = users.find(u =>
-      (u.email || '').toLowerCase() === email &&
-      u.password === password &&
-      u.userType === this.role
-    );
+    try {
+      const users = await EventDB.getAll('users');
+      const user = users.find(u =>
+        (u.email || '').toLowerCase() === email &&
+        u.password === password &&
+        u.userType === this.role
+      );
 
-    if (!user) { this.showToast('❌ Credenciais inválidas para este painel', 'error'); return; }
-    this.currentUser = user;
-    this.saveSession();
-    this.enterDashboard();
-    this.showToast('✨ Login realizado com sucesso!', 'success');
+      if (!user) { this.showToast('❌ Credenciais inválidas para este painel', 'error'); return; }
+      this.currentUser = user;
+      this.saveSession();
+      this.enterDashboard();
+      this.showToast('✨ Login realizado com sucesso!', 'success');
+    } catch (err) {
+      console.error('Erro ao fazer login:', err);
+      this.showToast('❌ Erro de conexão com o Firebase: ' + (err?.message || err), 'error');
+    }
   }
 
   async signup() {
@@ -1583,42 +1588,47 @@ class BaseApp {
       }
     }
 
-    const users = await EventDB.getAll('users');
-    if (users.some(u => (u.email || '').toLowerCase() === email)) {
-      this.showToast('❌ Email já cadastrado', 'error'); return;
-    }
+    try {
+      const users = await EventDB.getAll('users');
+      if (users.some(u => (u.email || '').toLowerCase() === email)) {
+        this.showToast('❌ Email já cadastrado', 'error'); return;
+      }
 
-    const id = Date.now().toString();
-    const user = {
-      id, name, email, phone, region, password,
-      userType: this.role,
-      createdAt: new Date().toISOString(),
-      phoneApproved: false,
-      specialties: this.role === 'professional' ? this.selectedSpecialties : [],
-      description: this.role === 'professional'
-        ? (document.getElementById('signupDescription')?.value || '') : '',
-      portfolio: [],
-      rating: 5.0,
-      views: 0
-    };
+      const id = Date.now().toString();
+      const user = {
+        id, name, email, phone, region, password,
+        userType: this.role,
+        createdAt: new Date().toISOString(),
+        phoneApproved: false,
+        specialties: this.role === 'professional' ? this.selectedSpecialties : [],
+        description: this.role === 'professional'
+          ? (document.getElementById('signupDescription')?.value || '') : '',
+        portfolio: [],
+        rating: 5.0,
+        views: 0
+      };
 
-    await EventDB.set('users', user);
-    if (this.role === 'professional') {
-      await EventDB.set('professionals', user); // espelho para a busca dos clientes
-    }
-    if (phone) {
-      const pid = id + '_phone';
-      await EventDB.set('phones', {
-        id: pid, userId: id, phone, approved: false,
-        createdAt: new Date().toISOString()
-      });
-    }
+      await EventDB.set('users', user);
+      if (this.role === 'professional') {
+        await EventDB.set('professionals', user); // espelho para a busca dos clientes
+      }
+      if (phone) {
+        const pid = id + '_phone';
+        await EventDB.set('phones', {
+          id: pid, userId: id, phone, approved: false,
+          createdAt: new Date().toISOString()
+        });
+      }
 
-    this.trackAccess('cadastro');
-    this.currentUser = user;
-    this.saveSession();
-    this.enterDashboard();
-    this.showToast('✨ Conta criada! Bem-vindo(a) ao EventLink!', 'success');
+      this.trackAccess('cadastro');
+      this.currentUser = user;
+      this.saveSession();
+      this.enterDashboard();
+      this.showToast('✨ Conta criada! Bem-vindo(a) ao EventLink!', 'success');
+    } catch (err) {
+      console.error('Erro ao criar conta:', err);
+      this.showToast('❌ Erro de conexão com o Firebase: ' + (err?.message || err), 'error');
+    }
   }
 
   logout() {
