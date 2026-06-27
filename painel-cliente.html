@@ -2,8 +2,21 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <title>EventLink · Painel do Contratante</title>
+
+    <!-- ===== PWA: app instalável, tela cheia, ícone próprio ===== -->
+    <link rel="manifest" href="manifest-cliente.json">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- iOS: modo standalone (sem barra do Safari) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EventLink">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -1164,6 +1177,37 @@
         .chooser-card h3 { font-family: 'Sora', sans-serif; font-size: 1.25rem; }
         .chooser-card p { color: var(--gray-600); font-size: 0.92rem; }
 
+        /* ============ PWA: respeita notch/status bar quando instalado ============ */
+        html.pwa-standalone header {
+            padding-top: calc(1rem + env(safe-area-inset-top));
+        }
+        html.pwa-standalone .auth-shell {
+            padding-top: calc(2rem + env(safe-area-inset-top));
+            padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+        }
+        html.pwa-standalone main,
+        html.pwa-standalone .chooser {
+            padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+        }
+        html.pwa-standalone {
+            /* Evita "bounce" de overscroll que quebra a sensação de app nativo */
+            overscroll-behavior-y: none;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        /* Botão flutuante "Instalar app" */
+        #pwaInstallBtn {
+            position: fixed;
+            bottom: calc(1.25rem + env(safe-area-inset-bottom));
+            right: 1.25rem;
+            z-index: 200;
+            display: none;
+            box-shadow: var(--shadow-lg);
+        }
+        #pwaInstallBtn.show { display: inline-flex; }
+
     </style>
 </head>
 <body>
@@ -2059,6 +2103,17 @@ class ClientApp extends BaseApp {
 const app = new ClientApp();
 app.boot();
 
+</script>
+
+<button id="pwaInstallBtn" class="btn-primary btn-small" onclick="EventLinkPWA.promptInstall()">📲 Instalar app</button>
+<script src="pwa-bootstrap.js"></script>
+<script>
+  document.addEventListener('eventlink:installable', () => {
+    if (!EventLinkPWA.isStandalone) document.getElementById('pwaInstallBtn').classList.add('show');
+  });
+  document.addEventListener('eventlink:installed', () => {
+    document.getElementById('pwaInstallBtn').classList.remove('show');
+  });
 </script>
 </body>
 </html>
