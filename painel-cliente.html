@@ -56,6 +56,9 @@ button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;fon
 
 /* ── MAIN / CONTENT ── */
 #appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── AUTH SHELL (tela de login/cadastro) ── */
+.auth-shell{flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow-y:auto}
 .content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
 section{display:none}
 section.active{display:block;animation:fadeIn .3s ease-out}
@@ -338,6 +341,9 @@ class EventDB {
   static async update(path, data) {
     return db.ref(path).update(data);
   }
+  static async delete(path, id) {
+    return db.ref(`${path}/${id}`).remove();
+  }
   static on(path, callback) {
     return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
   }
@@ -446,7 +452,7 @@ class ClientApp {
             ${(p.specialties || []).slice(0,2).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
           </div>
           <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
-          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar Serviço →</button>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal('${p.id}')">Solicitar Serviço →</button>
         </div>
       </div>
     `).join('');
@@ -469,7 +475,7 @@ class ClientApp {
             ${(p.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
           </div>
           <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
-          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar Serviço →</button>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal('${p.id}')">Solicitar Serviço →</button>
         </div>
       </div>
     `).join('');
@@ -492,7 +498,7 @@ class ClientApp {
           ${(prof.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
         </div>
       </div>
-      <button class="btn-primary" onclick="app.closeModal('professionalModal'); app.openRequestModal()" style="width:100%">Fazer Solicitação</button>
+      <button class="btn-primary" onclick="app.closeModal('professionalModal'); app.openRequestModal('${prof.id}')" style="width:100%">Fazer Solicitação</button>
       <button class="btn-secondary" onclick="app.closeModal('professionalModal')" style="width:100%;margin-top:.5rem">Fechar</button>
     `;
     this.openModal('professionalModal');
@@ -521,13 +527,18 @@ class ClientApp {
             ${(p.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
           </div>
           <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
-          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar →</button>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal('${p.id}')">Solicitar →</button>
         </div>
       </div>
     `).join('');
   }
 
-  openRequestModal() {
+  openRequestModal(profId) {
+    if (profId) {
+      const prof = this.professionals.find(p => p.id === profId);
+      if (prof) this.selectedProfessional = prof;
+    }
+    if (!this.selectedProfessional) { this.showToast('Selecione um profissional primeiro','error'); return; }
     ['requestDesc','requestDate','requestLocation','requestBudget','requestDetails'].forEach(i => document.getElementById(i).value = '');
     this.openModal('requestModal');
   }
@@ -538,10 +549,13 @@ class ClientApp {
     const loc = document.getElementById('requestLocation').value.trim();
     const budget = document.getElementById('requestBudget').value;
     if (!desc || !date || !loc || !budget) { this.showToast('Preencha os campos obrigatórios','error'); return; }
+    if (!this.selectedProfessional) { this.showToast('Selecione um profissional primeiro','error'); return; }
     const request = {
       id: Date.now().toString(),
       clientId: this.currentUser.id,
       clientName: this.currentUser.name,
+      professionalId: this.selectedProfessional.id,
+      professionalName: this.selectedProfessional.name,
       description: desc,
       date, location: loc, budget,
       details: document.getElementById('requestDetails').value,
@@ -551,6 +565,7 @@ class ClientApp {
     await EventDB.set('requests', request);
     this.showToast('✓ Solicitação enviada!','success');
     this.closeModal('requestModal');
+    this.selectedProfessional = null;
   }
 
   renderRecentRequests() {
@@ -584,7 +599,7 @@ class ClientApp {
           <div style="flex:1">
             <div style="font-weight:700;font-size:1.05rem;color:var(--dark);margin-bottom:.5rem">${this.escape(r.description)}</div>
             <div style="display:flex;flex-wrap:wrap;gap:.75rem;font-size:.85rem;color:var(--gray-600)">
-              <span>👤 Você</span>
+              <span>💼 ${this.escape(r.professionalName || 'Profissional')}</span>
               <span>📍 ${this.escape(r.location)}</span>
               <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
               <span>💰 R$ ${this.escape(r.budget)}</span>
@@ -596,12 +611,13 @@ class ClientApp {
     `).join('');
   }
 
-  saveProfile() {
+  async saveProfile() {
     const name = document.getElementById('profileName').value;
     const phone = document.getElementById('profilePhone').value;
     const region = document.getElementById('profileRegion').value;
     this.currentUser = { ...this.currentUser, name, phone, region };
     localStorage.setItem('clientSession', JSON.stringify(this.currentUser));
+    await EventDB.update(`users/${this.currentUser.id}`, { name, phone, region });
     this.showToast('✓ Perfil atualizado','success');
   }
 
