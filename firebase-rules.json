@@ -8,7 +8,7 @@
       ],
       ".read": true,
       "$uid": {
-        ".write": "!data.exists() || newData.child('id').val() === $uid",
+        ".write": "!data.exists() || newData.child('id').val() === $uid || (auth != null && data.child('email').val() === auth.token.email)",
         ".validate": "newData.hasChildren(['id','email','role','createdAt'])",
         "role": {
           ".validate": "newData.val() === 'client' || newData.val() === 'professional' || newData.val() === 'admin'"
@@ -30,7 +30,7 @@
     "professionals": {
       ".read": true,
       "$pid": {
-        ".write": "newData.child('id').val() === $pid",
+        ".write": "newData.child('id').val() === $pid || (auth != null && !newData.exists())",
         "password": {
           ".validate": "false"
         },
