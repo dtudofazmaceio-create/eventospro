@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no">
-<title>EventLink · Profissional</title>
+<title>Enlace · Fornecedor</title>
 <link rel="manifest" href="manifest-profissional.json">
-<meta name="theme-color" content="#D946EF">
+<meta name="theme-color" content="#B5658A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --primary:#4F46E5;--primary-light:#6366F1;--primary-dark:#3730A3;
-  --secondary:#D946EF;--accent:#06B6D4;
-  --success:#10B981;--danger:#EF4444;--warning:#F59E0B;
-  --dark:#0F172A;--dark-light:#1E293B;--dark-lighter:#334155;
-  --gray-700:#475569;--gray-600:#64748B;--gray-500:#78909C;
-  --gray-300:#CBD5E1;--gray-100:#E2E8F0;--gray-50:#F8FAFC;
+  --primary:#6E2A52;--primary-light:#8A3D63;--primary-dark:#45203A;
+  --secondary:#B5658A;--accent:#C2A35E;
+  --gold:#C2A35E;--gold-soft:#E4D2A8;--blush:#F4E6EC;--ivory:#FBF7F3;--ink:#2C2230;
+  --success:#4F8A6B;--danger:#C2453F;--warning:#C98A3A;
+  --dark:#2C2230;--dark-light:#3A2C3D;--dark-lighter:#4A3A4D;
+  --gray-700:#5A4E58;--gray-600:#7A6E76;--gray-500:#9A8E96;
+  --gray-300:#DDD2D8;--gray-200:#E7DCE2;--gray-100:#EFE7EB;--gray-50:#FBF7F3;
   --white:#FFFFFF;
   --shadow-sm:0 1px 3px rgba(15,23,42,0.10);
   --shadow:0 4px 6px rgba(15,23,42,0.10);
@@ -29,28 +30,28 @@
   --safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-top:env(safe-area-inset-top,0px);
 }
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#F8FAFC 0%,#F1F5F9 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(180deg,#FBF7F3 0%,#F5EAE3 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
 body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
 
 /* ── HEADER ── */
 header{background:var(--white);border-bottom:1px solid var(--gray-100);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);padding-top:calc(.75rem + var(--safe-top))}
 .header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Sora',sans-serif;background:linear-gradient(135deg,var(--secondary),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(217,70,239,.2)}
+.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;background:linear-gradient(135deg,var(--secondary),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(181,101,138,.2)}
 .header-right{display:flex;align-items:center;gap:.6rem}
 .user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--secondary),var(--primary));border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
 .role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,var(--secondary),var(--primary))}
 
 /* ── BUTTONS ── */
 button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px;text-transform:none}
-.btn-primary{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);box-shadow:0 4px 15px rgba(217,70,239,.25);border:none}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(217,70,239,.35)}
+.btn-primary{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);box-shadow:0 4px 15px rgba(181,101,138,.25);border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,101,138,.35)}
 .btn-primary:active{transform:scale(.98)}
 .btn-secondary{background:var(--gray-100);color:var(--dark);border:1px solid var(--gray-200)}
 .btn-secondary:hover{background:var(--gray-200)}
-.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:var(--white)}
+.btn-danger{background:linear-gradient(135deg,#C2453F,#A83A35);color:var(--white)}
 .btn-danger:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.25)}
-.btn-success{background:linear-gradient(135deg,#10B981,#059669);color:var(--white)}
+.btn-success{background:linear-gradient(135deg,#4F8A6B,#3F7257);color:var(--white)}
 .btn-success:hover{transform:translateY(-2px)}
 .btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
 .btn-icon{width:44px;height:44px;padding:0;border-radius:10px}
@@ -78,8 +79,8 @@ section.active{display:block;animation:fadeIn .3s ease-out}
 .card-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
 
 /* ── ANNOUNCEMENT CARDS ── */
-.announcement-card{background:linear-gradient(135deg,rgba(217,70,239,.05) 0%,rgba(79,70,229,.05) 100%);border:1.5px solid var(--secondary);border-radius:14px;padding:1.25rem;margin-bottom:1rem;transition:var(--transition);cursor:pointer}
-.announcement-card:hover{border-color:var(--primary);box-shadow:0 8px 20px rgba(217,70,239,.15);transform:translateY(-2px)}
+.announcement-card{background:linear-gradient(135deg,rgba(181,101,138,.05) 0%,rgba(110,42,82,.05) 100%);border:1.5px solid var(--secondary);border-radius:14px;padding:1.25rem;margin-bottom:1rem;transition:var(--transition);cursor:pointer}
+.announcement-card:hover{border-color:var(--primary);box-shadow:0 8px 20px rgba(181,101,138,.15);transform:translateY(-2px)}
 .announcement-card.admin{border-color:#FFB347;background:linear-gradient(135deg,rgba(255,179,71,.05) 0%,rgba(255,193,7,.05) 100%)}
 .announcement-card.admin:hover{border-color:#FF9500;box-shadow:0 8px 20px rgba(255,179,71,.2)}
 .announcement-title{font-weight:700;font-size:1rem;color:var(--dark);margin-bottom:.4rem}
@@ -90,14 +91,14 @@ section.active{display:block;animation:fadeIn .3s ease-out}
 /* ── REQUEST CARDS ── */
 .request-card{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:1.25rem;margin-bottom:.75rem;transition:var(--transition);cursor:pointer}
 .request-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.request-card.active{border-color:var(--primary);background:rgba(79,70,229,.02)}
+.request-card.active{border-color:var(--primary);background:rgba(110,42,82,.02)}
 .request-card.completed{border-color:var(--success);background:rgba(16,185,129,.02)}
 .request-card.cancelled{border-color:var(--danger);background:rgba(239,68,68,.02)}
 
 /* ── STAT CARDS ── */
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(217,70,239,.2);transition:var(--transition)}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(217,70,239,.3)}
+.stat-card{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(181,101,138,.2);transition:var(--transition)}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(181,101,138,.3)}
 .stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
 .stat-label{font-size:.8rem;opacity:.9}
 
@@ -115,7 +116,7 @@ section.active{display:block;animation:fadeIn .3s ease-out}
 .form-group{margin-bottom:1rem}
 label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--dark);font-size:.9rem}
 input,textarea,select{width:100%;padding:.8rem;border:1.5px solid var(--gray-300);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:var(--white);color:var(--dark)}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--secondary);box-shadow:0 0 0 3px rgba(217,70,239,.1)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--secondary);box-shadow:0 0 0 3px rgba(181,101,138,.1)}
 textarea{resize:vertical;min-height:100px}
 
 /* ── BADGES ── */
@@ -123,8 +124,8 @@ textarea{resize:vertical;min-height:100px}
 .badge-success{background:rgba(16,185,129,.12);color:var(--success)}
 .badge-warning{background:rgba(245,158,11,.12);color:var(--warning)}
 .badge-danger{background:rgba(239,68,68,.12);color:var(--danger)}
-.badge-primary{background:rgba(79,70,229,.12);color:var(--primary)}
-.badge-secondary{background:rgba(217,70,239,.12);color:var(--secondary)}
+.badge-primary{background:rgba(110,42,82,.12);color:var(--primary)}
+.badge-secondary{background:rgba(181,101,138,.12);color:var(--secondary)}
 
 /* ── EMPTY STATE ── */
 .empty-state{text-align:center;padding:2.5rem 1rem;color:var(--gray-500)}
@@ -143,6 +144,76 @@ textarea{resize:vertical;min-height:100px}
   .stats-row{grid-template-columns:repeat(4,1fr)}
   .professionals-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ══ DESKTOP: vira um sistema com sidebar lateral ══ */
+@media(min-width:1024px){
+  body{overscroll-behavior:auto}
+  #appShell{flex-direction:row}
+  .bottom-nav{
+    position:relative;order:-1;flex-direction:column;align-items:stretch;
+    width:250px;height:auto;flex-shrink:0;padding:1.25rem .85rem;gap:.35rem;
+    border-top:none;border-right:1px solid var(--gray-100);box-shadow:none;background:var(--white);
+  }
+  .bottom-nav::before{
+    content:"Navegação";display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--gray-500);padding:.25rem 1rem .65rem;
+  }
+  .nav-item{
+    flex-direction:row;justify-content:flex-start;gap:.85rem;padding:.75rem 1rem;border-radius:12px;
+    font-size:.92rem;font-weight:600;text-transform:none;letter-spacing:normal;min-height:46px;color:var(--gray-700);
+  }
+  .nav-item .nav-icon{font-size:1.2rem}
+  .nav-item:hover{background:var(--gray-50);color:var(--dark)}
+  .nav-item.active{transform:none;background:rgba(181,101,138,.12);color:var(--secondary)}
+  .content-area{max-width:1120px;padding:2.25rem 2.75rem;margin:0 auto}
+  .stats-row{grid-template-columns:repeat(4,1fr);gap:1rem}
+  .toast{bottom:1.5rem}
+}
+@media(min-width:1440px){ .content-area{max-width:1280px} }
+
+/* ══ IDENTIDADE ENLACE — tipografia editorial, hero em arco, busca, cards ══ */
+h1,.card-title,.modal-header{font-family:'Cormorant Garamond',serif;letter-spacing:.005em;line-height:1.14}
+.logo{font-size:1.5rem;letter-spacing:.01em}
+.logo-icon{background:linear-gradient(135deg,var(--primary),var(--gold))}
+.role-pill{background:linear-gradient(135deg,var(--primary),var(--secondary))}
+
+/* hero em arco */
+.hero-arc{position:relative;overflow:hidden;background:linear-gradient(150deg,#7d2f5b 0%,var(--primary-dark) 70%,#37142c 100%);color:var(--white)}
+.hero-arc .hero-inner{position:relative;z-index:2;padding:1.4rem 1.5rem 2.6rem}
+.hero-arc::after{content:"";position:absolute;left:-8%;right:-8%;bottom:-2px;height:46px;background:var(--ivory);border-radius:50% 50% 0 0/100% 100% 0 0;z-index:1}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);font-weight:600;margin-bottom:.4rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1.08;margin-bottom:.4rem}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.82);max-width:40ch}
+.hero-rings{position:absolute;right:-12px;top:-6px;width:150px;height:150px;opacity:.9;z-index:1}
+.hero-sprig{position:absolute;left:-10px;bottom:34px;width:120px;opacity:.5;z-index:1}
+
+/* busca em pílula */
+.search-pill{display:flex;align-items:center;gap:.55rem;background:var(--white);border:1.5px solid var(--gray-200);border-radius:999px;padding:.15rem .2rem .15rem 1.05rem;box-shadow:0 6px 18px rgba(110,42,82,.08);margin-bottom:.7rem}
+.search-pill .si{font-size:1.05rem;flex-shrink:0;opacity:.7}
+.search-pill input,.search-pill select{border:none!important;box-shadow:none!important;padding:.75rem .25rem;background:transparent;border-radius:999px}
+.search-pill input:focus,.search-pill select:focus{outline:none;box-shadow:none!important}
+.btn-cta{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:999px;box-shadow:0 8px 20px rgba(110,42,82,.25);width:100%}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,42,82,.32)}
+
+/* card de fornecedor (estilo marketplace) */
+.vendor-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--gray-100);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;margin-bottom:1rem}
+.vendor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.vendor-media{position:relative;aspect-ratio:16/10;min-height:130px;background:linear-gradient(135deg,var(--blush),#ecd3dc)}
+.vendor-monogram{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--primary);opacity:.85}
+.vendor-cat{position:absolute;top:.6rem;left:.6rem;background:rgba(255,255,255,.92);color:var(--primary);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.28rem .65rem;border-radius:999px}
+.vendor-fav{position:absolute;top:.55rem;right:.55rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--secondary);font-size:.95rem}
+.vendor-body{padding:.95rem 1.05rem 1.1rem}
+.vendor-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--ink);line-height:1.08;margin-bottom:.2rem}
+.vendor-rating{display:flex;align-items:center;gap:.35rem;font-size:.82rem;color:var(--gray-600);margin-bottom:.55rem}
+.vendor-stars{color:var(--gold);letter-spacing:1px}
+.vendor-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem}
+.vendor-desc{font-size:.86rem;color:var(--gray-600);line-height:1.5;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vendor-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.7rem;border-top:1px solid var(--gray-100)}
+.vendor-price{font-size:.82rem;color:var(--gray-600)}
+.vendor-price b{color:var(--ink);font-size:.95rem}
+.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%)}
+.specialty-chip{background:var(--blush);color:var(--primary);border:1px solid rgba(110,42,82,.15)}
+
 </style>
 </head>
 <body>
@@ -151,9 +222,9 @@ textarea{resize:vertical;min-height:100px}
 <header>
   <div class="header-container">
     <a href="index.html" class="logo">
-      <div class="logo-icon">⚡</div>
-      <span>EventLink</span>
-      <span class="role-pill">Profissional</span>
+      <div class="logo-icon">♥</div>
+      <span>Enlace</span>
+      <span class="role-pill">Fornecedor</span>
     </a>
     <div class="header-right">
       <div class="user-avatar" id="userAvatarHeader">P</div>
@@ -169,16 +240,23 @@ textarea{resize:vertical;min-height:100px}
 
     <!-- DASHBOARD -->
     <section id="profDashboard" class="active">
-      <div style="margin-bottom:1.5rem">
-        <h1 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">Olá, <span id="dashboardName">Profissional</span>! 👋</h1>
-        <p style="color:var(--gray-600);font-size:.95rem">Aqui estão seus anúncios, solicitações e oportunidades</p>
+      <div class="hero-arc" style="border-radius:18px;margin-bottom:1.25rem">
+        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="right:-18px;top:-10px;width:130px;height:130px">
+          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".85"/>
+          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
+        </svg>
+        <div class="hero-inner" style="padding-bottom:1.5rem">
+          <div class="hero-eyebrow">Olá, <span id="dashboardName">Fornecedor</span></div>
+          <div class="hero-title">Sua vitrine de casamentos</div>
+          <p class="hero-sub">Acompanhe seus anúncios, pedidos de orçamento e oportunidades</p>
+        </div>
       </div>
 
       <!-- STATS -->
       <div class="stats-row">
         <div class="stat-card"><div class="stat-label">Anúncios</div><div class="stat-number" id="statAds">0</div></div>
         <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="statRequests">0</div></div>
-        <div class="stat-card"><div class="stat-label">Ativas</div><div class="stat-number" id="statActive">0</div></div>
+        <div class="stat-card"><div class="stat-label">Em andamento</div><div class="stat-number" id="statActive">0</div></div>
         <div class="stat-card"><div class="stat-label">Concluídas</div><div class="stat-number" id="statCompleted">0</div></div>
       </div>
 
@@ -269,13 +347,22 @@ textarea{resize:vertical;min-height:100px}
 
 <!-- AUTH SHELL -->
 <div class="auth-shell" id="authShell">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:1.5rem">
-    <div style="background:var(--white);border-radius:16px;padding:2rem;max-width:400px;width:100%;box-shadow:var(--shadow-lg)">
-      <div style="text-align:center;margin-bottom:2rem">
-        <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--secondary),var(--primary));border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:2rem;color:var(--white)">⚡</div>
-        <h1 style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">EventLink</h1>
-        <p style="color:var(--gray-600);font-size:.9rem">Painel do Profissional</p>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:1.5rem">
+    <div style="background:var(--white);border-radius:20px;overflow:hidden;max-width:420px;width:100%;box-shadow:var(--shadow-lg)">
+      <div class="hero-arc">
+        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".9"/>
+          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
+          <path d="M61 33 q-7 -11 -2 -22" stroke="#E4D2A8" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="58" cy="10" r="3.4" fill="#E4D2A8"/><circle cx="64" cy="15" r="2.4" fill="#C2A35E"/><circle cx="53" cy="16" r="2.4" fill="#C2A35E"/>
+        </svg>
+        <div class="hero-inner" style="text-align:center;padding-bottom:2.6rem">
+          <div class="hero-eyebrow">Área do fornecedor</div>
+          <h1 class="hero-title" style="font-size:2.4rem">Enlace</h1>
+          <p class="hero-sub" style="margin:0 auto">Divulgue seus serviços para noivos de toda a região</p>
+        </div>
       </div>
+      <div style="padding:1.4rem 1.8rem 2rem">
 
       <div id="loginCard">
         <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
@@ -288,11 +375,12 @@ textarea{resize:vertical;min-height:100px}
         <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
         <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
         <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
-        <div class="form-group"><label>Especialidade</label><input type="text" id="signupSpecialty" placeholder="Ex: Fotógrafo, DJ, Decorador"></div>
+        <div class="form-group"><label>Especialidade</label><input type="text" id="signupSpecialty" placeholder="Ex: Fotografia, Buffet, Decoração"></div>
         <div class="form-group"><label>Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
         <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
         <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
         <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
+      </div>
       </div>
     </div>
   </div>
@@ -351,6 +439,80 @@ class EventDB {
   }
 }
 
+/* ════════════════════════════════════════════════════════════
+   CAMADA DE SEGURANÇA — proteção de dados (lado cliente)
+   • Hash de senha com PBKDF2-SHA256 + salt único por usuário
+   • Sessão sem senha, com expiração e verificação de integridade
+   • Validação de e-mail e força de senha
+   • Limite de tentativas de login (anti força-bruta)
+   OBS.: estas são proteções de cliente. A proteção definitiva
+   exige Firebase Authentication + Security Rules (ver SEGURANCA.md).
+   ════════════════════════════════════════════════════════════ */
+const Security = {
+  ITERATIONS: 150000,
+  SESSION_TTL_MS: 1000 * 60 * 60 * 12, // 12 horas
+  randomHex(bytes = 16) {
+    const a = new Uint8Array(bytes); crypto.getRandomValues(a);
+    return [...a].map(b => b.toString(16).padStart(2, '0')).join('');
+  },
+  async _derive(password, saltHex) {
+    const enc = new TextEncoder();
+    const salt = Uint8Array.from(saltHex.match(/.{2}/g).map(h => parseInt(h, 16)));
+    const km = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: this.ITERATIONS, hash: 'SHA-256' }, km, 256);
+    return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, '0')).join('');
+  },
+  async hashPassword(password) {
+    const salt = this.randomHex(16);
+    return { passwordHash: await this._derive(password, salt), passwordSalt: salt, passwordAlgo: 'PBKDF2-SHA256', passwordIter: this.ITERATIONS };
+  },
+  async verifyPassword(password, user) {
+    if (user.passwordHash && user.passwordSalt) {
+      const h = await this._derive(password, user.passwordSalt);
+      return this._safeEqual(h, user.passwordHash);
+    }
+    if (user.password != null) return user.password === password; // conta legada (texto puro)
+    return false;
+  },
+  _safeEqual(a, b) {
+    if (a.length !== b.length) return false;
+    let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    return r === 0;
+  },
+  validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
+  validatePassword(pw) {
+    if (!pw || pw.length < 8) return { ok: false, msg: 'A senha deve ter ao menos 8 caracteres' };
+    if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return { ok: false, msg: 'Use letras e números na senha' };
+    return { ok: true };
+  },
+  _tKey(email) { return 'sec_thr_' + btoa(unescape(encodeURIComponent(email))).slice(0, 24); },
+  loginThrottle(email) {
+    let rec; try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
+    if (rec.lockUntil && Date.now() < rec.lockUntil) return { allowed: false, wait: Math.ceil((rec.lockUntil - Date.now()) / 1000) };
+    return { allowed: true };
+  },
+  recordFailure(email) {
+    const MAX = 5, WIN = 6e5, LOCK = 3e5; let rec;
+    try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
+    const now = Date.now();
+    if (!rec.first || now - rec.first > WIN) rec = { first: now, count: 0 };
+    rec.count++; if (rec.count >= MAX) rec.lockUntil = now + LOCK;
+    localStorage.setItem(this._tKey(email), JSON.stringify(rec));
+  },
+  clearFailures(email) { localStorage.removeItem(this._tKey(email)); },
+  _strip(u) { const s = { ...u }; delete s.password; delete s.passwordHash; delete s.passwordSalt; delete s.passwordIter; delete s.passwordAlgo; return s; },
+  saveSession(key, user) {
+    const safe = this._strip(user);
+    localStorage.setItem(key, JSON.stringify({ user: safe, iat: Date.now(), exp: Date.now() + this.SESSION_TTL_MS }));
+    return safe;
+  },
+  loadSession(key) {
+    let p; try { p = JSON.parse(localStorage.getItem(key)); } catch { return null; }
+    if (!p || !p.user || !p.exp || Date.now() > p.exp) { localStorage.removeItem(key); return null; }
+    return p.user;
+  }
+};
+
 class ProfessionalApp {
   constructor() {
     this.currentUser = null;
@@ -363,10 +525,10 @@ class ProfessionalApp {
   escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   async boot() {
-    const session = localStorage.getItem('profSession');
-    if (!session) { this.showAuth(); return; }
-    this.currentUser = JSON.parse(session);
-    await EventDB.set('professionals', this.currentUser);
+    const user = Security.loadSession('profSession');
+    if (!user) { this.showAuth(); return; }
+    this.currentUser = user;
+    await EventDB.set('professionals', Security._strip(this.currentUser));
     this.setupListeners();
     this.showApp();
     document.getElementById('dashboardName').textContent = this.currentUser.name || 'Profissional';
@@ -398,18 +560,27 @@ class ProfessionalApp {
   showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
 
   async login() {
-    const email = document.getElementById('loginEmail').value;
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value;
     if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
+    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
+    const thr = Security.loginThrottle(email);
+    if (!thr.allowed) { this.showToast(`Muitas tentativas. Aguarde ${thr.wait}s`,'error'); return; }
     try {
       const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
       const users = Object.values(snap.val() || {});
-      if (!users.length || users[0].password !== password) { this.showToast('Email ou senha incorretos','error'); return; }
       const user = users[0];
+      const ok = user && await Security.verifyPassword(password, user);
+      if (!ok) { Security.recordFailure(email); this.showToast('E-mail ou senha incorretos','error'); return; }
       if (user.role !== 'professional') { this.showToast('Este é um painel apenas para profissionais','error'); return; }
-      this.currentUser = user;
-      localStorage.setItem('profSession', JSON.stringify(user));
-      await EventDB.set('professionals', user);
+      Security.clearFailures(email);
+      if (user.password != null && !user.passwordHash) {
+        const creds = await Security.hashPassword(password);
+        await EventDB.update(`users/${user.id}`, { ...creds, password: null });
+        Object.assign(user, creds); delete user.password;
+      }
+      this.currentUser = Security.saveSession('profSession', user);
+      await EventDB.set('professionals', Security._strip(this.currentUser));
       this.setupListeners();
       this.showApp();
       this.refreshDashboard();
@@ -418,17 +589,24 @@ class ProfessionalApp {
 
   async signup() {
     const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim();
+    const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const phone = document.getElementById('signupPhone').value.trim();
     const specialty = document.getElementById('signupSpecialty').value.trim();
     const region = document.getElementById('signupRegion').value.trim();
-    const password = document.getElementById('signupPassword').value.trim();
+    const password = document.getElementById('signupPassword').value;
     if (!name || !email || !phone || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    const user = { id:Date.now().toString(), name, email, phone, password, role:'professional', region, specialties:[specialty], createdAt:new Date().toISOString() };
+    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
+    const pv = Security.validatePassword(password);
+    if (!pv.ok) { this.showToast(pv.msg,'error'); return; }
+    try {
+      const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
+      if (snap.exists()) { this.showToast('Este e-mail já está cadastrado','error'); return; }
+    } catch(e) { console.error(e); }
+    const creds = await Security.hashPassword(password);
+    const user = { id:Date.now().toString(), name, email, phone, role:'professional', region, specialties:[specialty], ...creds, createdAt:new Date().toISOString() };
     await EventDB.set('users', user);
-    await EventDB.set('professionals', user);
-    this.currentUser = user;
-    localStorage.setItem('profSession', JSON.stringify(user));
+    await EventDB.set('professionals', Security._strip(user));
+    this.currentUser = Security.saveSession('profSession', user);
     this.setupListeners();
     this.showApp();
     this.refreshDashboard();
@@ -461,7 +639,7 @@ class ProfessionalApp {
         <div class="announcement-content">${this.escape(ad.content)}</div>
         <div class="announcement-meta">
           <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-          <span>⚡ De: EventLink</span>
+          <span>♥ De: Enlace</span>
         </div>
       </div>
     `).join('');
@@ -595,7 +773,7 @@ class ProfessionalApp {
             <div style="font-weight:700;color:var(--dark);margin-bottom:.25rem">${this.escape(r.description)}</div>
             <div style="font-size:.85rem;color:var(--gray-600)">💰 R$ ${this.escape(r.budget)}</div>
           </div>
-          <span class="badge" style="flex-shrink:0;background:${({pending:'#FCD34D',active:'#6366F1',cancelled:'#EF4444',completed:'#10B981'}[r.status])};color:#fff">${labels[r.status]}</span>
+          <span class="badge" style="flex-shrink:0;background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff">${labels[r.status]}</span>
         </div>
         <div style="font-size:.8rem;color:var(--gray-500)">👤 ${this.escape(r.clientName)} · 📍 ${this.escape(r.location)}</div>
         <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
@@ -625,7 +803,7 @@ class ProfessionalApp {
               <span>💰 R$ ${this.escape(r.budget)}</span>
             </div>
           </div>
-          <span class="badge" style="flex-shrink:0;background:${({pending:'#FCD34D',active:'#6366F1',cancelled:'#EF4444',completed:'#10B981'}[r.status])};color:#fff">${labels[r.status]}</span>
+          <span class="badge" style="flex-shrink:0;background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff">${labels[r.status]}</span>
         </div>
         <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap">
           ${r.status === 'pending' ? `<button class="btn-success btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','active')">✓ Aceitar</button><button class="btn-danger btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','cancelled')">✕ Recusar</button>` : ''}
@@ -651,7 +829,7 @@ class ProfessionalApp {
     const phone = document.getElementById('profilePhone').value;
     const region = document.getElementById('profileRegion').value;
     this.currentUser = { ...this.currentUser, name, phone, region };
-    localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    this.currentUser = Security.saveSession('profSession', this.currentUser);
     await EventDB.update(`users/${this.currentUser.id}`, { name, phone, region });
     await EventDB.update(`professionals/${this.currentUser.id}`, { name, phone, region });
     this.showToast('✓ Perfil atualizado','success');
@@ -664,7 +842,7 @@ class ProfessionalApp {
     if (!this.currentUser.specialties) this.currentUser.specialties = [];
     this.currentUser.specialties.push(specialty);
     input.value = '';
-    localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    this.currentUser = Security.saveSession('profSession', this.currentUser);
     await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     this.renderSpecialties();
@@ -686,7 +864,7 @@ class ProfessionalApp {
 
   async removeSpecialty(index) {
     this.currentUser.specialties.splice(index, 1);
-    localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    this.currentUser = Security.saveSession('profSession', this.currentUser);
     await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     this.renderSpecialties();
