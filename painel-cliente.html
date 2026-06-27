@@ -6,11 +6,6 @@
 <title>EventLink · Contratante</title>
 <link rel="manifest" href="manifest-cliente.json">
 <meta name="theme-color" content="#4F46E5">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="EventLink">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -34,61 +29,81 @@
   --safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-top:env(safe-area-inset-top,0px);
 }
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--gray-50);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#F8FAFC 0%,#F1F5F9 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
 body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
 
 /* ── HEADER ── */
 header{background:var(--white);border-bottom:1px solid var(--gray-100);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);padding-top:calc(.75rem + var(--safe-top))}
 .header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Sora',sans-serif;color:var(--primary);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0}
+.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Sora',sans-serif;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(79,70,229,.2)}
 .header-right{display:flex;align-items:center;gap:.6rem}
-.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
-.conn-dot{width:8px;height:8px;border-radius:50%;background:var(--gray-300);transition:var(--transition)}
-.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0}
-.role-pill.client{background:linear-gradient(135deg,var(--primary),var(--accent))}
-.role-pill.professional{background:linear-gradient(135deg,var(--secondary),var(--primary))}
-.role-pill.admin{background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))}
+.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
+.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent))}
 
 /* ── BUTTONS ── */
-button{padding:.65rem 1.25rem;border:none;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
-.btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);box-shadow:0 4px 12px rgba(79,70,229,.25)}
-.btn-primary:active{transform:scale(.97)}
-.btn-secondary{background:var(--gray-100);color:var(--dark)}
-.btn-secondary:active{background:var(--gray-300)}
-.btn-danger{background:var(--danger);color:var(--white)}
-.btn-success{background:var(--success);color:var(--white)}
+button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
+.btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);box-shadow:0 4px 15px rgba(79,70,229,.25);border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,.35)}
+.btn-primary:active{transform:scale(.98)}
+.btn-secondary{background:var(--gray-100);color:var(--dark);border:1px solid var(--gray-200)}
+.btn-secondary:hover{background:var(--gray-200)}
+.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:var(--white)}
+.btn-danger:hover{transform:translateY(-2px)}
+.btn-success{background:linear-gradient(135deg,#10B981,#059669);color:var(--white)}
+.btn-success:hover{transform:translateY(-2px)}
 .btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
-.btn-icon{width:44px;height:44px;padding:0;border-radius:10px}
-.btn-logout{background:none;color:var(--danger);font-weight:700;padding:.4rem .7rem;min-height:36px;font-size:.8rem}
 
 /* ── MAIN / CONTENT ── */
-#appShell{flex:1;flex-direction:column;overflow:hidden}
-.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:860px;margin:0 auto;width:100%}
+#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
 section{display:none}
-section.active{display:block}
+section.active{display:block;animation:fadeIn .3s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--white);border-top:1px solid var(--gray-100);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -2px 12px rgba(15,23,42,.06)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--white);border-top:1px solid var(--gray-100);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:var(--gray-500);font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
 .nav-item:active{opacity:.7}
-.nav-item.active{color:var(--primary)}
+.nav-item.active{color:var(--primary);transform:translateY(-2px)}
 .nav-item .nav-icon{font-size:1.35rem;line-height:1}
-.nav-badge{position:absolute;top:.15rem;right:calc(50% - 18px);background:var(--danger);color:var(--white);width:18px;height:18px;border-radius:50%;font-size:.65rem;font-weight:700;display:none;align-items:center;justify-content:center}
-.nav-badge.show{display:flex}
 
 /* ── CARDS ── */
-.card{background:var(--white);border-radius:14px;padding:1.25rem;box-shadow:var(--shadow-sm);margin-bottom:1rem}
+.card{background:var(--white);border-radius:14px;padding:1.25rem;box-shadow:var(--shadow);margin-bottom:1rem;border:1px solid var(--gray-100);transition:var(--transition)}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--primary)}
 .card-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
+
+/* ── PROFESSIONAL CARDS (CLICKABLE) ── */
+.professional-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:.75rem;border:1.5px solid var(--gray-100);transition:var(--transition);cursor:pointer}
+.professional-card:hover{box-shadow:var(--shadow-lg);border-color:var(--primary);transform:translateY(-4px)}
+.professional-card.selected{border-color:var(--primary);background:rgba(79,70,229,.02)}
+.professional-header{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);color:var(--white);padding:1rem;display:flex;align-items:center;gap:.75rem}
+.professional-avatar{width:52px;height:52px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;backdrop-filter:blur(10px)}
+.professional-name{font-size:1rem;font-weight:700}
+.professional-body{padding:1rem}
+.professional-specialties{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
+.specialty-chip{background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(6,182,212,.1));color:var(--primary);padding:.3rem .65rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1px solid rgba(79,70,229,.2)}
+.professional-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--gray-100)}
 
 /* ── STAT CARDS ── */
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center}
+.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(79,70,229,.2);transition:var(--transition)}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(79,70,229,.3)}
 .stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
 .stat-label{font-size:.8rem;opacity:.9}
 
+/* ── MODALS ── */
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:1rem}
+.modal.show{display:flex;animation:modalFadeIn .3s ease-out}
+@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
+.modal-content{background:var(--white);border-radius:16px;padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:modalSlideUp .3s ease-out}
+@keyframes modalSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--dark)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--gray-100);border:none;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition)}
+.modal-close:hover{background:var(--gray-200)}
+
 /* ── FORMS ── */
-.form-group{margin-bottom:1.1rem}
+.form-group{margin-bottom:1rem}
 label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--dark);font-size:.9rem}
 input,textarea,select{width:100%;padding:.8rem;border:1.5px solid var(--gray-300);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:var(--white);color:var(--dark)}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
@@ -101,152 +116,26 @@ textarea{resize:vertical;min-height:100px}
 .badge-danger{background:rgba(239,68,68,.12);color:var(--danger)}
 .badge-primary{background:rgba(79,70,229,.12);color:var(--primary)}
 
-/* ── HISTORY ITEMS ── */
-.history-list{display:flex;flex-direction:column;gap:.75rem}
-.history-item{background:var(--white);padding:1.1rem;border-radius:12px;border-left:4px solid var(--primary);box-shadow:var(--shadow-sm)}
-.history-title{font-weight:700;color:var(--dark);margin-bottom:.4rem;font-size:.95rem}
-.history-meta{display:flex;flex-wrap:wrap;gap:.5rem;font-size:.82rem;color:var(--gray-600)}
-.history-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}
-
-/* ── PROFESSIONAL CARDS ── */
-.professionals-grid{display:grid;grid-template-columns:1fr;gap:.75rem}
-.professional-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm)}
-.professional-header{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);color:var(--white);padding:1rem;display:flex;align-items:center;gap:.75rem}
-.professional-avatar{width:52px;height:52px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-.professional-name{font-size:1rem;font-weight:700}
-.professional-body{padding:1rem}
-.professional-specialties{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
-.specialty-chip{background:var(--gray-100);color:var(--dark);padding:.3rem .65rem;border-radius:6px;font-size:.78rem;font-weight:500}
-.professional-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-
-/* ── AD BANNER ── */
-.ad-banner{background:linear-gradient(135deg,#1E293B,#334155);color:var(--white);border-radius:12px;padding:1rem;margin-bottom:1rem;position:relative}
-.ad-banner h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
-.ad-banner p{font-size:.82rem;opacity:.85}
-.ad-label{position:absolute;top:.5rem;right:.5rem;font-size:.6rem;background:rgba(255,255,255,.2);padding:.15rem .4rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
-
-/* ── CHAT ── */
-.chat-layout{display:flex;flex-direction:column;height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 60px)}
-.conv-list{display:flex;flex-direction:column;gap:.25rem}
-.conv-item{display:flex;align-items:center;gap:.7rem;padding:.75rem;border-radius:10px;cursor:pointer;transition:var(--transition)}
-.conv-item:active{background:var(--gray-50)}
-.conv-avatar{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);background:linear-gradient(135deg,var(--primary),var(--secondary));flex-shrink:0}
-.chat-window{display:flex;flex-direction:column;background:var(--white);border-radius:14px;overflow:hidden;flex:1;min-height:0}
-.chat-header-bar{padding:.9rem 1rem;border-bottom:1px solid var(--gray-100);font-weight:700;display:flex;align-items:center;gap:.6rem}
-.chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
-.message.sent{align-self:flex-end}
-.message.received{align-self:flex-start}
-.message-content{max-width:75%;padding:.65rem .9rem;border-radius:12px;font-size:.9rem;line-height:1.45}
-.message.sent .message-content{background:var(--primary);color:var(--white);border-bottom-right-radius:4px}
-.message.received .message-content{background:var(--gray-100);color:var(--dark);border-bottom-left-radius:4px}
-.message-time{font-size:.7rem;color:var(--gray-500);margin-top:.2rem}
-.chat-input-bar{padding:.75rem 1rem;border-top:1px solid var(--gray-100);display:flex;gap:.6rem;align-items:center}
-.chat-input-bar input{flex:1;border-radius:22px;padding:.6rem 1rem}
-.chat-input-bar button{min-height:40px;height:40px;border-radius:22px;padding:0 1rem}
-
-/* ── MODAL ── */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:0}
-.modal.active{display:flex}
-.modal-content{background:var(--white);border-radius:20px 20px 0 0;padding:1.5rem 1.25rem;width:100%;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-xl)}
-@media(min-width:600px){.modal{align-items:center;padding:1rem}.modal-content{border-radius:16px;max-width:540px}}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.9rem;border-bottom:1px solid var(--gray-100)}
-.modal-title{font-size:1.2rem;font-weight:700;color:var(--dark)}
-.modal-close{background:none;color:var(--gray-500);font-size:1.4rem;padding:0;min-height:auto;width:32px;height:32px;border-radius:50%}
-.modal-footer{display:flex;gap:.75rem;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--gray-100)}
-.modal-footer button{flex:1}
-
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + .75rem);left:.75rem;right:.75rem;padding:.9rem 1.1rem;border-radius:12px;color:var(--white);font-weight:600;font-size:.9rem;box-shadow:var(--shadow-lg);z-index:3000;animation:toastIn .3s ease-out}
-.toast.success{background:var(--success)}
-.toast.error{background:var(--danger)}
-.toast.info{background:var(--primary)}
-@keyframes toastIn{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
-
-/* ── AUTH ── */
-.auth-shell{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto}
-.auth-card{width:100%;max-width:420px}
-.auth-brand{text-align:center;margin-bottom:1.25rem}
-.auth-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--white);margin:0 auto 1rem}
-
-/* ── SPECIALTIES ── */
-.specialties-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:.75rem}
-.specialty-badge{padding:.6rem .75rem;border:2px solid var(--gray-300);border-radius:8px;text-align:center;cursor:pointer;transition:var(--transition);font-weight:500;font-size:.85rem}
-.specialty-badge.selected{background:var(--primary);color:var(--white);border-color:var(--primary)}
-
-/* ── PORTFOLIO ── */
-.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.portfolio-item{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;cursor:pointer}
-.portfolio-item img{width:100%;height:100%;object-fit:cover}
-.portfolio-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;padding:.75rem;opacity:0;transition:var(--transition)}
-.portfolio-item:hover .portfolio-overlay,.portfolio-item:active .portfolio-overlay{opacity:1}
-.portfolio-info{color:var(--white);flex:1;font-size:.85rem}
-.portfolio-title{font-weight:700;margin-bottom:.15rem}
-.portfolio-remove{background:var(--danger);color:var(--white);border:none;width:32px;height:32px;min-height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
-
 /* ── EMPTY STATE ── */
 .empty-state{text-align:center;padding:2.5rem 1rem;color:var(--gray-500)}
-.empty-icon{font-size:2.5rem;margin-bottom:.75rem}
-.empty-state p{margin-bottom:1.25rem}
+.empty-icon{font-size:3rem;margin-bottom:.75rem}
+.empty-state p{margin-bottom:.5rem;font-size:.95rem}
 
-/* ── CONFIG BANNER ── */
-#configBanner{display:none;align-items:center;gap:.6rem;background:#FEF3C7;color:#92400E;border-bottom:1px solid #FCD34D;padding:.6rem 1rem;font-size:.85rem;font-weight:500}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 1rem);right:1rem;background:var(--white);padding:1rem 1.25rem;border-radius:10px;box-shadow:var(--shadow-lg);z-index:400;display:none;gap:.75rem;align-items:center;animation:slideUp .3s ease-out}
+.toast.show{display:flex}
+@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast.success{border-left:4px solid var(--success)}
+.toast.error{border-left:4px solid var(--danger)}
+.toast.info{border-left:4px solid var(--primary)}
 
-/* ── SEARCH FILTERS ── */
-.filter-bar{display:flex;flex-direction:column;gap:.75rem;padding:1rem;background:var(--white);border-radius:14px;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
-.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-
-/* ── PAGE HEADER ── */
-.page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:.75rem;flex-wrap:wrap}
-.page-title{font-size:1.4rem;font-weight:800;color:var(--dark)}
-.page-subtitle{font-size:.85rem;color:var(--gray-600);margin-top:.2rem}
-
-/* ── STATUS ONLINE DOT ── */
-.status-online{width:10px;height:10px;background:var(--success);border-radius:50%;display:inline-block;animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ── TABLE (gestor) ── */
-.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--gray-100)}
-table{width:100%;border-collapse:collapse;min-width:480px}
-thead{background:var(--gray-50)}
-th{padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--dark);border-bottom:2px solid var(--gray-100);font-size:.85rem;white-space:nowrap}
-td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
-
-/* ── FILE UPLOAD ── */
-.file-upload{border:2px dashed var(--gray-300);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:var(--transition)}
-.file-upload:active{border-color:var(--primary);background:rgba(79,70,229,.04)}
-.file-upload input[type="file"]{display:none}
-
-/* ── PWA INSTALL BTN ── */
-#pwaInstallBtn{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + .75rem);right:.75rem;z-index:200;display:none;box-shadow:var(--shadow-lg)}
-#pwaInstallBtn.show{display:inline-flex}
-
-/* ── DESKTOP (wide screens) ── */
 @media(min-width:768px){
   .stats-row{grid-template-columns:repeat(4,1fr)}
   .professionals-grid{grid-template-columns:repeat(2,1fr)}
-  .portfolio-grid{grid-template-columns:repeat(3,1fr)}
-  .filter-row{grid-template-columns:repeat(3,1fr)}
-  .specialties-grid{grid-template-columns:repeat(3,1fr)}
-  .content-area{padding:1.5rem 2rem calc(var(--nav-h) + var(--safe-bottom) + 1rem)}
-  .chat-layout{height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 80px)}
 }
-@media(min-width:1024px){
-  #appShell{flex-direction:row}
-  .desktop-sidebar{display:flex!important;flex-direction:column;width:240px;background:var(--white);padding:1.25rem 0;border-right:1px solid var(--gray-100);flex-shrink:0;height:calc(100vh - 60px);position:sticky;top:60px;overflow-y:auto}
-  .bottom-nav{display:none}
-  .content-area{padding:2rem;max-width:none}
-  .sidebar-item{padding:.7rem 1.5rem;color:var(--gray-600);cursor:pointer;transition:var(--transition);border-left:3px solid transparent;font-weight:500;font-size:.9rem}
-  .sidebar-item:hover{background:var(--gray-50);color:var(--primary)}
-  .sidebar-item.active{background:rgba(79,70,229,.08);color:var(--primary);border-left-color:var(--primary)}
-  .sidebar-title{padding:.4rem 1.5rem;font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--gray-500);margin-top:1rem}
-  #pwaInstallBtn{bottom:1.5rem}
-  .toast{bottom:1.5rem;left:auto;right:1.5rem;width:360px}
-}
-.desktop-sidebar{display:none}
 </style>
 </head>
 <body>
-<div id="configBanner">⚠️ Firebase não configurado — configure as credenciais.</div>
 
 <!-- HEADER -->
 <header>
@@ -254,215 +143,179 @@ td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
     <a href="index.html" class="logo">
       <div class="logo-icon">⚡</div>
       <span>EventLink</span>
-      <span class="role-pill client">Contratante</span>
+      <span class="role-pill">Contratante</span>
     </a>
     <div class="header-right">
-      <span class="conn-dot" id="connDot" title="Conexão"></span>
-      <div class="user-avatar" id="userAvatarHeader">E</div>
+      <div class="user-avatar" id="userAvatarHeader">C</div>
       <span id="userNameHeader" style="font-size:.85rem;font-weight:600;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
-      <button class="btn-logout" onclick="app.logout()">Sair</button>
+      <button class="btn-logout" onclick="app.logout()" style="background:none;color:var(--danger);font-weight:600;padding:.4rem .7rem;min-height:36px;font-size:.8rem;border:none;cursor:pointer">Sair</button>
     </div>
   </div>
 </header>
 
-<!-- AUTH -->
-<div class="auth-shell" id="authShell">
-  <div class="auth-card">
-    <div class="auth-brand">
-      <div class="auth-logo">⚡</div>
-      <h1 style="font-size:1.5rem;font-weight:800;font-family:'Sora',sans-serif;color:var(--dark)">Área do Contratante</h1>
-      <p style="color:var(--gray-600);margin-top:.4rem;font-size:.9rem">Encontre os melhores profissionais para o seu evento</p>
-    </div>
-    <div class="card" id="loginCard">
-      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-      <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
-      <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
-    </div>
-    <div class="card" id="signupCard" style="display:none">
-      <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
-      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
-      <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
-      <div class="form-group"><label>Cidade / Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
-      <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
-      <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar ao login</button>
-    </div>
-  </div>
-</div>
-
-<!-- APP -->
+<!-- APP SHELL -->
 <div id="appShell" style="display:none">
-  <!-- Desktop sidebar -->
-  <div class="desktop-sidebar" id="desktopSidebar">
-    <div class="sidebar-title">Contratante</div>
-    <div class="sidebar-item active" data-section="clientDashboard">📊 Dashboard</div>
-    <div class="sidebar-item" data-section="searchProfessionals">🔍 Buscar</div>
-    <div class="sidebar-item" data-section="requestHistory">📋 Histórico</div>
-    <div class="sidebar-item" data-section="messages">💬 Mensagens</div>
-  </div>
-
   <div class="content-area" id="contentArea">
 
     <!-- DASHBOARD -->
     <section id="clientDashboard" class="active">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Olá, <span id="clientName">Cliente</span>! 👋</h1>
-          <p class="page-subtitle">Encontre profissionais para seu evento</p>
-        </div>
-        <button class="btn-primary btn-small" onclick="app.showSection('searchProfessionals')">🔍 Buscar</button>
+      <div style="margin-bottom:1.5rem">
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">Olá, <span id="dashboardName">Contratante</span>! 👋</h1>
+        <p style="color:var(--gray-600);font-size:.95rem">Encontre os melhores profissionais para seu evento</p>
       </div>
-      <div id="adsTopClient"></div>
+
+      <!-- STATS -->
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="clientActiveBudgets">0</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--secondary),var(--primary))"><div class="stat-label">Histórico</div><div class="stat-number" id="clientHistoryCount">0</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--accent),var(--primary))"><div class="stat-label">Mensagens</div><div class="stat-number" id="clientMessages">0</div></div>
-        <div class="stat-card" style="background:linear-gradient(135deg,var(--success),#059669)"><div class="stat-label">Status</div><div class="stat-number" style="font-size:1.1rem">Ativo ✓</div></div>
+        <div class="stat-card"><div class="stat-label">Profissionais</div><div class="stat-number" id="statProf">0</div></div>
+        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="statReqs">0</div></div>
+        <div class="stat-card"><div class="stat-label">Ativas</div><div class="stat-number" id="statActive">0</div></div>
+        <div class="stat-card"><div class="stat-label">Concluídas</div><div class="stat-number" id="statDone">0</div></div>
       </div>
+
+      <!-- ÚLTIMOS PROFISSIONAIS VISUALIZADOS -->
       <div class="card">
-        <div class="card-title">Acesso rápido</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
-          <button class="btn-secondary" onclick="app.showSection('searchProfessionals')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">🔍</span><span style="font-size:.8rem">Buscar Profissionais</span>
-          </button>
-          <button class="btn-secondary" onclick="app.showSection('requestHistory')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">📋</span><span style="font-size:.8rem">Minhas Solicitações</span>
-          </button>
-          <button class="btn-secondary" onclick="app.showSection('messages')" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">💬</span><span style="font-size:.8rem">Mensagens</span>
-          </button>
-          <button class="btn-secondary" onclick="window.location.href='index.html'" style="flex-direction:column;gap:.3rem;padding:1rem">
-            <span style="font-size:1.5rem">🏠</span><span style="font-size:.8rem">Início</span>
-          </button>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+          <div class="card-title" style="margin-bottom:0">⭐ Profissionais em Destaque</div>
+          <a href="#" onclick="document.querySelector('[data-section=\"searchProfessionals\"]').click(); return false;" style="font-size:.8rem;color:var(--primary);text-decoration:none;font-weight:600">Ver mais →</a>
         </div>
+        <div id="featuredProfsList"></div>
+      </div>
+
+      <!-- SOLICITAÇÕES RECENTES -->
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+          <div class="card-title" style="margin-bottom:0">📨 Minhas Solicitações</div>
+        </div>
+        <div id="recentRequestsList"></div>
       </div>
     </section>
 
     <!-- BUSCAR PROFISSIONAIS -->
     <section id="searchProfessionals">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Encontre Profissionais</h1>
-          <p class="page-subtitle">Rede qualificada de eventos</p>
+      <div class="page-header" style="margin-bottom:1.5rem">
+        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--dark)">Buscar Profissionais 🔍</h1></div>
+        <button class="btn-primary" onclick="app.openRequestModal()">+ Nova Solicitação</button>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="card">
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+          <input type="text" id="searchKeyword" placeholder="Buscar por nome ou especialidade..." style="flex:1;min-width:200px">
+          <button class="btn-secondary" onclick="app.filterProfessionals()">🔍 Buscar</button>
         </div>
       </div>
-      <div class="filter-bar">
-        <div class="form-group" style="margin:0"><label>Especialidade</label>
-          <select id="filterSpecialty">
-            <option value="">Todas as especialidades</option>
-            <option value="Fotografia">📷 Fotografia</option>
-            <option value="Filmagem">🎬 Filmagem</option>
-            <option value="DJ">🎵 DJ</option>
-            <option value="Catering">🍽️ Catering</option>
-            <option value="Decoração">🎨 Decoração</option>
-            <option value="Locação">🏢 Locação</option>
-            <option value="Maquiagem">💄 Maquiagem</option>
-            <option value="Floricultura">🌹 Floricultura</option>
-            <option value="Cerimonial">👰 Cerimonial</option>
-            <option value="Buffet">🍰 Buffet</option>
-          </select>
-        </div>
-        <div class="filter-row">
-          <div class="form-group" style="margin:0"><label>Região</label><input type="text" id="filterRegion" placeholder="Cidade, estado"></div>
-          <div class="form-group" style="margin:0"><label>&nbsp;</label><button class="btn-primary" onclick="app.filterProfessionals()" style="width:100%">🔍 Filtrar</button></div>
-        </div>
+
+      <!-- LISTA DE PROFISSIONAIS (CLICÁVEL) -->
+      <div id="professionalsGrid"></div>
+    </section>
+
+    <!-- SOLICITAÇÕES -->
+    <section id="myRequests">
+      <div class="page-header" style="margin-bottom:1.5rem">
+        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--dark)">Minhas Solicitações 📨</h1></div>
+        <button class="btn-primary" onclick="app.openRequestModal()">+ Nova</button>
       </div>
-      <div id="adsSearchClient"></div>
-      <div id="profAdsInSearch"></div>
-      <div class="professionals-grid" id="professionalsList">
-        <div class="empty-state"><div class="empty-icon">🔍</div><p>Carregando profissionais…</p></div>
+      <div id="requestsFullList"></div>
+    </section>
+
+    <!-- PERFIL -->
+    <section id="clientProfile">
+      <div style="margin-bottom:1.5rem">
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">Meu Perfil</h1>
+        <p style="color:var(--gray-600);font-size:.95rem">Atualize suas informações pessoais</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Informações Básicas</div>
+        <div class="form-group"><label>Nome Completo</label><input type="text" id="profileName" placeholder="Seu nome"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="profileEmail" placeholder="seu@email.com" readonly></div>
+        <div class="form-group"><label>Telefone</label><input type="tel" id="profilePhone" placeholder="(00) 99999-9999"></div>
+        <div class="form-group"><label>Cidade/Região</label><input type="text" id="profileRegion" placeholder="Maceió, AL"></div>
+        <button class="btn-primary" onclick="app.saveProfile()" style="width:100%;margin-top:1rem">💾 Salvar Alterações</button>
       </div>
     </section>
 
-    <!-- HISTÓRICO -->
-    <section id="requestHistory">
-      <div class="page-header">
-        <div><h1 class="page-title">Minhas Solicitações</h1><p class="page-subtitle">Acompanhe suas contratações</p></div>
-      </div>
-      <div class="history-list" id="historyList">
-        <div class="empty-state"><div class="empty-icon">📋</div><p>Nenhuma solicitação ainda</p><button class="btn-primary btn-small" onclick="app.showSection('searchProfessionals')">Buscar profissionais</button></div>
-      </div>
-    </section>
+  </div>
 
-    <!-- MENSAGENS -->
-    <section id="messages">
-      <div class="page-header"><h1 class="page-title">Mensagens 💬</h1></div>
-      <!-- Vista de lista de conversas -->
-      <div id="convListView">
-        <div class="card">
-          <div class="card-title">Conversas</div>
-          <div id="conversationsList"><div class="empty-state" style="padding:1.5rem 0"><p>Nenhuma conversa</p></div></div>
-        </div>
-      </div>
-      <!-- Vista de chat -->
-      <div id="chatView" style="display:none">
-        <button class="btn-secondary btn-small" onclick="app.backToConvList()" style="margin-bottom:.75rem">← Conversas</button>
-        <div class="chat-window" style="height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 130px)">
-          <div class="chat-header-bar" id="chatPeerName">Chat</div>
-          <div class="chat-messages" id="chatMessages"><div class="empty-state" style="padding:2rem 1rem"><div class="empty-icon">💬</div><p>Diga olá!</p></div></div>
-          <div class="chat-input-bar">
-            <input type="text" id="messageInput" placeholder="Mensagem…">
-            <button class="btn-primary" onclick="app.sendMessage()">Enviar</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /content-area -->
-
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav" id="bottomNav">
+  <nav class="bottom-nav">
     <div class="nav-item active" data-section="clientDashboard">
       <span class="nav-icon">📊</span><span>Início</span>
     </div>
     <div class="nav-item" data-section="searchProfessionals">
       <span class="nav-icon">🔍</span><span>Buscar</span>
     </div>
-    <div class="nav-item" data-section="requestHistory">
-      <span class="nav-icon">📋</span><span>Histórico</span>
+    <div class="nav-item" data-section="myRequests" id="navRequests">
+      <span class="nav-icon">📨</span><span>Pedidos</span>
     </div>
-    <div class="nav-item" data-section="messages" style="position:relative">
-      <span class="nav-icon">💬</span><span>Chat</span>
-      <span class="nav-badge" id="msgBadge">0</span>
+    <div class="nav-item" data-section="clientProfile">
+      <span class="nav-icon">👤</span><span>Perfil</span>
     </div>
   </nav>
 </div>
 
-<!-- MODAL: NOVA SOLICITAÇÃO -->
-<div class="modal" id="newRequestModal">
+<!-- AUTH SHELL -->
+<div class="auth-shell" id="authShell">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:1.5rem">
+    <div style="background:var(--white);border-radius:16px;padding:2rem;max-width:400px;width:100%;box-shadow:var(--shadow-lg)">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:2rem;color:var(--white)">⚡</div>
+        <h1 style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">EventLink</h1>
+        <p style="color:var(--gray-600);font-size:.9rem">Painel do Contratante</p>
+      </div>
+
+      <div id="loginCard">
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
+        <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
+      </div>
+
+      <div id="signupCard" style="display:none">
+        <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
+        <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
+        <div class="form-group"><label>Cidade/Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
+        <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
+        <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- MODAL: CREATE REQUEST -->
+<div class="modal" id="requestModal">
   <div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title">📩 Nova Solicitação</h2><button class="modal-close" onclick="app.closeModal('newRequestModal')">✕</button></div>
-    <div class="form-group"><label>Descrição do Evento</label><textarea id="requestDescription" placeholder="Descreva o que você precisa..."></textarea></div>
+    <button class="modal-close" onclick="app.closeModal('requestModal')">✕</button>
+    <div class="modal-header">Nova Solicitação 📨</div>
+    <div class="form-group"><label>Descrição do Serviço</label><input type="text" id="requestDesc" placeholder="Ex: Fotografia de casamento"></div>
     <div class="form-group"><label>Data do Evento</label><input type="date" id="requestDate"></div>
-    <div class="form-group"><label>Orçamento (R$)</label><input type="number" id="requestBudget" placeholder="Ex: 1000"></div>
-    <div class="form-group"><label>Local do Evento</label><input type="text" id="requestLocation" placeholder="Endereço ou cidade"></div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="app.closeModal('newRequestModal')">Cancelar</button>
-      <button class="btn-primary" onclick="app.submitRequest()">Enviar</button>
+    <div class="form-group"><label>Local</label><input type="text" id="requestLocation" placeholder="Cidade, bairro ou endereço"></div>
+    <div class="form-group"><label>Orçamento (R$)</label><input type="number" id="requestBudget" placeholder="1000" min="100"></div>
+    <div class="form-group"><label>Detalhes Adicionais</label><textarea id="requestDetails" placeholder="Descreva melhor o que você precisa..."></textarea></div>
+    <div style="display:flex;gap:.75rem">
+      <button class="btn-primary" onclick="app.createRequest()" style="flex:1">Enviar Solicitação</button>
+      <button class="btn-secondary" onclick="app.closeModal('requestModal')" style="flex:1">Cancelar</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: DETALHE PROFISSIONAL -->
-<div class="modal" id="professionalDetailModal">
+<!-- MODAL: PROFESSIONAL DETAILS -->
+<div class="modal" id="professionalModal">
   <div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title" id="profDetailName">Profissional</h2><button class="modal-close" onclick="app.closeModal('professionalDetailModal')">✕</button></div>
-    <div id="profDetailContent"></div>
-    <div class="modal-footer" style="flex-wrap:wrap">
-      <button class="btn-secondary" onclick="app.closeModal('professionalDetailModal')">Fechar</button>
-      <button class="btn-success" onclick="app.messageSelected()">💬 Chat</button>
-      <button class="btn-primary" onclick="app.startRequest()">📩 Solicitar</button>
-    </div>
+    <button class="modal-close" onclick="app.closeModal('professionalModal')">✕</button>
+    <div id="professionalDetails"></div>
   </div>
 </div>
 
-<button id="pwaInstallBtn" class="btn-primary btn-small" onclick="EventLinkPWA.promptInstall()">📲 Instalar</button>
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-window.EVENTLINK_ADMIN_CODE = 'EVENTLINK-ADMIN';
 const firebaseConfig = {
   apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
   authDomain: "imobpro-667da.firebaseapp.com",
@@ -472,413 +325,324 @@ const firebaseConfig = {
   messagingSenderId: "827299768500",
   appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
 };
-const IS_PLACEHOLDER = firebaseConfig.apiKey === "COLE_SUA_API_KEY";
-let db = null, CONNECTED = false;
-if (!IS_PLACEHOLDER) {
-  firebase.initializeApp(firebaseConfig);
-  db = firebase.database();
-  db.ref(".info/connected").on("value", (snap) => {
-    CONNECTED = snap.val() === true;
-    document.dispatchEvent(new CustomEvent("eventlink:connection", { detail: CONNECTED }));
-  });
-}
-const EventDB = {
-  isReady() { return !IS_PLACEHOLDER && db !== null; },
-  isConnected() { return CONNECTED; },
-  ref(path) { return db.ref(path); },
-  async set(collection, obj) { return db.ref(`${collection}/${obj.id}`).set(obj); },
-  async update(path, partial) { return db.ref(path).update(partial); },
-  async push(path, obj) { const r = db.ref(path).push(); await r.set({ ...obj, id: r.key }); return r.key; },
-  async get(collection, id) { const snap = await db.ref(`${collection}/${id}`).once("value"); return snap.val(); },
-  async getAll(collection) { const snap = await db.ref(collection).once("value"); return Object.values(snap.val() || {}); },
-  async delete(collection, id) { return db.ref(`${collection}/${id}`).remove(); },
-  subscribe(path, callback) { const h = (s) => callback(s.val()); db.ref(path).on("value", h); return () => db.ref(path).off("value", h); },
-  subscribeList(collection, callback) { const h = (s) => callback(Object.values(s.val() || {})); db.ref(collection).on("value", h); return () => db.ref(collection).off("value", h); }
-};
-window.EventDB = EventDB;
-window.EVENTLINK_PLACEHOLDER = IS_PLACEHOLDER;
 
-class BaseApp {
-  constructor(role) {
-    this.role = role; this.currentUser = null; this.selectedSpecialties = [];
-    this.currentChat = null; this.currentChatName = null;
-    this._subs = []; this._chatMsgUnsub = null; this._convUnsub = null;
+try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
+
+const db = firebase.database();
+
+class EventDB {
+  static async set(path, data) {
+    const key = data.id || Date.now().toString();
+    return db.ref(`${path}/${key}`).set({...data,id:key});
   }
-  async boot() {
-    this.wireConnectionIndicator(); this.setupCommonListeners();
-    if (!EventDB.isReady()) { this.showConfigBanner(); this.showAuth(); return; }
-    await this.loadStoredUser();
+  static async update(path, data) {
+    return db.ref(path).update(data);
   }
-  showConfigBanner() { const b = document.getElementById('configBanner'); if (b) b.style.display = 'flex'; }
-  wireConnectionIndicator() {
-    const dot = document.getElementById('connDot');
-    if (!dot) return;
-    const paint = (ok) => { dot.style.background = ok ? 'var(--success)' : 'var(--danger)'; };
-    paint(EventDB.isConnected());
-    document.addEventListener('eventlink:connection', (e) => paint(e.detail));
+  static on(path, callback) {
+    return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
   }
-  sessionKey() { return `eventlink_session_${this.role}`; }
-  saveSession() { localStorage.setItem(this.sessionKey(), JSON.stringify(this.currentUser)); }
-  clearSession() { localStorage.removeItem(this.sessionKey()); }
-  async loadStoredUser() {
-    const raw = localStorage.getItem(this.sessionKey());
-    if (!raw) { this.showAuth(); return; }
-    const stored = JSON.parse(raw);
-    const fresh = await EventDB.get('users', stored.id);
-    this.currentUser = fresh || stored;
-    if (fresh) this.saveSession();
-    this.enterDashboard();
+}
+
+class ClientApp {
+  constructor() {
+    this.currentUser = null;
+    this.professionals = [];
+    this.myRequests = [];
+    this.selectedProfessional = null;
   }
-  showAuth() {
-    document.getElementById('authShell').style.display = 'flex';
-    document.getElementById('appShell').style.display = 'none';
-    this.showLogin();
-  }
-  showLogin() {
-    document.getElementById('loginCard').style.display = 'block';
-    const s = document.getElementById('signupCard'); if (s) s.style.display = 'none';
-  }
-  showSignup() {
-    const s = document.getElementById('signupCard'); if (!s) return;
-    document.getElementById('loginCard').style.display = 'none'; s.style.display = 'block';
-  }
-  async login() {
-    if (!this.guardReady()) return;
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password = document.getElementById('loginPassword').value;
-    if (!email || !password) { this.showToast('Preencha email e senha', 'error'); return; }
-    try {
-      const users = await EventDB.getAll('users');
-      const user = users.find(u => (u.email||'').toLowerCase()===email && u.password===password && u.userType===this.role);
-      if (!user) { this.showToast('❌ Credenciais inválidas para este painel', 'error'); return; }
-      this.currentUser = user; this.saveSession(); this.enterDashboard();
-      this.showToast('✨ Bem-vindo(a)!', 'success');
-    } catch(err) { this.showToast('❌ Erro de conexão: ' + (err?.message||err), 'error'); }
-  }
-  async signup() {
-    if (!this.guardReady()) return;
-    const name = (document.getElementById('signupName')?.value||'').trim();
-    const email = (document.getElementById('signupEmail')?.value||'').trim().toLowerCase();
-    const password = document.getElementById('signupPassword')?.value||'';
-    const phone = document.getElementById('signupPhone')?.value||'';
-    const region = document.getElementById('signupRegion')?.value||'';
-    if (!name||!email||!password) { this.showToast('Preencha nome, email e senha', 'error'); return; }
-    if (this.role==='admin') {
-      const code = document.getElementById('signupAdminCode')?.value||'';
-      if (code !== (window.EVENTLINK_ADMIN_CODE||'')) { this.showToast('❌ Código de gestor inválido', 'error'); return; }
-    }
-    try {
-      const users = await EventDB.getAll('users');
-      if (users.some(u => (u.email||'').toLowerCase()===email)) { this.showToast('❌ Email já cadastrado', 'error'); return; }
-      const id = Date.now().toString();
-      const user = { id, name, email, phone, region, password, userType: this.role,
-        createdAt: new Date().toISOString(), phoneApproved: false,
-        specialties: this.role==='professional'?this.selectedSpecialties:[],
-        description: this.role==='professional'?(document.getElementById('signupDescription')?.value||''):'',
-        portfolio: [], rating: 5.0, views: 0 };
-      await EventDB.set('users', user);
-      if (this.role==='professional') await EventDB.set('professionals', user);
-      if (phone) { const pid=id+'_phone'; await EventDB.set('phones',{id:pid,userId:id,phone,approved:false,createdAt:new Date().toISOString()}); }
-      this.trackAccess('cadastro'); this.currentUser = user; this.saveSession(); this.enterDashboard();
-      this.showToast('✨ Conta criada! Bem-vindo(a)!', 'success');
-    } catch(err) { this.showToast('❌ Erro: ' + (err?.message||err), 'error'); }
-  }
-  logout() {
-    if (!confirm('Deseja sair?')) return;
-    this.detachRealtime(); this.currentUser = null; this.clearSession();
-    document.getElementById('appShell').style.display = 'none'; this.showAuth();
-    this.showToast('Sessão encerrada', 'info');
-  }
-  guardReady() {
-    if (!EventDB.isReady()) { this.showToast('Configure o Firebase', 'error'); return false; }
-    return true;
-  }
-  enterDashboard() {
-    document.getElementById('authShell').style.display = 'none';
-    document.getElementById('appShell').style.display = 'flex';
-    const av = document.getElementById('userAvatarHeader');
-    const nm = document.getElementById('userNameHeader');
-    if (av) av.textContent = (this.currentUser.name||'?').charAt(0).toUpperCase();
-    if (nm) { nm.textContent = this.currentUser.name; nm.style.display = 'block'; }
-    const first = document.querySelector('.sidebar-item,.nav-item');
-    const target = first?.getAttribute('data-section');
-    this.showSection(target || document.querySelector('section')?.id);
-    this.attachRealtime(); this.subscribeConversations(); this.onDashboardReady?.();
-  }
-  showSection(sectionId) {
-    document.querySelectorAll('.content-area section').forEach(s => s.classList.remove('active'));
-    const sec = document.getElementById(sectionId);
-    if (sec) { sec.classList.add('active'); this.trackAccess(sectionId); }
-    document.querySelectorAll('.sidebar-item,.nav-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll(`[data-section="${sectionId}"]`).forEach(i => i.classList.add('active'));
-    const ca = document.getElementById('contentArea'); if (ca) ca.scrollTop = 0;
-    this.onSectionShown?.(sectionId);
-  }
-  attachRealtime() {}
-  detachRealtime() {
-    this._subs.forEach(u => { try{u()}catch(_){} }); this._subs = [];
-    if (this._chatMsgUnsub) { this._chatMsgUnsub(); this._chatMsgUnsub = null; }
-    if (this._convUnsub) { this._convUnsub(); this._convUnsub = null; }
-  }
-  track(unsub) { if (typeof unsub==='function') this._subs.push(unsub); }
-  chatIdFor(a,b) { return [a,b].sort().join('__'); }
-  async openChatWith(otherId, otherName) {
-    if (!otherId || otherId===this.currentUser.id) return;
-    const chatId = this.chatIdFor(this.currentUser.id, otherId);
-    this.currentChat = chatId; this.currentChatName = otherName;
-    await EventDB.update(`chats/${chatId}/meta`, {participants:{[this.currentUser.id]:this.currentUser.name,[otherId]:otherName},updatedAt:Date.now()});
-    await EventDB.update(`userChats/${this.currentUser.id}/${chatId}`,{chatId,otherId,otherName,updatedAt:Date.now()});
-    await EventDB.update(`userChats/${otherId}/${chatId}`,{chatId,otherId:this.currentUser.id,otherName:this.currentUser.name,updatedAt:Date.now()});
-    const h = document.getElementById('chatPeerName'); if (h) h.textContent = otherName;
-    this.subscribeMessages(chatId); this.showSection('messages'); this.showChatView();
-  }
-  showChatView() {
-    const cl = document.getElementById('convListView'); const cv = document.getElementById('chatView');
-    if (cl) cl.style.display = 'none'; if (cv) cv.style.display = 'block';
-  }
-  backToConvList() {
-    const cl = document.getElementById('convListView'); const cv = document.getElementById('chatView');
-    if (cl) cl.style.display = 'block'; if (cv) cv.style.display = 'none';
-  }
-  subscribeMessages(chatId) {
-    if (this._chatMsgUnsub) this._chatMsgUnsub();
-    this._chatMsgUnsub = EventDB.subscribe(`chats/${chatId}/messages`, (val) => {
-      const list = Object.values(val||{}).sort((a,b) => a.timestamp-b.timestamp);
-      this.renderMessages(list);
-    });
-  }
-  renderMessages(list) {
-    const box = document.getElementById('chatMessages'); if (!box) return;
-    if (!list.length) { box.innerHTML = '<div class="empty-state" style="padding:2rem 1rem"><div class="empty-icon">💬</div><p>Diga olá!</p></div>'; return; }
-    box.innerHTML = list.map(m => {
-      const mine = m.senderId===this.currentUser.id;
-      const time = new Date(m.timestamp).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-      return `<div class="message ${mine?'sent':'received'}"><div>
-        <div class="message-content">${this.escape(m.text)}</div>
-        <div class="message-time">${mine?'Você':this.escape(m.senderName)} · ${time}</div>
-      </div></div>`;
-    }).join('');
-    box.scrollTop = box.scrollHeight;
-  }
-  async sendMessage() {
-    const input = document.getElementById('messageInput'); const text = input.value.trim();
-    if (!text) return; if (!this.currentChat) { this.showToast('Selecione uma conversa','error'); return; }
-    const msg = {senderId:this.currentUser.id,senderName:this.currentUser.name,text,timestamp:Date.now()};
-    await EventDB.push(`chats/${this.currentChat}/messages`, msg);
-    await EventDB.update(`chats/${this.currentChat}/meta`,{lastMessage:text,updatedAt:Date.now()});
-    const meta = await EventDB.get(`chats/${this.currentChat}`,'meta');
-    const parts = meta?.participants||{};
-    Object.keys(parts).forEach(uid => EventDB.update(`userChats/${uid}/${this.currentChat}`,{lastMessage:text,updatedAt:Date.now()}));
-    input.value = '';
-  }
-  subscribeConversations() {
-    if (this._convUnsub) this._convUnsub();
-    this._convUnsub = EventDB.subscribe(`userChats/${this.currentUser.id}`, (val) => {
-      const convs = Object.values(val||{}).sort((a,b) => (b.updatedAt||0)-(a.updatedAt||0));
-      this.renderConversations(convs);
-      const badge = document.getElementById('msgBadge');
-      if (badge) { badge.textContent = convs.length; badge.classList.toggle('show', convs.length>0); }
-      const el = document.getElementById('clientMessages'); if (el) el.textContent = convs.length;
-    });
-  }
-  openConversation(otherId) {
-    const c = (this._convByOther||{})[otherId]; if (c) this.openChatWith(c.otherId,c.otherName);
-  }
-  renderConversations(convs) {
-    const box = document.getElementById('conversationsList'); if (!box) return;
-    this._convByOther = {}; convs.forEach(c => { this._convByOther[c.otherId] = c; });
-    if (!convs.length) { box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><p>Nenhuma conversa ainda</p></div>'; return; }
-    box.innerHTML = convs.map(c => `
-      <div class="conv-item" onclick="app.openConversation('${c.otherId}')">
-        <div class="conv-avatar">${(c.otherName||'?').charAt(0).toUpperCase()}</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:600;font-size:.9rem">${this.escape(c.otherName)}</div>
-          <div style="color:var(--gray-600);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${this.escape(c.lastMessage||'Nova conversa')}</div>
-        </div>
-        <span style="font-size:.7rem;color:var(--gray-500)">›</span>
-      </div>`).join('');
-  }
-  setupCommonListeners() {
-    document.querySelectorAll('.specialty-badge').forEach(b => {
-      b.addEventListener('click', () => {
-        b.classList.toggle('selected');
-        this.selectedSpecialties = Array.from(document.querySelectorAll('.specialty-badge.selected')).map(el => el.dataset.specialty);
-      });
-    });
-    document.getElementById('messageInput')?.addEventListener('keypress', (e) => { if (e.key==='Enter') this.sendMessage(); });
-    document.querySelectorAll('[data-section]').forEach(item => {
-      item.addEventListener('click', () => this.showSection(item.getAttribute('data-section')));
-    });
-    document.querySelectorAll('.modal').forEach(m => {
-      m.addEventListener('click', (e) => { if (e.target===m) m.classList.remove('active'); });
-    });
-  }
-  trackAccess(section='geral') {
-    if (!EventDB.isReady()) return;
-    const id = Date.now().toString()+Math.random().toString(36).slice(2,6);
-    EventDB.set('analytics',{id,userId:this.currentUser?.id||'anonimo',role:this.role,section,action:`Acessou ${section}`,timestamp:new Date().toISOString()});
-  }
-  openModal(id) { document.getElementById(id).classList.add('active'); }
-  closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
   escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-  showToast(message, type='info') {
-    const t = document.createElement('div'); t.className=`toast ${type}`; t.textContent=message;
-    document.body.appendChild(t);
-    setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(60px)'; setTimeout(()=>t.remove(),300); }, 3000);
+
+  async boot() {
+    const session = localStorage.getItem('clientSession');
+    if (!session) { this.showAuth(); return; }
+    this.currentUser = JSON.parse(session);
+    this.setupListeners();
+    this.showApp();
+    document.getElementById('dashboardName').textContent = this.currentUser.name || 'Contratante';
+    document.getElementById('userNameHeader').textContent = this.currentUser.name || 'C';
+    this.refreshDashboard();
   }
-  toggleUserMenu() {}
-  renderAds(ids, slot) {
-    if (!EventDB.isReady()) return;
-    EventDB.subscribeList('ads', (ads) => {
-      const now = new Date();
-      const active = ads.filter(a => a.position===slot && new Date(a.expire)>now);
-      ids.forEach(id => {
-        const box = document.getElementById(id); if (!box) return;
-        if (!active.length) { box.innerHTML=''; return; }
-        box.innerHTML = active.map(ad => `<div class="ad-banner"><span class="ad-label">Anúncio</span><h4>${this.escape(ad.title)}</h4><p>${this.escape(ad.content)}</p></div>`).join('');
-      });
+
+  setupListeners() {
+    EventDB.on('professionals', profs => {
+      this.professionals = profs;
+      this.renderFeaturedProfessionals();
+    });
+
+    EventDB.on('requests', requests => {
+      this.myRequests = requests.filter(r => r.clientId === this.currentUser.id);
+      this.renderRecentRequests();
+      this.renderRequestsFullList();
     });
   }
-}
 
-class ClientApp extends BaseApp {
-  constructor() { super('client'); this.professionals = []; this.myRequests = []; this.selectedProfessional = null; }
-  attachRealtime() {
-    this.track(EventDB.subscribeList('professionals', (list) => {
-      this.professionals = list;
-      if (document.getElementById('searchProfessionals')?.classList.contains('active')) this.filterProfessionals();
-    }));
-    this.track(EventDB.subscribeList('requests', (list) => {
-      this.myRequests = list.filter(r => r.clientId===this.currentUser.id);
+  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; }
+  showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
+
+  async login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
+    try {
+      const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
+      const users = Object.values(snap.val() || {});
+      if (!users.length || users[0].password !== password) { this.showToast('Email ou senha incorretos','error'); return; }
+      const user = users[0];
+      if (user.role !== 'client') { this.showToast('Este é um painel apenas para contratantes','error'); return; }
+      this.currentUser = user;
+      localStorage.setItem('clientSession', JSON.stringify(user));
+      this.setupListeners();
+      this.showApp();
       this.refreshDashboard();
-      if (document.getElementById('requestHistory')?.classList.contains('active')) this.renderHistory();
-    }));
+    } catch(e) { console.error(e); this.showToast('Erro ao fazer login','error'); }
   }
-  onDashboardReady() {
+
+  async signup() {
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
+    const region = document.getElementById('signupRegion').value.trim();
+    const password = document.getElementById('signupPassword').value.trim();
+    if (!name || !email || !phone || !password) { this.showToast('Preencha todos os campos','error'); return; }
+    const user = { id:Date.now().toString(), name, email, phone, password, role:'client', region, createdAt:new Date().toISOString() };
+    await EventDB.set('users', user);
+    this.currentUser = user;
+    localStorage.setItem('clientSession', JSON.stringify(user));
+    this.setupListeners();
+    this.showApp();
     this.refreshDashboard();
-    this.renderAds(['adsTopClient'], 'top');
-    this.renderAds(['adsSearchClient'], 'search');
-    this.renderProfAds();
   }
-  onSectionShown(id) {
-    if (id==='searchProfessionals') this.filterProfessionals();
-    if (id==='requestHistory') this.renderHistory();
-    if (id==='messages') { const cv=document.getElementById('chatView'); const cl=document.getElementById('convListView'); if(cv&&!this.currentChat){cv.style.display='none';cl.style.display='block';} }
-  }
+
+  showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
+  showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
+
+  logout() { localStorage.removeItem('clientSession'); location.reload(); }
+
   refreshDashboard() {
-    const active = this.myRequests.filter(r => r.status==='pending'||r.status==='active');
-    const cn = document.getElementById('clientName'); if(cn) cn.textContent=this.currentUser.name;
-    const ca = document.getElementById('clientActiveBudgets'); if(ca) ca.textContent=active.length;
-    const ch = document.getElementById('clientHistoryCount'); if(ch) ch.textContent=this.myRequests.length;
+    const active = this.myRequests.filter(r => r.status === 'active').length;
+    const completed = this.myRequests.filter(r => r.status === 'completed').length;
+    document.getElementById('statProf').textContent = this.professionals.length;
+    document.getElementById('statReqs').textContent = this.myRequests.length;
+    document.getElementById('statActive').textContent = active;
+    document.getElementById('statDone').textContent = completed;
   }
-  filterProfessionals() {
-    const specialty = document.getElementById('filterSpecialty').value;
-    const region = document.getElementById('filterRegion').value.toLowerCase();
-    let list = [...this.professionals];
-    if (specialty) list = list.filter(p => (p.specialties||[]).includes(specialty));
-    if (region) list = list.filter(p => (p.region||'').toLowerCase().includes(region));
-    this.displayProfessionals(list);
-  }
-  displayProfessionals(list) {
-    const box = document.getElementById('professionalsList');
-    if (!list.length) { box.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔍</div><p>Nenhum profissional encontrado</p></div>'; return; }
-    box.innerHTML = list.map(p => `
-      <div class="professional-card">
+
+  renderFeaturedProfessionals() {
+    const box = document.getElementById('featuredProfsList');
+    const featured = this.professionals.slice(0, 2);
+    if (!featured.length) {
+      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">👤</div><p>Nenhum profissional disponível</p></div>';
+      return;
+    }
+    box.innerHTML = featured.map(p => `
+      <div class="professional-card" onclick="app.showProfessionalDetails('${p.id}')">
         <div class="professional-header">
-          <div class="professional-avatar">💼</div>
-          <div>
-            <div class="professional-name">${this.escape(p.name)}</div>
-            <div style="font-size:.82rem;opacity:.9"><span class="status-online"></span> Disponível · 📍 ${this.escape(p.region||'—')}</div>
-          </div>
+          <div class="professional-avatar">${p.emoji || '💼'}</div>
+          <div><div class="professional-name">${this.escape(p.name)}</div></div>
         </div>
         <div class="professional-body">
-          <div class="professional-specialties">${(p.specialties||[]).map(s=>`<span class="specialty-chip">${this.escape(s)}</span>`).join('')}</div>
-          <p style="color:var(--gray-600);font-size:.88rem;margin-bottom:.9rem;line-height:1.5">${this.escape((p.description||'Profissional qualificado').substring(0,120))}</p>
-          <div class="professional-actions">
-            <button class="btn-secondary btn-small" onclick="app.viewProfessional('${p.id}')">👁️ Perfil</button>
-            <button class="btn-success btn-small" onclick="app.messageProfessional('${p.id}')">💬 Chat</button>
-            <button class="btn-primary btn-small" onclick="app.startRequest('${p.id}')">📩 Solicitar</button>
+          <div class="professional-specialties">
+            ${(p.specialties || []).slice(0,2).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
           </div>
+          <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar Serviço →</button>
         </div>
-      </div>`).join('');
+      </div>
+    `).join('');
   }
-  async viewProfessional(id) {
-    const p = await EventDB.get('professionals', id); if (!p) { this.showToast('Profissional não encontrado','error'); return; }
-    this.selectedProfessional = p;
-    await EventDB.update(`professionals/${id}`,{views:(p.views||0)+1}); await EventDB.update(`users/${id}`,{views:(p.views||0)+1});
-    let portfolio = '';
-    if ((p.portfolio||[]).length) {
-      portfolio = `<div style="margin-top:1.25rem"><h4 style="margin-bottom:.75rem;font-weight:700">Portfólio</h4>
-        <div class="portfolio-grid">${p.portfolio.map(it=>`<div class="portfolio-item"><img src="${it.image}" alt="${this.escape(it.title)}"><div class="portfolio-overlay"><div class="portfolio-info"><div class="portfolio-title">${this.escape(it.title)}</div></div></div></div>`).join('')}</div></div>`;
+
+  renderFull() {
+    const box = document.getElementById('professionalsGrid');
+    if (!this.professionals.length) {
+      box.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>Nenhum profissional encontrado</p></div>';
+      return;
     }
-    document.getElementById('profDetailName').textContent = p.name;
-    document.getElementById('profDetailContent').innerHTML = `
-      <div style="margin-bottom:1rem"><strong>Especialidades:</strong><div class="professional-specialties" style="margin-top:.5rem">${(p.specialties||[]).map(s=>`<span class="specialty-chip">${this.escape(s)}</span>`).join('')||'—'}</div></div>
-      <div style="margin-bottom:1rem"><strong>Sobre:</strong><p style="color:var(--gray-600);margin-top:.35rem;line-height:1.55;font-size:.9rem">${this.escape(p.description||'Profissional qualificado.')}</p></div>
-      <div style="color:var(--gray-600);font-size:.9rem">📍 ${this.escape(p.region||'—')}</div>
-      ${portfolio}`;
-    this.openModal('professionalDetailModal');
-  }
-  startRequest(id=null) {
-    const target = id || this.selectedProfessional?.id;
-    if (!target) { this.showToast('Selecione um profissional','error'); return; }
-    this.selectedProfessional = this.professionals.find(p=>p.id===target)||this.selectedProfessional;
-    this.closeModal('professionalDetailModal'); this.openModal('newRequestModal');
-  }
-  messageSelected() { if (!this.selectedProfessional) return; this.closeModal('professionalDetailModal'); this.openChatWith(this.selectedProfessional.id,this.selectedProfessional.name); }
-  messageProfessional(id) { const p=this.professionals.find(x=>x.id===id); if(p) this.openChatWith(p.id,p.name); }
-  async submitRequest() {
-    const description=document.getElementById('requestDescription').value;
-    const date=document.getElementById('requestDate').value;
-    const budget=document.getElementById('requestBudget').value;
-    const location=document.getElementById('requestLocation').value;
-    if (!description||!date||!budget||!location) { this.showToast('Preencha todos os campos','error'); return; }
-    const prof=this.selectedProfessional;
-    const req={id:Date.now().toString(),clientId:this.currentUser.id,clientName:this.currentUser.name,
-      professionalId:prof?.id||null,professionalName:prof?.name||null,
-      description,date,budget,location,status:'pending',createdAt:new Date().toISOString()};
-    await EventDB.set('requests',req);
-    this.showToast('✨ Solicitação enviada!','success'); this.closeModal('newRequestModal');
-    ['requestDescription','requestDate','requestBudget','requestLocation'].forEach(i=>document.getElementById(i).value='');
-  }
-  renderHistory() {
-    const box=document.getElementById('historyList');
-    if (!this.myRequests.length) { box.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><p>Nenhuma solicitação ainda</p><button class="btn-primary btn-small" onclick="app.showSection(\'searchProfessionals\')">Buscar profissionais</button></div>'; return; }
-    const colors={pending:'var(--warning)',active:'var(--primary)',completed:'var(--success)',cancelled:'var(--danger)'};
-    const labels={pending:'Pendente',active:'Aceita',completed:'Concluída',cancelled:'Recusada'};
-    const sorted=[...this.myRequests].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-    box.innerHTML=sorted.map(r=>`
-      <div class="history-item">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
-          <div class="history-title">${this.escape(r.description)}</div>
-          <span class="badge" style="background:${colors[r.status]};color:#fff;flex-shrink:0">${labels[r.status]||r.status}</span>
+    box.innerHTML = this.professionals.map(p => `
+      <div class="professional-card" onclick="app.showProfessionalDetails('${p.id}')">
+        <div class="professional-header">
+          <div class="professional-avatar">${p.emoji || '💼'}</div>
+          <div><div class="professional-name">${this.escape(p.name)}</div></div>
         </div>
-        <div class="history-meta">
-          <span>💼 ${this.escape(r.professionalName||'A definir')}</span>
-          <span>📍 ${this.escape(r.location)}</span>
-          <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
-          <span>💰 R$ ${this.escape(r.budget)}</span>
+        <div class="professional-body">
+          <div class="professional-specialties">
+            ${(p.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
+          </div>
+          <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar Serviço →</button>
         </div>
-      </div>`).join('');
+      </div>
+    `).join('');
   }
-  renderProfAds() {
-    if (!EventDB.isReady()) return;
-    this.track(EventDB.subscribeList('profAds', (ads) => {
-      const now = new Date();
-      const active = ads.filter(a => new Date(a.expire) > now);
-      const box = document.getElementById('profAdsInSearch'); if (!box) return;
-      if (!active.length) { box.innerHTML = ''; return; }
-      box.innerHTML = '<div style="margin-bottom:.75rem"><div style="font-size:.82rem;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem">🌟 Em Destaque</div>' + active.map(a => `<div class="ad-banner" style="background:linear-gradient(135deg,var(--secondary),var(--primary-dark))"><span class="ad-label">Profissional</span><h4>${this.escape(a.title)}</h4><p>${this.escape(a.content)}</p><div style="font-size:.75rem;opacity:.8;margin-top:.25rem">💼 ${this.escape(a.professionalName||'')}${a.region ? ' · 📍 '+this.escape(a.region):''}</div></div>`).join('') + '</div>';
-    }));
+
+  showProfessionalDetails(profId) {
+    const prof = this.professionals.find(p => p.id === profId);
+    if (!prof) return;
+    this.selectedProfessional = prof;
+    const details = document.getElementById('professionalDetails');
+    details.innerHTML = `
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div style="font-size:3rem;margin-bottom:.5rem">${prof.emoji || '💼'}</div>
+        <h2 style="font-size:1.3rem;font-weight:700;color:var(--dark)">${this.escape(prof.name)}</h2>
+        <p style="color:var(--gray-600);font-size:.9rem;margin-top:.25rem">📍 ${this.escape(prof.region || 'Sem localização')}</p>
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <div style="font-weight:600;margin-bottom:.5rem;color:var(--dark)">Especialidades</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+          ${(prof.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
+        </div>
+      </div>
+      <button class="btn-primary" onclick="app.closeModal('professionalModal'); app.openRequestModal()" style="width:100%">Fazer Solicitação</button>
+      <button class="btn-secondary" onclick="app.closeModal('professionalModal')" style="width:100%;margin-top:.5rem">Fechar</button>
+    `;
+    this.openModal('professionalModal');
+  }
+
+  filterProfessionals() {
+    const keyword = document.getElementById('searchKeyword').value.toLowerCase();
+    if (!keyword) { this.renderFull(); return; }
+    const filtered = this.professionals.filter(p => 
+      p.name.toLowerCase().includes(keyword) || 
+      (p.specialties || []).some(s => s.toLowerCase().includes(keyword))
+    );
+    const box = document.getElementById('professionalsGrid');
+    if (!filtered.length) {
+      box.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>Nenhum profissional encontrado</p></div>';
+      return;
+    }
+    box.innerHTML = filtered.map(p => `
+      <div class="professional-card" onclick="app.showProfessionalDetails('${p.id}')">
+        <div class="professional-header">
+          <div class="professional-avatar">${p.emoji || '💼'}</div>
+          <div><div class="professional-name">${this.escape(p.name)}</div></div>
+        </div>
+        <div class="professional-body">
+          <div class="professional-specialties">
+            ${(p.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('')}
+          </div>
+          <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.75rem">📍 ${this.escape(p.region || 'Sem localização')}</div>
+          <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal()">Solicitar →</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  openRequestModal() {
+    ['requestDesc','requestDate','requestLocation','requestBudget','requestDetails'].forEach(i => document.getElementById(i).value = '');
+    this.openModal('requestModal');
+  }
+
+  async createRequest() {
+    const desc = document.getElementById('requestDesc').value.trim();
+    const date = document.getElementById('requestDate').value;
+    const loc = document.getElementById('requestLocation').value.trim();
+    const budget = document.getElementById('requestBudget').value;
+    if (!desc || !date || !loc || !budget) { this.showToast('Preencha os campos obrigatórios','error'); return; }
+    const request = {
+      id: Date.now().toString(),
+      clientId: this.currentUser.id,
+      clientName: this.currentUser.name,
+      description: desc,
+      date, location: loc, budget,
+      details: document.getElementById('requestDetails').value,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    };
+    await EventDB.set('requests', request);
+    this.showToast('✓ Solicitação enviada!','success');
+    this.closeModal('requestModal');
+  }
+
+  renderRecentRequests() {
+    const box = document.getElementById('recentRequestsList');
+    if (!this.myRequests.length) {
+      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📨</div><p>Nenhuma solicitação criada</p></div>';
+      return;
+    }
+    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
+    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    box.innerHTML = sorted.slice(0,2).map(r => `
+      <div style="background:rgba(79,70,229,.02);border:1px solid var(--gray-200);border-radius:10px;padding:1rem;margin-bottom:.75rem">
+        <div style="font-weight:700;margin-bottom:.5rem">${this.escape(r.description)}</div>
+        <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.5rem">💰 R$ ${this.escape(r.budget)} · 📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</div>
+        <span class="badge" style="background:${({pending:'#FCD34D',active:'#6366F1',cancelled:'#EF4444',completed:'#10B981'}[r.status])};color:#fff">${labels[r.status]}</span>
+      </div>
+    `).join('');
+  }
+
+  renderRequestsFullList() {
+    const box = document.getElementById('requestsFullList');
+    if (!this.myRequests.length) {
+      box.innerHTML = '<div class="empty-state"><div class="empty-icon">📨</div><p>Nenhuma solicitação</p></div>';
+      return;
+    }
+    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
+    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    box.innerHTML = sorted.map(r => `
+      <div style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:12px;padding:1.25rem;margin-bottom:1rem;transition:var(--transition)" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none'">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.75rem">
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:1.05rem;color:var(--dark);margin-bottom:.5rem">${this.escape(r.description)}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:.75rem;font-size:.85rem;color:var(--gray-600)">
+              <span>👤 Você</span>
+              <span>📍 ${this.escape(r.location)}</span>
+              <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
+              <span>💰 R$ ${this.escape(r.budget)}</span>
+            </div>
+          </div>
+          <span class="badge" style="background:${({pending:'#FCD34D',active:'#6366F1',cancelled:'#EF4444',completed:'#10B981'}[r.status])};color:#fff;flex-shrink:0">${labels[r.status]}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  saveProfile() {
+    const name = document.getElementById('profileName').value;
+    const phone = document.getElementById('profilePhone').value;
+    const region = document.getElementById('profileRegion').value;
+    this.currentUser = { ...this.currentUser, name, phone, region };
+    localStorage.setItem('clientSession', JSON.stringify(this.currentUser));
+    this.showToast('✓ Perfil atualizado','success');
+  }
+
+  openModal(id) { document.getElementById(id).classList.add('show'); }
+  closeModal(id) { document.getElementById(id).classList.remove('show'); }
+  showToast(msg, type='info') {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
   }
 }
+
 const app = new ClientApp();
 app.boot();
-</script>
-<script src="pwa-bootstrap.js"></script>
-<script>
-  document.addEventListener('eventlink:installable', () => { if (!EventLinkPWA.isStandalone) document.getElementById('pwaInstallBtn').classList.add('show'); });
-  document.addEventListener('eventlink:installed', () => { document.getElementById('pwaInstallBtn').classList.remove('show'); });
+
+// Nav switching
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const section = item.getAttribute('data-section');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById(section).classList.add('active');
+    if (section === 'searchProfessionals') app.renderFull();
+    if (section === 'clientProfile' && app.currentUser) {
+      document.getElementById('profileName').value = app.currentUser.name || '';
+      document.getElementById('profileEmail').value = app.currentUser.email || '';
+      document.getElementById('profilePhone').value = app.currentUser.phone || '';
+      document.getElementById('profileRegion').value = app.currentUser.region || '';
+    }
+  });
+});
+
+// Modal closes
+document.getElementById('requestModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('requestModal')) app.closeModal('requestModal');
+});
+document.getElementById('professionalModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('professionalModal')) app.closeModal('professionalModal');
+});
 </script>
 </body>
 </html>
