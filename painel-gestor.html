@@ -6,11 +6,6 @@
 <title>EventLink · Gestor</title>
 <link rel="manifest" href="manifest-gestor.json">
 <meta name="theme-color" content="#1E293B">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="EventLink">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -33,353 +28,218 @@
   --nav-h:64px;
   --safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-top:env(safe-area-inset-top,0px);
+  --admin:#1E293B;
 }
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--gray-50);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#0F172A 0%,#1A1F35 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
 body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
 
 /* ── HEADER ── */
-header{background:var(--white);border-bottom:1px solid var(--gray-100);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);padding-top:calc(.75rem + var(--safe-top))}
+header{background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border-bottom:1px solid rgba(255,255,255,.05);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.2);padding-top:calc(.75rem + var(--safe-top))}
 .header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Sora',sans-serif;color:var(--primary);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0}
+.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Sora',sans-serif;color:var(--white);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#FF6B35 0%,#F7B32B 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 15px rgba(255,107,53,.3)}
 .header-right{display:flex;align-items:center;gap:.6rem}
-.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
-.conn-dot{width:8px;height:8px;border-radius:50%;background:var(--gray-300);transition:var(--transition)}
-.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0}
-.role-pill.client{background:linear-gradient(135deg,var(--primary),var(--accent))}
-.role-pill.professional{background:linear-gradient(135deg,var(--secondary),var(--primary))}
-.role-pill.admin{background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))}
+.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,#FF6B35,#F7B32B);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
+.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,#FF6B35,#F7B32B)}
 
 /* ── BUTTONS ── */
-button{padding:.65rem 1.25rem;border:none;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
-.btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);box-shadow:0 4px 12px rgba(79,70,229,.25)}
-.btn-primary:active{transform:scale(.97)}
-.btn-secondary{background:var(--gray-100);color:var(--dark)}
-.btn-secondary:active{background:var(--gray-300)}
-.btn-danger{background:var(--danger);color:var(--white)}
-.btn-success{background:var(--success);color:var(--white)}
+button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
+.btn-primary{background:linear-gradient(135deg,#FF6B35 0%,#F7B32B 100%);color:var(--white);box-shadow:0 4px 15px rgba(255,107,53,.25);border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,107,53,.35)}
+.btn-primary:active{transform:scale(.98)}
+.btn-secondary{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.1)}
+.btn-secondary:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
+.btn-danger{background:linear-gradient(135deg,#EF4444,#DC2626);color:var(--white)}
+.btn-danger:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.25)}
+.btn-success{background:linear-gradient(135deg,#10B981,#059669);color:var(--white)}
+.btn-success:hover{transform:translateY(-2px)}
 .btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
-.btn-icon{width:44px;height:44px;padding:0;border-radius:10px}
-.btn-logout{background:none;color:var(--danger);font-weight:700;padding:.4rem .7rem;min-height:36px;font-size:.8rem}
 
 /* ── MAIN / CONTENT ── */
-#appShell{flex:1;flex-direction:column;overflow:hidden}
-.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:860px;margin:0 auto;width:100%}
+#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
 section{display:none}
-section.active{display:block}
+section.active{display:block;animation:fadeIn .3s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--white);border-top:1px solid var(--gray-100);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -2px 12px rgba(15,23,42,.06)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:var(--gray-500);font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:#94a3b8;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
 .nav-item:active{opacity:.7}
-.nav-item.active{color:var(--primary)}
+.nav-item.active{color:#FF6B35;transform:translateY(-2px)}
 .nav-item .nav-icon{font-size:1.35rem;line-height:1}
-.nav-badge{position:absolute;top:.15rem;right:calc(50% - 18px);background:var(--danger);color:var(--white);width:18px;height:18px;border-radius:50%;font-size:.65rem;font-weight:700;display:none;align-items:center;justify-content:center}
-.nav-badge.show{display:flex}
 
 /* ── CARDS ── */
-.card{background:var(--white);border-radius:14px;padding:1.25rem;box-shadow:var(--shadow-sm);margin-bottom:1rem}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem;box-shadow:0 4px 20px rgba(0,0,0,.1);margin-bottom:1rem;backdrop-filter:blur(10px);transition:var(--transition)}
+.card:hover{box-shadow:0 8px 30px rgba(255,107,53,.15);border-color:rgba(255,107,53,.3);transform:translateY(-2px)}
+.card-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.75rem}
+
+/* ── AD CARDS (CLICKABLE) ── */
+.ad-card{background:linear-gradient(135deg,rgba(255,107,53,.08) 0%,rgba(247,179,43,.08) 100%);border:1.5px solid rgba(255,107,53,.3);border-radius:14px;padding:1.25rem;margin-bottom:.75rem;transition:var(--transition);cursor:pointer}
+.ad-card:hover{border-color:#FF6B35;box-shadow:0 8px 25px rgba(255,107,53,.2);transform:translateY(-2px)}
+.ad-card.selected{border-color:#FF6B35;background:linear-gradient(135deg,rgba(255,107,53,.15) 0%,rgba(247,179,43,.15) 100%)}
+.ad-title{font-weight:700;font-size:1rem;color:var(--white);margin-bottom:.4rem}
+.ad-content{color:#cbd5e1;font-size:.9rem;margin-bottom:.6rem;line-height:1.5}
+.ad-meta{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.8rem;color:#94a3b8}
+.ad-meta span{display:flex;align-items:center;gap:.2rem}
 
 /* ── STAT CARDS ── */
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center}
+.stat-card{background:linear-gradient(135deg,#FF6B35 0%,#F7B32B 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 20px rgba(255,107,53,.2);transition:var(--transition)}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(255,107,53,.3)}
 .stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
 .stat-label{font-size:.8rem;opacity:.9}
 
+/* ── MODALS ── */
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+.modal.show{display:flex;animation:modalFadeIn .3s ease-out}
+@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
+.modal-content{background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalSlideUp .3s ease-out}
+@keyframes modalSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--white)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition);color:var(--white)}
+.modal-close:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2)}
+
 /* ── FORMS ── */
-.form-group{margin-bottom:1.1rem}
-label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--dark);font-size:.9rem}
-input,textarea,select{width:100%;padding:.8rem;border:1.5px solid var(--gray-300);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:var(--white);color:var(--dark)}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
-textarea{resize:vertical;min-height:100px}
+.form-group{margin-bottom:1rem}
+label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--white);font-size:.9rem}
+input,textarea,select{width:100%;padding:.8rem;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:rgba(255,255,255,.05);color:var(--white)}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.4)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#FF6B35;box-shadow:0 0 0 3px rgba(255,107,53,.1);background:rgba(255,255,255,.08)}
 
 /* ── BADGES ── */
 .badge{display:inline-flex;align-items:center;padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600}
-.badge-success{background:rgba(16,185,129,.12);color:var(--success)}
-.badge-warning{background:rgba(245,158,11,.12);color:var(--warning)}
-.badge-danger{background:rgba(239,68,68,.12);color:var(--danger)}
-.badge-primary{background:rgba(79,70,229,.12);color:var(--primary)}
-
-/* ── HISTORY ITEMS ── */
-.history-list{display:flex;flex-direction:column;gap:.75rem}
-.history-item{background:var(--white);padding:1.1rem;border-radius:12px;border-left:4px solid var(--primary);box-shadow:var(--shadow-sm)}
-.history-title{font-weight:700;color:var(--dark);margin-bottom:.4rem;font-size:.95rem}
-.history-meta{display:flex;flex-wrap:wrap;gap:.5rem;font-size:.82rem;color:var(--gray-600)}
-.history-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}
-
-/* ── PROFESSIONAL CARDS ── */
-.professionals-grid{display:grid;grid-template-columns:1fr;gap:.75rem}
-.professional-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm)}
-.professional-header{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);color:var(--white);padding:1rem;display:flex;align-items:center;gap:.75rem}
-.professional-avatar{width:52px;height:52px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-.professional-name{font-size:1rem;font-weight:700}
-.professional-body{padding:1rem}
-.professional-specialties{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
-.specialty-chip{background:var(--gray-100);color:var(--dark);padding:.3rem .65rem;border-radius:6px;font-size:.78rem;font-weight:500}
-.professional-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-
-/* ── AD BANNER ── */
-.ad-banner{background:linear-gradient(135deg,#1E293B,#334155);color:var(--white);border-radius:12px;padding:1rem;margin-bottom:1rem;position:relative}
-.ad-banner h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
-.ad-banner p{font-size:.82rem;opacity:.85}
-.ad-label{position:absolute;top:.5rem;right:.5rem;font-size:.6rem;background:rgba(255,255,255,.2);padding:.15rem .4rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
-
-/* ── CHAT ── */
-.chat-layout{display:flex;flex-direction:column;height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 60px)}
-.conv-list{display:flex;flex-direction:column;gap:.25rem}
-.conv-item{display:flex;align-items:center;gap:.7rem;padding:.75rem;border-radius:10px;cursor:pointer;transition:var(--transition)}
-.conv-item:active{background:var(--gray-50)}
-.conv-avatar{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);background:linear-gradient(135deg,var(--primary),var(--secondary));flex-shrink:0}
-.chat-window{display:flex;flex-direction:column;background:var(--white);border-radius:14px;overflow:hidden;flex:1;min-height:0}
-.chat-header-bar{padding:.9rem 1rem;border-bottom:1px solid var(--gray-100);font-weight:700;display:flex;align-items:center;gap:.6rem}
-.chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
-.message.sent{align-self:flex-end}
-.message.received{align-self:flex-start}
-.message-content{max-width:75%;padding:.65rem .9rem;border-radius:12px;font-size:.9rem;line-height:1.45}
-.message.sent .message-content{background:var(--primary);color:var(--white);border-bottom-right-radius:4px}
-.message.received .message-content{background:var(--gray-100);color:var(--dark);border-bottom-left-radius:4px}
-.message-time{font-size:.7rem;color:var(--gray-500);margin-top:.2rem}
-.chat-input-bar{padding:.75rem 1rem;border-top:1px solid var(--gray-100);display:flex;gap:.6rem;align-items:center}
-.chat-input-bar input{flex:1;border-radius:22px;padding:.6rem 1rem}
-.chat-input-bar button{min-height:40px;height:40px;border-radius:22px;padding:0 1rem}
-
-/* ── MODAL ── */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:0}
-.modal.active{display:flex}
-.modal-content{background:var(--white);border-radius:20px 20px 0 0;padding:1.5rem 1.25rem;width:100%;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-xl)}
-@media(min-width:600px){.modal{align-items:center;padding:1rem}.modal-content{border-radius:16px;max-width:540px}}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:.9rem;border-bottom:1px solid var(--gray-100)}
-.modal-title{font-size:1.2rem;font-weight:700;color:var(--dark)}
-.modal-close{background:none;color:var(--gray-500);font-size:1.4rem;padding:0;min-height:auto;width:32px;height:32px;border-radius:50%}
-.modal-footer{display:flex;gap:.75rem;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--gray-100)}
-.modal-footer button{flex:1}
-
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + .75rem);left:.75rem;right:.75rem;padding:.9rem 1.1rem;border-radius:12px;color:var(--white);font-weight:600;font-size:.9rem;box-shadow:var(--shadow-lg);z-index:3000;animation:toastIn .3s ease-out}
-.toast.success{background:var(--success)}
-.toast.error{background:var(--danger)}
-.toast.info{background:var(--primary)}
-@keyframes toastIn{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
-
-/* ── AUTH ── */
-.auth-shell{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:1.5rem 1rem;overflow-y:auto}
-.auth-card{width:100%;max-width:420px}
-.auth-brand{text-align:center;margin-bottom:1.25rem}
-.auth-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--white);margin:0 auto 1rem}
-
-/* ── SPECIALTIES ── */
-.specialties-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:.75rem}
-.specialty-badge{padding:.6rem .75rem;border:2px solid var(--gray-300);border-radius:8px;text-align:center;cursor:pointer;transition:var(--transition);font-weight:500;font-size:.85rem}
-.specialty-badge.selected{background:var(--primary);color:var(--white);border-color:var(--primary)}
-
-/* ── PORTFOLIO ── */
-.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.portfolio-item{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;cursor:pointer}
-.portfolio-item img{width:100%;height:100%;object-fit:cover}
-.portfolio-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;padding:.75rem;opacity:0;transition:var(--transition)}
-.portfolio-item:hover .portfolio-overlay,.portfolio-item:active .portfolio-overlay{opacity:1}
-.portfolio-info{color:var(--white);flex:1;font-size:.85rem}
-.portfolio-title{font-weight:700;margin-bottom:.15rem}
-.portfolio-remove{background:var(--danger);color:var(--white);border:none;width:32px;height:32px;min-height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.badge-success{background:rgba(16,185,129,.2);color:#10B981}
+.badge-warning{background:rgba(245,158,11,.2);color:#F59E0B}
+.badge-danger{background:rgba(239,68,68,.2);color:#EF4444}
+.badge-primary{background:rgba(79,70,229,.2);color:#6366F1}
 
 /* ── EMPTY STATE ── */
-.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--gray-500)}
-.empty-icon{font-size:2.5rem;margin-bottom:.75rem}
-.empty-state p{margin-bottom:1.25rem}
+.empty-state{text-align:center;padding:2.5rem 1rem;color:#94a3b8}
+.empty-icon{font-size:3rem;margin-bottom:.75rem}
+.empty-state p{margin-bottom:.5rem;font-size:.95rem}
 
-/* ── CONFIG BANNER ── */
-#configBanner{display:none;align-items:center;gap:.6rem;background:#FEF3C7;color:#92400E;border-bottom:1px solid #FCD34D;padding:.6rem 1rem;font-size:.85rem;font-weight:500}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 1rem);right:1rem;background:linear-gradient(135deg,#1E293B,#0F172A);border:1px solid rgba(255,255,255,.1);padding:1rem 1.25rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.3);z-index:400;display:none;gap:.75rem;align-items:center;animation:slideUp .3s ease-out;color:var(--white)}
+.toast.show{display:flex}
+@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}
+.toast.success{border-left:4px solid var(--success)}
+.toast.error{border-left:4px solid var(--danger)}
+.toast.info{border-left:4px solid #FF6B35}
 
-/* ── SEARCH FILTERS ── */
-.filter-bar{display:flex;flex-direction:column;gap:.75rem;padding:1rem;background:var(--white);border-radius:14px;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
-.filter-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-
-/* ── PAGE HEADER ── */
-.page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:.75rem;flex-wrap:wrap}
-.page-title{font-size:1.4rem;font-weight:800;color:var(--dark)}
-.page-subtitle{font-size:.85rem;color:var(--gray-600);margin-top:.2rem}
-
-/* ── STATUS ONLINE DOT ── */
-.status-online{width:10px;height:10px;background:var(--success);border-radius:50%;display:inline-block;animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ── TABLE (gestor) ── */
-.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--gray-100)}
-table{width:100%;border-collapse:collapse;min-width:480px}
-thead{background:var(--gray-50)}
-th{padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--dark);border-bottom:2px solid var(--gray-100);font-size:.85rem;white-space:nowrap}
-td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
-
-/* ── FILE UPLOAD ── */
-.file-upload{border:2px dashed var(--gray-300);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:var(--transition)}
-.file-upload:active{border-color:var(--primary);background:rgba(79,70,229,.04)}
-.file-upload input[type="file"]{display:none}
-
-/* ── PWA INSTALL BTN ── */
-#pwaInstallBtn{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + .75rem);right:.75rem;z-index:200;display:none;box-shadow:var(--shadow-lg)}
-#pwaInstallBtn.show{display:inline-flex}
-
-/* ── DESKTOP (wide screens) ── */
 @media(min-width:768px){
   .stats-row{grid-template-columns:repeat(4,1fr)}
-  .professionals-grid{grid-template-columns:repeat(2,1fr)}
-  .portfolio-grid{grid-template-columns:repeat(3,1fr)}
-  .filter-row{grid-template-columns:repeat(3,1fr)}
-  .specialties-grid{grid-template-columns:repeat(3,1fr)}
-  .content-area{padding:1.5rem 2rem calc(var(--nav-h) + var(--safe-bottom) + 1rem)}
-  .chat-layout{height:calc(100vh - var(--nav-h) - var(--safe-bottom) - 80px)}
 }
-@media(min-width:1024px){
-  #appShell{flex-direction:row}
-  .desktop-sidebar{display:flex!important;flex-direction:column;width:240px;background:var(--white);padding:1.25rem 0;border-right:1px solid var(--gray-100);flex-shrink:0;height:calc(100vh - 60px);position:sticky;top:60px;overflow-y:auto}
-  .bottom-nav{display:none}
-  .content-area{padding:2rem;max-width:none}
-  .sidebar-item{padding:.7rem 1.5rem;color:var(--gray-600);cursor:pointer;transition:var(--transition);border-left:3px solid transparent;font-weight:500;font-size:.9rem}
-  .sidebar-item:hover{background:var(--gray-50);color:var(--primary)}
-  .sidebar-item.active{background:rgba(79,70,229,.08);color:var(--primary);border-left-color:var(--primary)}
-  .sidebar-title{padding:.4rem 1.5rem;font-size:.7rem;font-weight:700;text-transform:uppercase;color:var(--gray-500);margin-top:1rem}
-  #pwaInstallBtn{bottom:1.5rem}
-  .toast{bottom:1.5rem;left:auto;right:1.5rem;width:360px}
-}
-.desktop-sidebar{display:none}
-</style>
-<style>
-.stat-card.dark{background:linear-gradient(135deg,var(--dark-light),var(--dark-lighter))}
 </style>
 </head>
 <body>
-<div id="configBanner">⚠️ Firebase não configurado.</div>
 
-<header style="background:var(--dark-light);border-bottom-color:#334155">
+<!-- HEADER -->
+<header>
   <div class="header-container">
-    <a href="index.html" class="logo" style="color:#e2e8f0">
-      <div class="logo-icon" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary-dark))">⚡</div>
+    <a href="index.html" class="logo">
+      <div class="logo-icon">⚡</div>
       <span>EventLink</span>
-      <span class="role-pill admin">Gestor</span>
+      <span class="role-pill">Gestor</span>
     </a>
     <div class="header-right">
-      <span class="conn-dot" id="connDot"></span>
-      <div class="user-avatar" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary))" id="userAvatarHeader">G</div>
-      <button class="btn-logout" onclick="app.logout()" style="color:#94a3b8">Sair</button>
+      <div class="user-avatar" id="userAvatarHeader">G</div>
+      <span id="userNameHeader" style="font-size:.85rem;font-weight:600;color:var(--white);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
+      <button class="btn-logout" onclick="app.logout()" style="background:none;color:#EF4444;font-weight:600;padding:.4rem .7rem;min-height:36px;font-size:.8rem;border:none;cursor:pointer">Sair</button>
     </div>
   </div>
 </header>
 
-<!-- AUTH -->
-<div class="auth-shell" id="authShell">
-  <div class="auth-card">
-    <div class="auth-brand">
-      <div class="auth-logo" style="background:linear-gradient(135deg,var(--dark-lighter),var(--primary-dark))">👨‍💼</div>
-      <h1 style="font-size:1.5rem;font-weight:800;font-family:'Sora',sans-serif;color:var(--dark)">Painel Gerencial</h1>
-      <p style="color:var(--gray-600);margin-top:.4rem;font-size:.9rem">Gerencie a plataforma EventLink</p>
-    </div>
-    <div class="card" id="loginCard">
-      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="gestor@email.com" autocomplete="email"></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-      <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Entrar</button>
-      <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta de gestor</button>
-    </div>
-    <div class="card" id="signupCard" style="display:none">
-      <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome"></div>
-      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="gestor@email.com"></div>
-      <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••"></div>
-      <div class="form-group"><label>Código de Gestor</label><input type="password" id="signupAdminCode" placeholder="Código de acesso">
-        <small style="color:var(--gray-600);margin-top:.25rem;display:block">Padrão: EVENTLINK-ADMIN (altere no HTML)</small>
-      </div>
-      <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem;background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Criar conta</button>
-      <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar ao login</button>
-    </div>
-  </div>
-</div>
-
-<!-- APP -->
+<!-- APP SHELL -->
 <div id="appShell" style="display:none">
-  <div class="desktop-sidebar" id="desktopSidebar" style="background:#1e293b;border-right-color:#334155">
-    <div class="sidebar-title" style="color:#64748b">Gestor</div>
-    <div class="sidebar-item active" data-section="adminDashboard" style="color:#94a3b8">📊 Dashboard</div>
-    <div class="sidebar-item" data-section="adminUsers" style="color:#94a3b8">👥 Usuários</div>
-    <div class="sidebar-item" data-section="adminAds" style="color:#94a3b8">📢 Anúncios</div>
-    <div class="sidebar-item" data-section="adminAnalytics" style="color:#94a3b8">📈 Análises</div>
-  </div>
-
   <div class="content-area" id="contentArea">
 
     <!-- DASHBOARD -->
     <section id="adminDashboard" class="active">
-      <div class="page-header">
-        <div><h1 class="page-title">Painel Gerencial 👨‍💼</h1><p class="page-subtitle">Visão geral da plataforma</p></div>
+      <div style="margin-bottom:1.5rem">
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--white);margin-bottom:.25rem">Painel Gerencial 👨‍💼</h1>
+        <p style="color:#94a3b8;font-size:.95rem">Visão geral da plataforma EventLink</p>
       </div>
+
       <div class="stats-row">
-        <div class="stat-card dark"><div class="stat-label">Acessos Totais</div><div class="stat-number" id="adminTotalAccess">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Usuários</div><div class="stat-number" id="adminTotalUsers">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Profissionais</div><div class="stat-number" id="adminActiveProfessionals">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Solicitações</div><div class="stat-number" id="adminBudgets">0</div></div>
+        <div class="stat-card"><div class="stat-label">Acessos Totais</div><div class="stat-number" id="adminTotalAccess">0</div></div>
+        <div class="stat-card"><div class="stat-label">Usuários</div><div class="stat-number" id="adminTotalUsers">0</div></div>
+        <div class="stat-card"><div class="stat-label">Profissionais</div><div class="stat-number" id="adminActiveProfessionals">0</div></div>
+        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="adminBudgets">0</div></div>
       </div>
 
       <div class="card">
-        <div class="card-title">📱 Telefones Pendentes de Aprovação</div>
-        <div id="pendingPhonesList">
+        <div class="card-title">📱 Telefones Pendentes</div>
+        <div id="pendingPhonesList" style="margin-top:.75rem">
           <div class="empty-state" style="padding:1.5rem 0"><p>Nenhum telefone pendente</p></div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">🕐 Atividades Recentes</div>
-        <div id="adminActivityList" style="max-height:320px;overflow-y:auto">
+        <div id="adminActivityList" style="max-height:320px;overflow-y:auto;margin-top:.75rem">
           <div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- USUÁRIOS -->
-    <section id="adminUsers">
-      <div class="page-header"><div><h1 class="page-title">Usuários 👥</h1><p class="page-subtitle">Gerencie todos os usuários</p></div></div>
-      <div class="card">
-        <div class="table-wrap">
-          <table>
-            <thead><tr>
-              <th>Nome</th><th>Tipo</th><th>Região</th><th>Telefone</th><th>Ação</th>
-            </tr></thead>
-            <tbody id="adminUsersList">
-              <tr><td colspan="5" style="text-align:center;padding:2rem">Carregando...</td></tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </section>
 
     <!-- ANÚNCIOS -->
     <section id="adminAds">
-      <div class="page-header">
-        <div><h1 class="page-title">Anúncios 📢</h1><p class="page-subtitle">Gerencie todos os anúncios da plataforma</p></div>
-        <button class="btn-primary btn-small" onclick="app.openAdModal()" style="background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">+ Novo</button>
+      <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;gap:.75rem;flex-wrap:wrap">
+        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Anúncios 📢</h1><p style="color:#94a3b8;font-size:.9rem;margin-top:.2rem">Gerencie todos os anúncios da plataforma</p></div>
+        <button class="btn-primary btn-small" onclick="app.openAdModal()">+ Novo Anúncio</button>
       </div>
-      <!-- Anúncios globais do gestor -->
+
       <div class="card" style="margin-bottom:1rem">
-        <div class="card-title">Anúncios Globais (criados pelo Gestor)</div>
-        <div id="adminAdsList" class="history-list" style="margin-top:.75rem">
-          <div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>
-        </div>
+        <div class="card-title">Anúncios Globais (Gestor)</div>
+        <div id="adminAdsList" style="margin-top:.75rem"></div>
       </div>
-      <!-- Anúncios de profissionais -->
+
       <div class="card">
         <div class="card-title">Anúncios de Profissionais</div>
-        <div id="profAdsAdminList" class="history-list" style="margin-top:.75rem">
-          <div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>
+        <div id="profAdsAdminList" style="margin-top:.75rem"></div>
+      </div>
+    </section>
+
+    <!-- USUÁRIOS -->
+    <section id="adminUsers">
+      <div style="margin-bottom:1.5rem">
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Usuários 👥</h1>
+        <p style="color:#94a3b8;font-size:.9rem;margin-top:.2rem">Gerencie todos os usuários da plataforma</p>
+      </div>
+
+      <div class="card">
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse">
+            <thead>
+              <tr style="border-bottom:2px solid rgba(255,255,255,.1)">
+                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Nome</th>
+                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Tipo</th>
+                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Região</th>
+                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Telefone</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersList">
+              <tr><td colspan="4" style="text-align:center;padding:2rem;color:#94a3b8">Carregando...</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
     <!-- ANÁLISES -->
     <section id="adminAnalytics">
-      <div class="page-header"><h1 class="page-title">Análises 📈</h1></div>
-      <div class="stats-row" style="margin-bottom:1rem">
-        <div class="stat-card dark"><div class="stat-label">Acessos Hoje</div><div class="stat-number" id="statsVisualizacoes">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Cadastros Hoje</div><div class="stat-number" id="statsRegistros">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Solicitações Hoje</div><div class="stat-number" id="statsSolicitacoes">0</div></div>
-        <div class="stat-card dark"><div class="stat-label">Anúncios Ativos</div><div class="stat-number" id="statsAds">0</div></div>
+      <div style="margin-bottom:1.5rem">
+        <h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Análises 📈</h1>
       </div>
+
+      <div class="stats-row" style="margin-bottom:1rem">
+        <div class="stat-card"><div class="stat-label">Acessos Hoje</div><div class="stat-number" id="statsVisualizacoes">0</div></div>
+        <div class="stat-card"><div class="stat-label">Cadastros Hoje</div><div class="stat-number" id="statsRegistros">0</div></div>
+        <div class="stat-card"><div class="stat-label">Solicitações Hoje</div><div class="stat-number" id="statsSolicitacoes">0</div></div>
+        <div class="stat-card"><div class="stat-label">Anúncios Ativos</div><div class="stat-number" id="statsAds">0</div></div>
+      </div>
+
       <div class="card">
         <div class="card-title">Últimas Atividades</div>
         <div id="lastActivities" style="max-height:400px;overflow-y:auto;margin-top:.75rem">
@@ -390,47 +250,75 @@ td{padding:.75rem 1rem;border-bottom:1px solid var(--gray-100);font-size:.88rem}
 
   </div>
 
-  <nav class="bottom-nav" style="background:#1e293b;border-top-color:#334155">
-    <div class="nav-item active" data-section="adminDashboard" style="color:#94a3b8">
+  <nav class="bottom-nav">
+    <div class="nav-item active" data-section="adminDashboard">
       <span class="nav-icon">📊</span><span>Início</span>
     </div>
-    <div class="nav-item" data-section="adminUsers" style="color:#94a3b8" id="navUsers">
-      <span class="nav-icon">👥</span><span>Usuários</span>
-      <span class="nav-badge" id="phoneBadge">0</span>
+    <div class="nav-item" data-section="adminAds">
+      <span class="nav-icon">📢</span><span>Anúncios</span>
     </div>
-    <div class="nav-item" data-section="adminAds" style="color:#94a3b8"><span class="nav-icon">📢</span><span>Anúncios</span></div>
-    <div class="nav-item" data-section="adminAnalytics" style="color:#94a3b8"><span class="nav-icon">📈</span><span>Análises</span></div>
+    <div class="nav-item" data-section="adminUsers">
+      <span class="nav-icon">👥</span><span>Usuários</span>
+    </div>
+    <div class="nav-item" data-section="adminAnalytics">
+      <span class="nav-icon">📈</span><span>Análises</span>
+    </div>
   </nav>
 </div>
 
-<!-- MODAL: NOVO ANÚNCIO GLOBAL -->
-<div class="modal" id="newAdModal">
-  <div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title">📢 Criar Anúncio Global</h2><button class="modal-close" onclick="app.closeModal('newAdModal')">✕</button></div>
-    <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem">Anúncios globais aparecem para todos os usuários: contratantes, profissionais e na página inicial.</p>
-    <div class="form-group"><label>Título</label><input type="text" id="adTitle" placeholder="Ex: Promoção especial de verão"></div>
-    <div class="form-group"><label>Conteúdo</label><textarea id="adContent" placeholder="Descreva o anúncio..."></textarea></div>
-    <div class="form-group"><label>Posição</label>
-      <select id="adPosition">
-        <option value="top">Topo (todos os painéis)</option>
-        <option value="search">Busca de profissionais</option>
-        <option value="bottom">Rodapé</option>
-      </select>
-    </div>
-    <div class="form-group"><label>Expira em</label><input type="date" id="adExpire"></div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="app.closeModal('newAdModal')">Cancelar</button>
-      <button class="btn-primary" onclick="app.createAd()" style="background:linear-gradient(135deg,var(--dark-light),var(--primary-dark))">Publicar</button>
+<!-- AUTH SHELL -->
+<div class="auth-shell" id="authShell">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:1.5rem">
+    <div style="background:linear-gradient(135deg,#1E293B,#0F172A);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:2rem;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#FF6B35,#F7B32B);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:2rem;color:var(--white)">⚡</div>
+        <h1 style="font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:.25rem">EventLink</h1>
+        <p style="color:#94a3b8;font-size:.9rem">Painel do Gestor</p>
+      </div>
+
+      <div id="loginCard">
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="gestor@email.com" autocomplete="email"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
+        <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
+      </div>
+
+      <div id="signupCard" style="display:none">
+        <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="gestor@email.com"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••"></div>
+        <div class="form-group"><label>Código de Gestor</label><input type="password" id="signupAdminCode" placeholder="Código de acesso"><small style="color:#94a3b8;margin-top:.25rem;display:block">Padrão: EVENTLINK-ADMIN</small></div>
+        <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
+        <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
+      </div>
     </div>
   </div>
 </div>
 
-<button id="pwaInstallBtn" class="btn-primary btn-small" onclick="EventLinkPWA.promptInstall()">📲 Instalar</button>
+<!-- MODALS -->
+
+<!-- MODAL: CREATE/EDIT AD -->
+<div class="modal" id="adModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="app.closeModal('adModal')">✕</button>
+    <div class="modal-header" id="adModalTitle">Novo Anúncio</div>
+    <div class="form-group"><label>Título</label><input type="text" id="adTitle" placeholder="Título do anúncio"></div>
+    <div class="form-group"><label>Conteúdo</label><textarea id="adContent" placeholder="Descreva o anúncio..."></textarea></div>
+    <div class="form-group"><label>Posição</label><select id="adPosition"><option value="top">Topo da página</option><option value="bottom">Rodapé da página</option></select></div>
+    <div class="form-group"><label>Expira em</label><input type="date" id="adExpire"></div>
+    <div style="display:flex;gap:.75rem">
+      <button class="btn-primary" onclick="app.createAd()" id="adSaveBtn" style="flex:1">Publicar</button>
+      <button class="btn-secondary" onclick="app.closeModal('adModal')" style="flex:1">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-window.EVENTLINK_ADMIN_CODE = 'EVENTLINK-ADMIN';
 const firebaseConfig = {
   apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
   authDomain: "imobpro-667da.firebaseapp.com",
@@ -440,318 +328,252 @@ const firebaseConfig = {
   messagingSenderId: "827299768500",
   appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
 };
-const IS_PLACEHOLDER = firebaseConfig.apiKey === "COLE_SUA_API_KEY";
-let db = null, CONNECTED = false;
-if (!IS_PLACEHOLDER) {
-  firebase.initializeApp(firebaseConfig);
-  db = firebase.database();
-  db.ref(".info/connected").on("value", (snap) => {
-    CONNECTED = snap.val() === true;
-    document.dispatchEvent(new CustomEvent("eventlink:connection", { detail: CONNECTED }));
-  });
-}
-const EventDB = {
-  isReady() { return !IS_PLACEHOLDER && db !== null; },
-  isConnected() { return CONNECTED; },
-  ref(path) { return db.ref(path); },
-  async set(collection, obj) { return db.ref(`${collection}/${obj.id}`).set(obj); },
-  async update(path, partial) { return db.ref(path).update(partial); },
-  async push(path, obj) { const r = db.ref(path).push(); await r.set({ ...obj, id: r.key }); return r.key; },
-  async get(collection, id) { const snap = await db.ref(`${collection}/${id}`).once("value"); return snap.val(); },
-  async getAll(collection) { const snap = await db.ref(collection).once("value"); return Object.values(snap.val() || {}); },
-  async delete(collection, id) { return db.ref(`${collection}/${id}`).remove(); },
-  subscribe(path, callback) { const h = (s) => callback(s.val()); db.ref(path).on("value", h); return () => db.ref(path).off("value", h); },
-  subscribeList(collection, callback) { const h = (s) => callback(Object.values(s.val() || {})); db.ref(collection).on("value", h); return () => db.ref(collection).off("value", h); }
-};
-window.EventDB = EventDB;
 
-class BaseApp {
-  constructor(role) {
-    this.role = role; this.currentUser = null; this.selectedSpecialties = [];
-    this.currentChat = null; this._subs = []; this._chatMsgUnsub = null; this._convUnsub = null;
+try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
+
+const db = firebase.database();
+
+class EventDB {
+  static async set(path, data) {
+    const key = data.id || Date.now().toString();
+    return db.ref(`${path}/${key}`).set({...data,id:key});
   }
-  async boot() {
-    this.wireConnectionIndicator(); this.setupCommonListeners();
-    if (!EventDB.isReady()) { this.showConfigBanner(); this.showAuth(); return; }
-    await this.loadStoredUser();
+  static async update(path, data) {
+    return db.ref(path).update(data);
   }
-  showConfigBanner() { const b=document.getElementById('configBanner'); if(b) b.style.display='flex'; }
-  wireConnectionIndicator() {
-    const dot=document.getElementById('connDot'); if(!dot) return;
-    const paint=(ok)=>{ dot.style.background=ok?'var(--success)':'var(--danger)'; };
-    paint(EventDB.isConnected());
-    document.addEventListener('eventlink:connection',(e)=>paint(e.detail));
+  static async delete(path, id) {
+    return db.ref(`${path}/${id}`).remove();
   }
-  sessionKey() { return `eventlink_session_${this.role}`; }
-  saveSession() { localStorage.setItem(this.sessionKey(),JSON.stringify(this.currentUser)); }
-  clearSession() { localStorage.removeItem(this.sessionKey()); }
-  async loadStoredUser() {
-    const raw=localStorage.getItem(this.sessionKey()); if(!raw){this.showAuth();return;}
-    const stored=JSON.parse(raw); const fresh=await EventDB.get('users',stored.id);
-    this.currentUser=fresh||stored; if(fresh) this.saveSession(); this.enterDashboard();
+  static on(path, callback) {
+    return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
   }
-  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; this.showLogin(); }
-  showLogin() { document.getElementById('loginCard').style.display='block'; const s=document.getElementById('signupCard'); if(s) s.style.display='none'; }
-  showSignup() { const s=document.getElementById('signupCard'); if(!s) return; document.getElementById('loginCard').style.display='none'; s.style.display='block'; }
-  async login() {
-    if(!this.guardReady()) return;
-    const email=document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password=document.getElementById('loginPassword').value;
-    if(!email||!password){this.showToast('Preencha email e senha','error');return;}
-    try {
-      const users=await EventDB.getAll('users');
-      const user=users.find(u=>(u.email||'').toLowerCase()===email&&u.password===password&&u.userType===this.role);
-      if(!user){this.showToast('❌ Credenciais inválidas','error');return;}
-      this.currentUser=user; this.saveSession(); this.enterDashboard(); this.showToast('✨ Bem-vindo(a)!','success');
-    } catch(err){this.showToast('❌ Erro: '+(err?.message||err),'error');}
-  }
-  async signup() {
-    if(!this.guardReady()) return;
-    const name=(document.getElementById('signupName')?.value||'').trim();
-    const email=(document.getElementById('signupEmail')?.value||'').trim().toLowerCase();
-    const password=document.getElementById('signupPassword')?.value||'';
-    if(!name||!email||!password){this.showToast('Preencha nome, email e senha','error');return;}
-    if(this.role==='admin'){
-      const code=document.getElementById('signupAdminCode')?.value||'';
-      if(code!==(window.EVENTLINK_ADMIN_CODE||'')){this.showToast('❌ Código de gestor inválido','error');return;}
-    }
-    try {
-      const users=await EventDB.getAll('users');
-      if(users.some(u=>(u.email||'').toLowerCase()===email)){this.showToast('❌ Email já cadastrado','error');return;}
-      const id=Date.now().toString();
-      const user={id,name,email,password,userType:this.role,createdAt:new Date().toISOString(),phoneApproved:false,specialties:[],portfolio:[],rating:5.0,views:0};
-      await EventDB.set('users',user);
-      this.currentUser=user; this.saveSession(); this.enterDashboard(); this.showToast('✨ Conta criada!','success');
-    } catch(err){this.showToast('❌ Erro: '+(err?.message||err),'error');}
-  }
-  logout() {
-    if(!confirm('Deseja sair?')) return;
-    this.detachRealtime(); this.currentUser=null; this.clearSession();
-    document.getElementById('appShell').style.display='none'; this.showAuth(); this.showToast('Sessão encerrada','info');
-  }
-  guardReady() { if(!EventDB.isReady()){this.showToast('Configure o Firebase','error');return false;} return true; }
-  enterDashboard() {
-    document.getElementById('authShell').style.display='none';
-    document.getElementById('appShell').style.display='flex';
-    const av=document.getElementById('userAvatarHeader'); if(av) av.textContent=(this.currentUser.name||'G').charAt(0).toUpperCase();
-    const first=document.querySelector('.sidebar-item,.nav-item');
-    const target=first?.getAttribute('data-section');
-    this.showSection(target||'adminDashboard');
-    this.attachRealtime(); this.onDashboardReady?.();
-  }
-  showSection(sectionId) {
-    document.querySelectorAll('.content-area section').forEach(s=>s.classList.remove('active'));
-    const sec=document.getElementById(sectionId); if(sec){sec.classList.add('active'); this.trackAccess(sectionId);}
-    document.querySelectorAll('[data-section]').forEach(i=>i.classList.remove('active'));
-    document.querySelectorAll(`[data-section="${sectionId}"]`).forEach(i=>i.classList.add('active'));
-    const ca=document.getElementById('contentArea'); if(ca) ca.scrollTop=0;
-    this.onSectionShown?.(sectionId);
-  }
-  attachRealtime() {}
-  detachRealtime() { this._subs.forEach(u=>{try{u()}catch(_){}});this._subs=[]; }
-  track(unsub){if(typeof unsub==='function') this._subs.push(unsub);}
-  setupCommonListeners() {
-    document.querySelectorAll('[data-section]').forEach(item=>{
-      item.addEventListener('click',()=>this.showSection(item.getAttribute('data-section')));
-    });
-    document.querySelectorAll('.modal').forEach(m=>{
-      m.addEventListener('click',(e)=>{if(e.target===m) m.classList.remove('active');});
-    });
-  }
-  trackAccess(section='geral') {
-    if(!EventDB.isReady()) return;
-    const id=Date.now().toString()+Math.random().toString(36).slice(2,6);
-    EventDB.set('analytics',{id,userId:this.currentUser?.id||'anonimo',role:this.role,section,action:`Acessou ${section}`,timestamp:new Date().toISOString()});
-  }
-  openModal(id){document.getElementById(id).classList.add('active');}
-  closeModal(id){document.getElementById(id).classList.remove('active');}
-  escape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  showToast(message,type='info'){
-    const t=document.createElement('div'); t.className=`toast ${type}`; t.textContent=message;
-    document.body.appendChild(t);
-    setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(60px)';setTimeout(()=>t.remove(),300);},3000);
-  }
-  toggleUserMenu(){}
 }
 
-class AdminApp extends BaseApp {
+class AdminApp {
   constructor() {
-    super('admin');
-    this.users=[]; this.requests=[]; this.phones=[]; this.ads=[]; this.profAds=[]; this.analytics=[];
-  }
-  attachRealtime() {
-    this.track(EventDB.subscribeList('users',(l)=>{ this.users=l; this.refreshDashboard(); if(document.getElementById('adminUsers')?.classList.contains('active')) this.renderUsers(); }));
-    this.track(EventDB.subscribeList('requests',(l)=>{ this.requests=l; this.refreshDashboard(); }));
-    this.track(EventDB.subscribeList('phones',(l)=>{ this.phones=l; this.renderPendingPhones(); const pending=l.filter(p=>!p.approved).length; const b=document.getElementById('phoneBadge'); if(b){b.textContent=pending; b.classList.toggle('show',pending>0);} }));
-    this.track(EventDB.subscribeList('ads',(l)=>{ this.ads=l.filter(a=>a.position!=='profissional'); if(document.getElementById('adminAds')?.classList.contains('active')) this.renderAds(); }));
-    this.track(EventDB.subscribeList('profAds',(l)=>{ this.profAds=l; if(document.getElementById('adminAds')?.classList.contains('active')) this.renderProfAdsAdmin(); }));
-    this.track(EventDB.subscribeList('analytics',(l)=>{ this.analytics=l; this.refreshDashboard(); this.renderActivity(); if(document.getElementById('adminAnalytics')?.classList.contains('active')) this.renderAnalytics(); }));
-  }
-  onDashboardReady(){ this.refreshDashboard(); }
-  onSectionShown(id){
-    if(id==='adminUsers') this.renderUsers();
-    if(id==='adminAds'){ this.renderAds(); this.renderProfAdsAdmin(); }
-    if(id==='adminAnalytics') this.renderAnalytics();
-  }
-  refreshDashboard() {
-    const profs=this.users.filter(u=>u.userType==='professional');
-    const ta=document.getElementById('adminTotalAccess'); if(ta) ta.textContent=this.analytics.length;
-    const tu=document.getElementById('adminTotalUsers'); if(tu) tu.textContent=this.users.length;
-    const ap=document.getElementById('adminActiveProfessionals'); if(ap) ap.textContent=profs.length;
-    const ab=document.getElementById('adminBudgets'); if(ab) ab.textContent=this.requests.length;
-  }
-  renderPendingPhones() {
-    const box=document.getElementById('pendingPhonesList');
-    const pending=this.phones.filter(p=>!p.approved);
-    if(!pending.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><p>Nenhum telefone pendente ✓</p></div>';return;}
-    box.innerHTML=pending.map(p=>{
-      const user=this.users.find(u=>u.id===p.userId);
-      return `<div style="padding:.9rem;border-bottom:1px solid var(--gray-100);display:flex;justify-content:space-between;align-items:center;gap:.75rem">
-        <div>
-          <div style="font-weight:600;font-size:.9rem">${this.escape(user?.name||'Usuário')}</div>
-          <div style="color:var(--gray-600);font-size:.85rem">📞 ${this.escape(p.phone)}</div>
-          <div style="color:var(--gray-500);font-size:.78rem">${user?.email||''} · ${user?.region||''}</div>
-        </div>
-        <div style="display:flex;gap:.4rem;flex-shrink:0">
-          <button class="btn-success btn-small" onclick="app.approvePhone('${p.id}','${p.userId}')">✓ Aprovar</button>
-          <button class="btn-danger btn-small" onclick="app.rejectPhone('${p.id}')">✕</button>
-        </div>
-      </div>`;
-    }).join('');
-  }
-  async approvePhone(phoneId,userId) {
-    await EventDB.update(`phones/${phoneId}`,{approved:true,approvedAt:new Date().toISOString()});
-    await EventDB.update(`users/${userId}`,{phoneApproved:true});
-    await EventDB.update(`professionals/${userId}`,{phoneApproved:true});
-    this.showToast('✓ Telefone aprovado — profissional liberado','success');
-  }
-  async rejectPhone(phoneId) {
-    await EventDB.delete('phones',phoneId); this.showToast('✕ Telefone rejeitado','info');
-  }
-  renderActivity() {
-    const box=document.getElementById('adminActivityList'); if(!box) return;
-    if(!this.analytics.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>';return;}
-    const recent=[...this.analytics].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,12);
-    box.innerHTML=recent.map(l=>`
-      <div style="padding:.65rem 0;border-bottom:1px solid var(--gray-100)">
-        <div style="color:var(--gray-500);font-size:.75rem">${new Date(l.timestamp).toLocaleString('pt-BR')}</div>
-        <div style="font-size:.88rem;font-weight:500;margin-top:.15rem">${this.escape(l.action||'Atividade')} <span style="color:var(--gray-500);font-weight:400">(${this.escape(l.role||'')})</span></div>
-      </div>`).join('');
-  }
-  renderUsers() {
-    const tbody=document.getElementById('adminUsersList');
-    if(!this.users.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem">Nenhum usuário</td></tr>';return;}
-    const tipo={client:'👤 Contratante',professional:'💼 Profissional',admin:'👨‍💼 Gestor'};
-    tbody.innerHTML=this.users.map(u=>`
-      <tr>
-        <td><strong>${this.escape(u.name)}</strong><div style="color:var(--gray-500);font-size:.75rem">${this.escape(u.email)}</div></td>
-        <td><span class="badge badge-primary" style="font-size:.72rem">${tipo[u.userType]||u.userType}</span></td>
-        <td style="font-size:.85rem">${this.escape(u.region||'—')}</td>
-        <td>${u.phoneApproved?'<span class="badge badge-success">✓</span>':'<span class="badge badge-warning">⏳</span>'}</td>
-        <td><button class="btn-danger btn-small" onclick="app.removeUser('${u.id}','${u.userType}')">Remover</button></td>
-      </tr>`).join('');
-  }
-  async removeUser(id,type) {
-    if(!confirm('Remover este usuário? Esta ação é irreversível.')) return;
-    await EventDB.delete('users',id);
-    if(type==='professional') await EventDB.delete('professionals',id);
-    this.showToast('Usuário removido','info');
+    this.currentUser = null;
+    this.managerAds = [];
+    this.profAds = [];
+    this.users = [];
+    this.currentEditingAdId = null;
   }
 
-  /* ── ANÚNCIOS GLOBAIS ── */
-  renderAds() {
-    const box=document.getElementById('adminAdsList'); if(!box) return;
-    if(!this.ads.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>';return;}
-    const now=new Date();
-    box.innerHTML=this.ads.map(ad=>{
-      const expired=new Date(ad.expire)<now;
-      return `<div class="history-item" style="border-left-color:${expired?'var(--danger)':'var(--success)'}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem">
-          <div style="flex:1">
-            <div class="history-title">${this.escape(ad.title)}</div>
-            <p style="color:var(--gray-600);font-size:.85rem;margin:.25rem 0">${this.escape(ad.content)}</p>
-            <div class="history-meta">
-              <span>📍 ${this.escape(ad.position)}</span>
-              <span>${expired?'<span style="color:var(--danger)">⚠️ Expirado</span>':'<span style="color:var(--success)">✓ Ativo</span>'}</span>
-              <span>Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-            </div>
-          </div>
-          <button class="btn-danger btn-small" onclick="app.deleteAd('${ad.id}')">Remover</button>
-        </div>
-      </div>`;
-    }).join('');
+  escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  async boot() {
+    const session = localStorage.getItem('adminSession');
+    if (!session) { this.showAuth(); return; }
+    this.currentUser = JSON.parse(session);
+    this.setupListeners();
+    this.showApp();
+    document.getElementById('userNameHeader').textContent = this.currentUser.name || 'G';
   }
+
+  setupListeners() {
+    EventDB.on('ads', ads => {
+      this.managerAds = ads.filter(a => a.position !== 'profissional');
+      this.renderManagerAds();
+    });
+
+    EventDB.on('profAds', ads => {
+      this.profAds = ads;
+      this.renderProfAds();
+    });
+
+    EventDB.on('users', users => {
+      this.users = users;
+      this.renderUsers();
+      this.updateStats();
+    });
+  }
+
+  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; }
+  showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
+
+  async login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
+    try {
+      const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
+      const users = Object.values(snap.val() || {});
+      if (!users.length || users[0].password !== password) { this.showToast('Email ou senha incorretos','error'); return; }
+      const user = users[0];
+      if (user.role !== 'admin') { this.showToast('Este é um painel apenas para gestores','error'); return; }
+      this.currentUser = user;
+      localStorage.setItem('adminSession', JSON.stringify(user));
+      this.setupListeners();
+      this.showApp();
+    } catch(e) { console.error(e); this.showToast('Erro ao fazer login','error'); }
+  }
+
+  async signup() {
+    const name = document.getElementById('signupName').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value.trim();
+    const code = document.getElementById('signupAdminCode').value.trim();
+    if (!name || !email || !password || !code) { this.showToast('Preencha todos os campos','error'); return; }
+    if (code !== 'EVENTLINK-ADMIN') { this.showToast('Código de gestor inválido','error'); return; }
+    const user = { id:Date.now().toString(), name, email, password, role:'admin', createdAt:new Date().toISOString() };
+    await EventDB.set('users', user);
+    this.currentUser = user;
+    localStorage.setItem('adminSession', JSON.stringify(user));
+    this.setupListeners();
+    this.showApp();
+  }
+
+  showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
+  showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
+
+  logout() { localStorage.removeItem('adminSession'); location.reload(); }
+
   openAdModal() {
-    ['adTitle','adContent','adExpire'].forEach(i=>document.getElementById(i).value='');
-    this.openModal('newAdModal');
-  }
-  async createAd() {
-    const title=document.getElementById('adTitle').value.trim();
-    const content=document.getElementById('adContent').value.trim();
-    const position=document.getElementById('adPosition').value;
-    const expire=document.getElementById('adExpire').value;
-    if(!title||!content||!expire){this.showToast('Preencha todos os campos','error');return;}
-    await EventDB.set('ads',{id:Date.now().toString(),title,content,position,expire,createdAt:new Date().toISOString()});
-    this.showToast('✨ Anúncio publicado em todos os painéis!','success'); this.closeModal('newAdModal');
-  }
-  async deleteAd(id) {
-    if(!confirm('Remover este anúncio?')) return;
-    await EventDB.delete('ads',id); this.showToast('Anúncio removido','info');
+    this.currentEditingAdId = null;
+    document.getElementById('adModalTitle').textContent = 'Novo Anúncio';
+    document.getElementById('adSaveBtn').textContent = 'Publicar Anúncio';
+    ['adTitle','adContent','adPosition','adExpire'].forEach(i => document.getElementById(i).value = '');
+    this.openModal('adModal');
   }
 
-  /* ── ANÚNCIOS DE PROFISSIONAIS (visão do gestor) ── */
-  renderProfAdsAdmin() {
-    const box=document.getElementById('profAdsAdminList'); if(!box) return;
-    if(!this.profAds.length){box.innerHTML='<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>';return;}
-    const now=new Date();
-    box.innerHTML=this.profAds.map(ad=>{
-      const expired=new Date(ad.expire)<now;
-      return `<div class="history-item" style="border-left-color:${expired?'var(--gray-300)':'var(--secondary)'}">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem">
-          <div style="flex:1">
-            <div class="history-title">${this.escape(ad.title)}</div>
-            <p style="color:var(--gray-600);font-size:.85rem;margin:.25rem 0">${this.escape(ad.content)}</p>
-            <div class="history-meta">
-              <span>💼 ${this.escape(ad.professionalName||'Profissional')}</span>
-              <span>${expired?'<span style="color:var(--danger)">⚠️ Expirado</span>':'<span style="color:var(--success)">✓ Ativo</span>'}</span>
-              <span>Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-            </div>
-          </div>
-          <button class="btn-danger btn-small" onclick="app.deleteProfAd('${ad.id}')">Remover</button>
-        </div>
-      </div>`;
-    }).join('');
+  async createAd() {
+    const title = document.getElementById('adTitle').value.trim();
+    const content = document.getElementById('adContent').value.trim();
+    const position = document.getElementById('adPosition').value;
+    const expire = document.getElementById('adExpire').value;
+    if (!title || !content || !expire) { this.showToast('Preencha todos os campos','error'); return; }
+    const ad = {
+      id: this.currentEditingAdId || Date.now().toString(),
+      title, content, position, expire,
+      createdAt: new Date().toISOString()
+    };
+    await EventDB.set('ads', ad);
+    this.showToast(this.currentEditingAdId ? '✏️ Anúncio atualizado!' : '✨ Anúncio publicado!', 'success');
+    this.closeModal('adModal');
+    this.currentEditingAdId = null;
   }
-  async deleteProfAd(id) {
-    if(!confirm('Remover este anúncio do profissional?')) return;
-    await EventDB.delete('profAds',id); await EventDB.delete('ads',id);
+
+  editAd(adId) {
+    const ad = this.managerAds.find(a => a.id === adId);
+    if (!ad) return;
+    this.currentEditingAdId = adId;
+    document.getElementById('adModalTitle').textContent = 'Editar Anúncio';
+    document.getElementById('adSaveBtn').textContent = 'Salvar Alterações';
+    document.getElementById('adTitle').value = ad.title;
+    document.getElementById('adContent').value = ad.content;
+    document.getElementById('adPosition').value = ad.position;
+    document.getElementById('adExpire').value = ad.expire;
+    this.openModal('adModal');
+  }
+
+  async deleteAd(id) {
+    if (!confirm('Remover este anúncio?')) return;
+    await EventDB.delete('ads', id);
     this.showToast('Anúncio removido','info');
   }
 
-  /* ── ANÁLISES ── */
-  renderAnalytics() {
-    const today=new Date().toDateString();
-    const todays=this.analytics.filter(a=>new Date(a.timestamp).toDateString()===today);
-    const sv=document.getElementById('statsVisualizacoes'); if(sv) sv.textContent=todays.length;
-    const sr=document.getElementById('statsRegistros'); if(sr) sr.textContent=this.users.filter(u=>new Date(u.createdAt).toDateString()===today).length;
-    const ss=document.getElementById('statsSolicitacoes'); if(ss) ss.textContent=this.requests.filter(r=>new Date(r.createdAt).toDateString()===today).length;
-    const now=new Date();
-    const activeAds=[...this.ads,...this.profAds].filter(a=>new Date(a.expire)>now).length;
-    const sa=document.getElementById('statsAds'); if(sa) sa.textContent=activeAds;
-    const box=document.getElementById('lastActivities');
-    const recent=[...this.analytics].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,20);
-    box.innerHTML=recent.length
-      ? recent.map(l=>`<div style="padding:.6rem 0;border-bottom:1px solid var(--gray-100)"><div style="font-size:.75rem;color:var(--gray-500)">${new Date(l.timestamp).toLocaleString('pt-BR')}</div><div style="font-size:.88rem;font-weight:500;margin-top:.1rem">${this.escape(l.action||'Atividade')} <span style="color:var(--gray-500)">(${this.escape(l.role||'')})</span></div></div>`).join('')
-      : '<div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>';
+  renderManagerAds() {
+    const box = document.getElementById('adminAdsList');
+    if (!this.managerAds.length) {
+      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>';
+      return;
+    }
+    const now = new Date();
+    box.innerHTML = this.managerAds.map(ad => {
+      const expired = new Date(ad.expire) < now;
+      return `
+        <div class="ad-card ${expired ? '' : ''}">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.75rem">
+            <div style="flex:1">
+              <div class="ad-title">${this.escape(ad.title)}</div>
+              <div class="ad-content">${this.escape(ad.content)}</div>
+              <div class="ad-meta">
+                <span>${expired ? '⚠️ Expirado' : '✓ Ativo'}</span>
+                <span>📍 ${ad.position === 'top' ? 'Topo' : 'Rodapé'}</span>
+                <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:.5rem;flex-shrink:0">
+              <button class="btn-secondary btn-small" onclick="app.editAd('${ad.id}')" style="background:rgba(255,255,255,.08);color:var(--white)">✏️</button>
+              <button class="btn-danger btn-small" onclick="app.deleteAd('${ad.id}')">✕</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  renderProfAds() {
+    const box = document.getElementById('profAdsAdminList');
+    if (!this.profAds.length) {
+      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>';
+      return;
+    }
+    const now = new Date();
+    box.innerHTML = this.profAds.map(ad => {
+      const expired = new Date(ad.expire) < now;
+      return `
+        <div class="ad-card">
+          <div style="flex:1">
+            <div class="ad-title">${this.escape(ad.title)}</div>
+            <div class="ad-content">${this.escape(ad.content)}</div>
+            <div class="ad-meta">
+              <span>${expired ? '⚠️ Expirado' : '✓ Ativo'}</span>
+              <span>💼 ${this.escape(ad.professionalName || 'Profissional')}</span>
+              <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  renderUsers() {
+    const tbody = document.getElementById('adminUsersList');
+    if (!this.users.length) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#94a3b8">Nenhum usuário</td></tr>';
+      return;
+    }
+    tbody.innerHTML = this.users.map(u => `
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:.75rem 1rem;color:var(--white);font-size:.88rem">${this.escape(u.name)}</td>
+        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${u.role === 'client' ? 'Contratante' : u.role === 'professional' ? 'Profissional' : 'Gestor'}</td>
+        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${this.escape(u.region || '-')}</td>
+        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${this.escape(u.phone || '-')}</td>
+      </tr>
+    `).join('');
+  }
+
+  updateStats() {
+    document.getElementById('adminTotalUsers').textContent = this.users.length;
+    document.getElementById('adminActiveProfessionals').textContent = this.users.filter(u => u.role === 'professional').length;
+  }
+
+  openModal(id) { document.getElementById(id).classList.add('show'); }
+  closeModal(id) { document.getElementById(id).classList.remove('show'); }
+  showToast(msg, type='info') {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
   }
 }
+
 const app = new AdminApp();
 app.boot();
-</script>
-<script src="pwa-bootstrap.js"></script>
-<script>
-  document.addEventListener('eventlink:installable',()=>{if(!EventLinkPWA.isStandalone) document.getElementById('pwaInstallBtn').classList.add('show');});
-  document.addEventListener('eventlink:installed',()=>{ document.getElementById('pwaInstallBtn').classList.remove('show');});
+
+// Nav switching
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const section = item.getAttribute('data-section');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById(section).classList.add('active');
+  });
+});
+
+// Modal close on background
+document.getElementById('adModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('adModal')) app.closeModal('adModal');
+});
 </script>
 </body>
 </html>
