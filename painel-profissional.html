@@ -57,6 +57,9 @@ button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;fon
 
 /* ── MAIN / CONTENT ── */
 #appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── AUTH SHELL (tela de login/cadastro) ── */
+.auth-shell{flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow-y:auto}
 .content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
 section{display:none}
 section.active{display:block;animation:fadeIn .3s ease-out}
@@ -363,6 +366,7 @@ class ProfessionalApp {
     const session = localStorage.getItem('profSession');
     if (!session) { this.showAuth(); return; }
     this.currentUser = JSON.parse(session);
+    await EventDB.set('professionals', this.currentUser);
     this.setupListeners();
     this.showApp();
     document.getElementById('dashboardName').textContent = this.currentUser.name || 'Profissional';
@@ -377,7 +381,7 @@ class ProfessionalApp {
       this.renderProfAdsFullList();
     });
 
-    EventDB.on('managerAds', ads => {
+    EventDB.on('ads', ads => {
       const now = new Date();
       this.managerAds = ads.filter(a => new Date(a.expire) > now);
       this.renderManagerAds();
@@ -405,6 +409,7 @@ class ProfessionalApp {
       if (user.role !== 'professional') { this.showToast('Este é um painel apenas para profissionais','error'); return; }
       this.currentUser = user;
       localStorage.setItem('profSession', JSON.stringify(user));
+      await EventDB.set('professionals', user);
       this.setupListeners();
       this.showApp();
       this.refreshDashboard();
@@ -421,6 +426,7 @@ class ProfessionalApp {
     if (!name || !email || !phone || !password) { this.showToast('Preencha todos os campos','error'); return; }
     const user = { id:Date.now().toString(), name, email, phone, password, role:'professional', region, specialties:[specialty], createdAt:new Date().toISOString() };
     await EventDB.set('users', user);
+    await EventDB.set('professionals', user);
     this.currentUser = user;
     localStorage.setItem('profSession', JSON.stringify(user));
     this.setupListeners();
@@ -640,16 +646,18 @@ class ProfessionalApp {
     this.showToast(msg[status] || 'Atualizado', status === 'cancelled' ? 'info' : 'success');
   }
 
-  saveProfile() {
+  async saveProfile() {
     const name = document.getElementById('profileName').value;
     const phone = document.getElementById('profilePhone').value;
     const region = document.getElementById('profileRegion').value;
     this.currentUser = { ...this.currentUser, name, phone, region };
     localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    await EventDB.update(`users/${this.currentUser.id}`, { name, phone, region });
+    await EventDB.update(`professionals/${this.currentUser.id}`, { name, phone, region });
     this.showToast('✓ Perfil atualizado','success');
   }
 
-  addSpecialty() {
+  async addSpecialty() {
     const input = document.getElementById('newSpecialty');
     const specialty = input.value.trim();
     if (!specialty) return;
@@ -657,6 +665,8 @@ class ProfessionalApp {
     this.currentUser.specialties.push(specialty);
     input.value = '';
     localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
+    await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     this.renderSpecialties();
     this.showToast('✓ Especialidade adicionada','success');
   }
@@ -674,9 +684,11 @@ class ProfessionalApp {
       </div>`).join('');
   }
 
-  removeSpecialty(index) {
+  async removeSpecialty(index) {
     this.currentUser.specialties.splice(index, 1);
     localStorage.setItem('profSession', JSON.stringify(this.currentUser));
+    await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
+    await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
     this.renderSpecialties();
   }
 
