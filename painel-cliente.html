@@ -425,6 +425,7 @@ h1,.card-title,.modal-header{font-family:'Cormorant Garamond',serif;letter-spaci
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
@@ -439,6 +440,7 @@ const firebaseConfig = {
 try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
 
 const db = firebase.database();
+const auth = firebase.auth();
 
 class EventDB {
   static async set(path, data) {
@@ -541,14 +543,73 @@ class ClientApp {
   escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   async boot() {
-    const user = Security.loadSession('clientSession');
-    if (!user) { this.showAuth(); return; }
-    this.currentUser = user;
-    this.setupListeners();
-    this.showApp();
-    document.getElementById('dashboardName').textContent = this.currentUser.name || 'Contratante';
-    document.getElementById('userNameHeader').textContent = this.currentUser.name || 'C';
-    this.refreshDashboard();
+    // O Firebase Authentication controla a sessão (persistência local automática).
+    auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser));
+  }
+
+  async handleAuth(fbUser) {
+    if (!fbUser) { this.currentUser = null; this.showAuth(); return; }
+    try {
+      const profile = await this.loadProfile(fbUser.uid);
+      if (!profile) { await auth.signOut(); this.showAuth(); return; }
+      if (profile.role !== 'client') {
+        this.showToast('Este painel é apenas para noivos','error');
+        await auth.signOut(); this.showAuth(); return;
+      }
+      this.currentUser = profile;
+      if (!this._wired) { this.setupListeners(); this._wired = true; }
+      this.showApp();
+      document.getElementById('dashboardName').textContent = profile.name || 'Noivos';
+      document.getElementById('userNameHeader').textContent = profile.name || 'C';
+      this.refreshDashboard();
+    } catch (e) { console.error(e); this.showToast('Erro ao carregar seu perfil','error'); }
+  }
+
+  loadProfile(uid) { return db.ref('users/' + uid).once('value').then(s => s.val()); }
+
+  authError(e) {
+    const m = {
+      'auth/invalid-email': 'E-mail inválido',
+      'auth/email-already-in-use': 'Este e-mail já está cadastrado',
+      'auth/weak-password': 'A senha deve ter ao menos 6 caracteres',
+      'auth/user-not-found': 'E-mail ou senha incorretos',
+      'auth/wrong-password': 'E-mail ou senha incorretos',
+      'auth/invalid-credential': 'E-mail ou senha incorretos',
+      'auth/invalid-login-credentials': 'E-mail ou senha incorretos',
+      'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
+      'auth/network-request-failed': 'Falha de conexão. Verifique sua internet',
+      'auth/operation-not-allowed': 'Ative o login por e-mail/senha no Console do Firebase'
+    };
+    return m[e && e.code] || 'Não foi possível concluir. Tente novamente';
+  }
+
+  /* Migra automaticamente uma conta antiga (anterior ao Firebase Auth) no
+     primeiro login: valida a senha pelo hash existente, cria a conta no
+     Firebase Authentication e move o perfil para users/{uid} (sem senha). */
+  async migrateLegacy(email, password) {
+    const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
+    const val = snap.val(); if (!val) return false;
+    const legacyKey = Object.keys(val)[0];
+    const legacy = val[legacyKey];
+    if (legacy.role !== 'client') return false;
+    const ok = await Security.verifyPassword(password, legacy);
+    if (!ok) return false;
+    let cred;
+    try { cred = await auth.createUserWithEmailAndPassword(email, password); }
+    catch (e) {
+      if (e.code === 'auth/email-already-in-use') cred = await auth.signInWithEmailAndPassword(email, password);
+      else throw e;
+    }
+    const uid = cred.user.uid;
+    const profile = { ...Security._strip(legacy), id: uid };
+    await db.ref('users/' + uid).set(profile);
+    // mantém o histórico de solicitações ligado ao novo id
+    const allR = (await db.ref('requests').once('value')).val() || {};
+    const upd = {};
+    Object.entries(allR).forEach(([k, r]) => { if (r && r.clientId === legacy.id) upd[k + '/clientId'] = uid; });
+    if (Object.keys(upd).length) await db.ref('requests').update(upd);
+    if (legacyKey !== uid) await db.ref('users/' + legacyKey).remove();
+    return true; // onAuthStateChanged assume a partir daqui
   }
 
   setupListeners() {
@@ -575,24 +636,20 @@ class ClientApp {
     const thr = Security.loginThrottle(email);
     if (!thr.allowed) { this.showToast(`Muitas tentativas. Aguarde ${thr.wait}s`,'error'); return; }
     try {
-      const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
-      const users = Object.values(snap.val() || {});
-      const user = users[0];
-      const ok = user && await Security.verifyPassword(password, user);
-      if (!ok) { Security.recordFailure(email); this.showToast('E-mail ou senha incorretos','error'); return; }
-      if (user.role !== 'client') { this.showToast('Este é um painel apenas para contratantes','error'); return; }
-      Security.clearFailures(email);
-      // migra contas legadas (senha em texto puro) para hash seguro
-      if (user.password != null && !user.passwordHash) {
-        const creds = await Security.hashPassword(password);
-        await EventDB.update(`users/${user.id}`, { ...creds, password: null });
-        Object.assign(user, creds); delete user.password;
+      await auth.signInWithEmailAndPassword(email, password);
+      Security.clearFailures(email); // sucesso → handleAuth mostra o app
+    } catch (e) {
+      if (['auth/user-not-found','auth/invalid-credential','auth/invalid-login-credentials','auth/wrong-password'].includes(e.code)) {
+        try {
+          if (await this.migrateLegacy(email, password)) { Security.clearFailures(email); return; }
+        } catch (me) {
+          console.error('migração', me);
+          if (me.code === 'auth/weak-password') { this.showToast('Sua senha antiga é curta demais. Use "Esqueci minha senha".','error'); return; }
+        }
       }
-      this.currentUser = Security.saveSession('clientSession', user);
-      this.setupListeners();
-      this.showApp();
-      this.refreshDashboard();
-    } catch(e) { console.error(e); this.showToast('Erro ao fazer login','error'); }
+      Security.recordFailure(email);
+      this.showToast(this.authError(e),'error');
+    }
   }
 
   async signup() {
@@ -606,22 +663,17 @@ class ClientApp {
     const pv = Security.validatePassword(password);
     if (!pv.ok) { this.showToast(pv.msg,'error'); return; }
     try {
-      const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
-      if (snap.exists()) { this.showToast('Este e-mail já está cadastrado','error'); return; }
-    } catch(e) { console.error(e); }
-    const creds = await Security.hashPassword(password);
-    const user = { id:Date.now().toString(), name, email, phone, role:'client', region, ...creds, createdAt:new Date().toISOString() };
-    await EventDB.set('users', user);
-    this.currentUser = Security.saveSession('clientSession', user);
-    this.setupListeners();
-    this.showApp();
-    this.refreshDashboard();
+      const cred = await auth.createUserWithEmailAndPassword(email, password);
+      const uid = cred.user.uid;
+      const profile = { id: uid, name, email, phone, role: 'client', region, createdAt: new Date().toISOString() };
+      await db.ref('users/' + uid).set(profile); // handleAuth mostra o app
+    } catch (e) { console.error(e); this.showToast(this.authError(e),'error'); }
   }
 
   showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
   showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
 
-  logout() { localStorage.removeItem('clientSession'); location.reload(); }
+  async logout() { try { await auth.signOut(); } finally { location.reload(); } }
 
   refreshDashboard() {
     const active = this.myRequests.filter(r => r.status === 'active').length;
@@ -831,8 +883,8 @@ class ClientApp {
     const phone = document.getElementById('profilePhone').value;
     const region = document.getElementById('profileRegion').value;
     this.currentUser = { ...this.currentUser, name, phone, region };
-    this.currentUser = Security.saveSession('clientSession', this.currentUser);
-    await EventDB.update(`users/${this.currentUser.id}`, { name, phone, region });
+    await db.ref('users/' + this.currentUser.id).update({ name, phone, region });
+    document.getElementById('dashboardName').textContent = name || 'Noivos';
     this.showToast('✓ Perfil atualizado','success');
   }
 
