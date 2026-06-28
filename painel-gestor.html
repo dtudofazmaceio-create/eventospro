@@ -1,776 +1,682 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no">
-<title>Enlace · Gestor</title>
-<link rel="manifest" href="manifest-gestor.json">
-<meta name="theme-color" content="#1E293B">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#6E2A52;--primary-light:#8A3D63;--primary-dark:#45203A;
-  --secondary:#B5658A;--accent:#C2A35E;
-  --gold:#C2A35E;--gold-soft:#E4D2A8;--blush:#F4E6EC;--ivory:#FBF7F3;--ink:#2C2230;
-  --success:#4F8A6B;--danger:#C2453F;--warning:#C98A3A;
-  --dark:#2C2230;--dark-light:#3A2C3D;--dark-lighter:#4A3A4D;
-  --gray-700:#5A4E58;--gray-600:#7A6E76;--gray-500:#9A8E96;
-  --gray-300:#DDD2D8;--gray-200:#E7DCE2;--gray-100:#EFE7EB;--gray-50:#FBF7F3;
-  --white:#FFFFFF;
-  --shadow-sm:0 1px 3px rgba(15,23,42,0.10);
-  --shadow:0 4px 6px rgba(15,23,42,0.10);
-  --shadow-md:0 10px 15px rgba(15,23,42,0.10);
-  --shadow-lg:0 20px 25px rgba(15,23,42,0.15);
-  --shadow-xl:0 40px 50px rgba(15,23,42,0.2);
-  --transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  --nav-h:64px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --safe-top:env(safe-area-inset-top,0px);
-  --admin:#1E293B;
-}
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#241726 0%,#1A1020 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <title>Enlace · Gestor</title>
+  <link rel="manifest" href="manifest-gestor.json" />
+  <meta name="theme-color" content="#0F172A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ── HEADER ── */
-header{background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border-bottom:1px solid rgba(255,255,255,.05);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.2);padding-top:calc(.75rem + var(--safe-top))}
-.header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;color:var(--white);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#C2A35E 0%,#E4D2A8 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 15px rgba(194,163,94,.3)}
-.header-right{display:flex;align-items:center;gap:.6rem}
-.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,#C2A35E,#E4D2A8);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
-.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,#C2A35E,#E4D2A8)}
+    :root {
+      --primary: #6E2A52;
+      --primary-light: #8A3D63;
+      --gold: #C2A35E;
+      --gold-soft: #E4D2A8;
+      --secondary: #B5658A;
+      --success: #4F8A6B;
+      --danger: #C2453F;
+      --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --nav-h: 68px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+    }
 
-/* ── BUTTONS ── */
-button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
-.btn-primary{background:linear-gradient(135deg,#C2A35E 0%,#E4D2A8 100%);color:var(--white);box-shadow:0 4px 15px rgba(194,163,94,.25);border:none}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(194,163,94,.35)}
-.btn-primary:active{transform:scale(.98)}
-.btn-secondary{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.1)}
-.btn-secondary:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
-.btn-danger{background:linear-gradient(135deg,#C2453F,#A83A35);color:var(--white)}
-.btn-danger:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.25)}
-.btn-success{background:linear-gradient(135deg,#4F8A6B,#3F7257);color:var(--white)}
-.btn-success:hover{transform:translateY(-2px)}
-.btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0B0E14;
+      color: #E2E8F0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: none;
+    }
+    body { display: flex; flex-direction: column; }
 
-/* ── MAIN / CONTENT ── */
-#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+    /* ── HEADER FLUTUANTE ── */
+    .header-glass {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0.8rem 1.5rem;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: calc(0.8rem + var(--safe-top));
+    }
+    .logo-creative {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .logo-creative .badge-ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0B0E14;
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px rgba(194, 163, 94, 0.2);
+    }
+    .role-pill-glass {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(194, 163, 94, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(194, 163, 94, 0.1);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .user-avatar-glass {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #0B0E14;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(194, 163, 94, 0.15);
+    }
+    .user-name-glass {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #E2E8F0;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .btn-logout-glass {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: 999px;
+    }
+    .btn-logout-glass:hover {
+      color: var(--danger);
+      background: rgba(194, 69, 63, 0.1);
+    }
 
-/* ── AUTH SHELL (tela de login/cadastro) ── */
-.auth-shell{flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow-y:auto}
-.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
-section{display:none}
-section.active{display:block;animation:fadeIn .3s ease-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    /* ── APP SHELL ── */
+    #appShell { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.5rem calc(var(--nav-h) + var(--safe-bottom) + 2rem);
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    section { display: none; animation: fadeIn 0.4s ease-out; }
+    section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,.2)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:#94a3b8;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
-.nav-item:active{opacity:.7}
-.nav-item.active{color:#C2A35E;transform:translateY(-2px)}
-.nav-item .nav-icon{font-size:1.35rem;line-height:1}
+    /* ── DOCK FLUTUANTE ── */
+    .dock-floating {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      padding: 0.3rem 0.4rem;
+      gap: 0.1rem;
+      z-index: 999;
+      width: auto;
+      max-width: 95%;
+      flex-wrap: nowrap;
+    }
+    .dock-item {
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .dock-item .icon { font-size: 1.1rem; }
+    .dock-item.active {
+      background: linear-gradient(135deg, var(--gold), var(--secondary));
+      color: #0B0E14;
+      box-shadow: 0 4px 16px rgba(194, 163, 94, 0.3);
+    }
+    .dock-item:not(.active):hover { background: rgba(255, 255, 255, 0.05); color: #E2E8F0; }
 
-/* ── CARDS ── */
-.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem;box-shadow:0 4px 20px rgba(0,0,0,.1);margin-bottom:1rem;backdrop-filter:blur(10px);transition:var(--transition)}
-.card:hover{box-shadow:0 8px 30px rgba(194,163,94,.15);border-color:rgba(194,163,94,.3);transform:translateY(-2px)}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.75rem}
+    /* ── CARDS ── */
+    .card-glass {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      transition: var(--transition);
+      margin-bottom: 1.5rem;
+    }
+    .card-glass:hover { border-color: rgba(194, 163, 94, 0.15); box-shadow: 0 8px 40px rgba(194, 163, 94, 0.05); transform: translateY(-2px); }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #F1F5F9;
+      margin-bottom: 1rem;
+    }
 
-/* ── AD CARDS (CLICKABLE) ── */
-.ad-card{background:linear-gradient(135deg,rgba(194,163,94,.08) 0%,rgba(247,179,43,.08) 100%);border:1.5px solid rgba(194,163,94,.3);border-radius:14px;padding:1.25rem;margin-bottom:.75rem;transition:var(--transition);cursor:pointer}
-.ad-card:hover{border-color:#C2A35E;box-shadow:0 8px 25px rgba(194,163,94,.2);transform:translateY(-2px)}
-.ad-card.selected{border-color:#C2A35E;background:linear-gradient(135deg,rgba(194,163,94,.15) 0%,rgba(247,179,43,.15) 100%)}
-.ad-title{font-weight:700;font-size:1rem;color:var(--white);margin-bottom:.4rem}
-.ad-content{color:#cbd5e1;font-size:.9rem;margin-bottom:.6rem;line-height:1.5}
-.ad-meta{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.8rem;color:#94a3b8}
-.ad-meta span{display:flex;align-items:center;gap:.2rem}
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card-gold {
+      background: linear-gradient(135deg, rgba(194, 163, 94, 0.12), rgba(181, 101, 138, 0.08));
+      border: 1px solid rgba(194, 163, 94, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .stat-card-gold:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 8px 30px rgba(194, 163, 94, 0.1); }
+    .stat-number { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1.1; }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #94A3B8; font-weight: 600; margin-top: 0.2rem; }
 
-/* ── STAT CARDS ── */
-.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,#C2A35E 0%,#E4D2A8 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 20px rgba(194,163,94,.2);transition:var(--transition)}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(194,163,94,.3)}
-.stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
-.stat-label{font-size:.8rem;opacity:.9}
+    /* ── TABELA ── */
+    .table-wrap { overflow-x: auto; margin-top: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    thead th { text-align: left; padding: 0.8rem 1rem; color: #94A3B8; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    tbody td { padding: 0.8rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03); color: #E2E8F0; }
+    tbody tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    .role-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .role-badge.client { background: rgba(110, 42, 82, 0.2); color: #8A3D63; }
+    .role-badge.professional { background: rgba(181, 101, 138, 0.2); color: #B5658A; }
+    .role-badge.admin { background: rgba(194, 163, 94, 0.2); color: var(--gold); }
 
-/* ── MODALS ── */
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
-.modal.show{display:flex;animation:modalFadeIn .3s ease-out}
-@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
-.modal-content{background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalSlideUp .3s ease-out}
-@keyframes modalSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-header{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--white)}
-.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition);color:var(--white)}
-.modal-close:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2)}
+    /* ── ANÚNCIOS CARDS ── */
+    .ad-card-glass {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .ad-card-glass:hover { border-color: rgba(194, 163, 94, 0.2); background: rgba(194, 163, 94, 0.03); }
+    .ad-card-glass .ad-info { flex: 1; }
+    .ad-card-glass .ad-info h4 { font-weight: 700; color: #F1F5F9; font-size: 1rem; }
+    .ad-card-glass .ad-info p { color: #94A3B8; font-size: 0.85rem; margin: 0.2rem 0 0.3rem; }
+    .ad-card-glass .ad-meta { font-size: 0.75rem; color: #64748B; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-small-glass { padding: 0.3rem 0.8rem; border-radius: 999px; border: none; font-weight: 600; font-size: 0.7rem; cursor: pointer; transition: var(--transition); background: rgba(255, 255, 255, 0.05); color: #94A3B8; }
+    .btn-small-glass:hover { background: rgba(194, 163, 94, 0.1); color: var(--gold); }
+    .btn-small-glass.danger:hover { background: rgba(194, 69, 63, 0.15); color: var(--danger); }
 
-/* ── FORMS ── */
-.form-group{margin-bottom:1rem}
-label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--white);font-size:.9rem}
-input,textarea,select{width:100%;padding:.8rem;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:rgba(255,255,255,.05);color:var(--white)}
-input::placeholder,textarea::placeholder{color:rgba(255,255,255,.4)}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#C2A35E;box-shadow:0 0 0 3px rgba(194,163,94,.1);background:rgba(255,255,255,.08)}
+    /* ── FORMULÁRIOS DO CMS ── */
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: #94A3B8; margin-bottom: 0.3rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      color: #F1F5F9;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(194, 163, 94, 0.1);
+    }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #64748B; }
 
-/* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600}
-.badge-success{background:rgba(16,185,129,.2);color:#4F8A6B}
-.badge-warning{background:rgba(245,158,11,.2);color:#F59E0B}
-.badge-danger{background:rgba(239,68,68,.2);color:#C2453F}
-.badge-primary{background:rgba(110,42,82,.2);color:#8A3D63}
+    .btn-modal-primary {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--secondary));
+      color: #0B0E14;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .btn-modal-primary:hover { transform: scale(1.02); box-shadow: 0 4px 20px rgba(194, 163, 94, 0.3); }
 
-/* ── EMPTY STATE ── */
-.empty-state{text-align:center;padding:2.5rem 1rem;color:#94a3b8}
-.empty-icon{font-size:3rem;margin-bottom:.75rem}
-.empty-state p{margin-bottom:.5rem;font-size:.95rem}
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 6rem;
+      right: 1.5rem;
+      background: #1E293B;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      box-shadow: var(--shadow-glass);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      color: #E2E8F0;
+      border-left: 4px solid var(--gold);
+    }
+    .toast.show { display: flex; }
+    .toast.success { border-left-color: var(--success); }
+    .toast.error { border-left-color: var(--danger); }
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 1rem);right:1rem;background:linear-gradient(135deg,#1E293B,#0F172A);border:1px solid rgba(255,255,255,.1);padding:1rem 1.25rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.3);z-index:400;display:none;gap:.75rem;align-items:center;animation:slideUp .3s ease-out;color:var(--white)}
-.toast.show{display:flex}
-@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}
-.toast.success{border-left:4px solid var(--success)}
-.toast.error{border-left:4px solid var(--danger)}
-.toast.info{border-left:4px solid #C2A35E}
+    /* ── AUTH ── */
+    .auth-shell { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: radial-gradient(circle at 30% 20%, #1E293B, #0B0E14); }
+    .auth-card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+    }
+    .auth-card h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; }
+    .auth-card .sub { color: #94A3B8; margin-bottom: 2rem; }
+    .auth-card .form-group input { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); border-radius: 999px; padding: 0.9rem 1.5rem; }
+    .btn-auth-primary { width: 100%; padding: 0.9rem; border: none; border-radius: 999px; background: linear-gradient(135deg, var(--gold), var(--secondary)); color: #0B0E14; font-weight: 700; font-size: 1rem; cursor: pointer; transition: var(--transition); }
+    .btn-auth-primary:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(194, 163, 94, 0.2); }
+    .btn-auth-secondary { width: 100%; padding: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 999px; background: transparent; color: #94A3B8; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: var(--transition); }
+    .btn-auth-secondary:hover { background: rgba(255, 255, 255, 0.03); color: #E2E8F0; }
+    #authShell { display: flex; }
+    #appShell { display: none; }
 
-@media(min-width:768px){
-  .stats-row{grid-template-columns:repeat(4,1fr)}
-}
-
-/* ══ DESKTOP: vira um sistema com sidebar lateral (tema escuro) ══ */
-@media(min-width:1024px){
-  body{overscroll-behavior:auto}
-  #appShell{flex-direction:row}
-  .bottom-nav{
-    position:relative;order:-1;flex-direction:column;align-items:stretch;
-    width:250px;height:auto;flex-shrink:0;padding:1.25rem .85rem;gap:.35rem;
-    border-top:none;border-right:1px solid rgba(255,255,255,.06);box-shadow:none;
-    background:linear-gradient(180deg,#1E293B 0%,#0F172A 100%);
-  }
-  .bottom-nav::before{
-    content:"Painel";display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;
-    letter-spacing:.06em;color:#64748B;padding:.25rem 1rem .65rem;
-  }
-  .nav-item{
-    flex-direction:row;justify-content:flex-start;gap:.85rem;padding:.75rem 1rem;border-radius:12px;
-    font-size:.92rem;font-weight:600;text-transform:none;letter-spacing:normal;min-height:46px;color:#94a3b8;
-  }
-  .nav-item .nav-icon{font-size:1.2rem}
-  .nav-item:hover{background:rgba(255,255,255,.05);color:var(--white)}
-  .nav-item.active{transform:none;background:linear-gradient(135deg,rgba(194,163,94,.18),rgba(247,179,43,.12));color:#FF8B5E}
-  .content-area{max-width:1180px;padding:2.25rem 2.75rem;margin:0 auto}
-  .stats-row{grid-template-columns:repeat(4,1fr);gap:1rem}
-  .toast{bottom:1.5rem}
-}
-@media(min-width:1440px){ .content-area{max-width:1340px} }
-
-/* ══ IDENTIDADE ENLACE (gestor) ══ */
-h1,.card-title,.modal-header{font-family:'Cormorant Garamond',serif;letter-spacing:.005em;line-height:1.14}
-.logo{font-size:1.5rem;letter-spacing:.01em}
-.logo-icon{background:linear-gradient(135deg,var(--gold),var(--secondary))}
-.role-pill{background:linear-gradient(135deg,var(--gold),var(--secondary))}
-.hero-arc{position:relative;overflow:hidden;background:linear-gradient(150deg,#3a2238 0%,#241726 70%,#190f1a 100%);color:var(--white);border:1px solid rgba(194,163,94,.15)}
-.hero-arc .hero-inner{position:relative;z-index:2;padding:1.4rem 1.5rem 2rem}
-.hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.4rem}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1.08;margin-bottom:.4rem}
-.hero-sub{font-size:.95rem;color:rgba(255,255,255,.8)}
-.hero-rings{position:absolute;right:-12px;top:-6px;width:140px;height:140px;opacity:.85;z-index:1}
-
-</style>
+    /* ── RESPONSIVE ── */
+    @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1024px) {
+      .dock-floating {
+        position: relative; bottom: auto; left: auto; transform: none; flex-direction: column; align-items: stretch; width: 220px; border-radius: var(--radius); background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.04); padding: 0.8rem 0.5rem; gap: 0.2rem; box-shadow: none; margin-right: 1.5rem; height: fit-content; flex-shrink: 0;
+      }
+      #appShell { flex-direction: row; align-items: flex-start; padding: 1.5rem; gap: 1.5rem; }
+      .content-area { padding: 0; max-width: none; flex: 1; }
+      .dock-item { padding: 0.6rem 1rem; font-size: 0.85rem; border-radius: var(--radius-sm); justify-content: flex-start; }
+      .dock-item .icon { font-size: 1.2rem; }
+      .dock-item.active { background: rgba(194, 163, 94, 0.12); color: var(--gold); box-shadow: none; }
+      .dock-item:not(.active):hover { background: rgba(255, 255, 255, 0.03); }
+      .toast { bottom: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .dock-item span:not(.icon) { display: none; }
+      .dock-item { padding: 0.5rem 0.8rem; }
+      .user-name-glass { display: none; }
+      .stats-grid { gap: 0.5rem; }
+      .stat-number { font-size: 1.5rem; }
+      .header-glass { padding: 0.6rem 1rem; }
+      .logo-creative { font-size: 1.3rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-container">
-    <a href="index.html" class="logo">
-      <div class="logo-icon">♥</div>
-      <span>Enlace</span>
-      <span class="role-pill">Gestor</span>
+  <!-- HEADER -->
+  <header class="header-glass">
+    <a href="index.html" class="logo-creative">
+      <span class="badge-ring">♥</span> Enlace <span class="role-pill-glass">Gestor</span>
     </a>
     <div class="header-right">
-      <div class="user-avatar" id="userAvatarHeader">G</div>
-      <span id="userNameHeader" style="font-size:.85rem;font-weight:600;color:var(--white);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
-      <button class="btn-logout" onclick="app.logout()" style="background:none;color:#C2453F;font-weight:600;padding:.4rem .7rem;min-height:36px;font-size:.8rem;border:none;cursor:pointer">Sair</button>
+      <div class="user-avatar-glass" id="userAvatarHeader">G</div>
+      <span class="user-name-glass" id="userNameHeader"></span>
+      <button class="btn-logout-glass" onclick="app.logout()">Sair</button>
+    </div>
+  </header>
+
+  <!-- APP SHELL -->
+  <div id="appShell">
+    <nav class="dock-floating" id="mainDock">
+      <button class="dock-item active" data-section="adminDashboard"><span class="icon">📊</span><span>Dashboard</span></button>
+      <button class="dock-item" data-section="adminAds"><span class="icon">📢</span><span>Anúncios</span></button>
+      <button class="dock-item" data-section="adminUsers"><span class="icon">👥</span><span>Usuários</span></button>
+      <button class="dock-item" data-section="adminAnalytics"><span class="icon">📈</span><span>Análises</span></button>
+      <button class="dock-item" data-section="adminSettings"><span class="icon">⚙️</span><span>Configurações</span></button>
+    </nav>
+
+    <div class="content-area" id="contentArea">
+
+      <!-- DASHBOARD -->
+      <section id="adminDashboard" class="active">
+        <div style="margin-bottom:1.5rem">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#F1F5F9;">Centro de Comando</h1>
+          <p style="color:#94A3B8;">Visão geral da plataforma Enlace</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card-gold"><div class="stat-number" id="adminTotalUsers">0</div><div class="stat-label">Usuários</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="adminActiveProfessionals">0</div><div class="stat-label">Profissionais</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="adminBudgets">0</div><div class="stat-label">Solicitações</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="adminTotalAccess">0</div><div class="stat-label">Acessos</div></div>
+        </div>
+        <div class="card-glass"><div class="card-title">📱 Telefones pendentes</div><div id="pendingPhonesList" style="color:#94A3B8;">Nenhum pendente</div></div>
+        <div class="card-glass"><div class="card-title">🕐 Atividades recentes</div><div id="adminActivityList" style="max-height:300px;overflow-y:auto;color:#94A3B8;">Sem atividades</div></div>
+      </section>
+
+      <!-- ANÚNCIOS -->
+      <section id="adminAds">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem">
+          <div><h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#F1F5F9;">Anúncios Globais</h1><p style="color:#94A3B8;">Gerencie os anúncios da plataforma</p></div>
+          <button class="btn-modal-primary" onclick="app.openAdModal()" style="padding:0.5rem 1.5rem;border-radius:999px;">+ Novo</button>
+        </div>
+        <div class="card-glass"><div id="adminAdsList"></div></div>
+        <div style="margin-top:1.5rem"><h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#F1F5F9;margin-bottom:0.5rem;">Anúncios de Profissionais</h2><div class="card-glass" id="profAdsAdminList"></div></div>
+      </section>
+
+      <!-- USUÁRIOS -->
+      <section id="adminUsers">
+        <div style="margin-bottom:1.5rem"><h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#F1F5F9;">Todos os Usuários</h1><p style="color:#94A3B8;">Lista completa de contratantes, profissionais e gestores</p></div>
+        <div class="card-glass"><div class="table-wrap"><table><thead><tr><th>Nome</th><th>Perfil</th><th>Região</th><th>Telefone</th></tr></thead><tbody id="adminUsersList"><tr><td colspan="4" style="text-align:center;color:#94A3B8;padding:2rem;">Carregando...</td></tr></tbody></table></div></div>
+      </section>
+
+      <!-- ANÁLISES -->
+      <section id="adminAnalytics">
+        <div style="margin-bottom:1.5rem"><h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#F1F5F9;">Métricas</h1><p style="color:#94A3B8;">Acompanhe o crescimento da plataforma</p></div>
+        <div class="stats-grid">
+          <div class="stat-card-gold"><div class="stat-number" id="statsVisualizacoes">0</div><div class="stat-label">Acessos hoje</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="statsRegistros">0</div><div class="stat-label">Cadastros hoje</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="statsSolicitacoes">0</div><div class="stat-label">Solicitações hoje</div></div>
+          <div class="stat-card-gold"><div class="stat-number" id="statsAds">0</div><div class="stat-label">Anúncios ativos</div></div>
+        </div>
+        <div class="card-glass"><div class="card-title">Últimas atividades</div><div id="lastActivities" style="max-height:400px;overflow-y:auto;color:#94A3B8;">Nenhuma atividade recente</div></div>
+      </section>
+
+      <!-- ═══ CONFIGURAÇÕES DO SITE (CMS) ═══ -->
+      <section id="adminSettings">
+        <div style="margin-bottom:1.5rem">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#F1F5F9;">⚙️ Configurações do Site</h1>
+          <p style="color:#94A3B8;">Altere imagens e textos da página inicial. Tudo é sincronizado em tempo real com o Firebase.</p>
+        </div>
+
+        <div class="card-glass">
+          <div class="card-title">🖼️ Hero (Banner Principal)</div>
+          <div class="form-group">
+            <label>Imagem de fundo (URL)</label>
+            <input type="text" id="settingsHeroImage" placeholder="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80" />
+          </div>
+          <div class="form-group">
+            <label>Título Principal</label>
+            <input type="text" id="settingsHeroTitle" placeholder="Seu dia perfeito começa aqui" />
+          </div>
+          <div class="form-group">
+            <label>Subtítulo / Descrição</label>
+            <textarea id="settingsHeroSubtitle" rows="2" placeholder="Fotógrafos, buffets, decoração..."></textarea>
+          </div>
+        </div>
+
+        <div class="card-glass">
+          <div class="card-title">📸 Galeria de Inspiração</div>
+          <div class="form-group">
+            <label>URLs das imagens (uma por linha)</label>
+            <textarea id="settingsGalleryImages" rows="5" placeholder="https://images.unsplash.com/photo-1511798616182-a4d4ce8f6bc1?w=600&q=80"></textarea>
+            <small style="color:#64748B;display:block;margin-top:0.3rem;">Cole as URLs das imagens que aparecerão na galeria da página inicial.</small>
+          </div>
+        </div>
+
+        <button class="btn-modal-primary" onclick="app.saveSiteSettings()" style="width:100%;padding:0.8rem;border-radius:999px;font-size:1rem;">
+          💾 Salvar Todas as Configurações
+        </button>
+      </section>
+
     </div>
   </div>
-</header>
 
-<!-- APP SHELL -->
-<div id="appShell" style="display:none">
-  <div class="content-area" id="contentArea">
-
-    <!-- DASHBOARD -->
-    <section id="adminDashboard" class="active">
-      <div class="hero-arc" style="border-radius:18px;margin-bottom:1.25rem">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="right:-18px;top:-8px;width:130px;height:130px">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".7"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-        </svg>
-        <div class="hero-inner">
-          <div class="hero-eyebrow">Painel gerencial</div>
-          <div class="hero-title">Visão geral da plataforma</div>
-          <p class="hero-sub">Acompanhe usuários, anúncios e o desempenho do Enlace</p>
-        </div>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Acessos Totais</div><div class="stat-number" id="adminTotalAccess">0</div></div>
-        <div class="stat-card"><div class="stat-label">Usuários</div><div class="stat-number" id="adminTotalUsers">0</div></div>
-        <div class="stat-card"><div class="stat-label">Profissionais</div><div class="stat-number" id="adminActiveProfessionals">0</div></div>
-        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="adminBudgets">0</div></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">📱 Telefones Pendentes</div>
-        <div id="pendingPhonesList" style="margin-top:.75rem">
-          <div class="empty-state" style="padding:1.5rem 0"><p>Nenhum telefone pendente</p></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">🕐 Atividades Recentes</div>
-        <div id="adminActivityList" style="max-height:320px;overflow-y:auto;margin-top:.75rem">
-          <div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ANÚNCIOS -->
-    <section id="adminAds">
-      <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;gap:.75rem;flex-wrap:wrap">
-        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Anúncios 📢</h1><p style="color:#94a3b8;font-size:.9rem;margin-top:.2rem">Gerencie todos os anúncios da plataforma</p></div>
-        <button class="btn-primary btn-small" onclick="app.openAdModal()">+ Novo Anúncio</button>
-      </div>
-
-      <div class="card" style="margin-bottom:1rem">
-        <div class="card-title">Anúncios Globais (Gestor)</div>
-        <div id="adminAdsList" style="margin-top:.75rem"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Anúncios de Profissionais</div>
-        <div id="profAdsAdminList" style="margin-top:.75rem"></div>
-      </div>
-    </section>
-
-    <!-- USUÁRIOS -->
-    <section id="adminUsers">
-      <div style="margin-bottom:1.5rem">
-        <h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Usuários 👥</h1>
-        <p style="color:#94a3b8;font-size:.9rem;margin-top:.2rem">Gerencie todos os usuários da plataforma</p>
-      </div>
-
-      <div class="card">
-        <div style="overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse">
-            <thead>
-              <tr style="border-bottom:2px solid rgba(255,255,255,.1)">
-                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Nome</th>
-                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Tipo</th>
-                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Região</th>
-                <th style="padding:.75rem 1rem;text-align:left;font-weight:700;color:var(--white);font-size:.85rem;white-space:nowrap">Telefone</th>
-              </tr>
-            </thead>
-            <tbody id="adminUsersList">
-              <tr><td colspan="4" style="text-align:center;padding:2rem;color:#94a3b8">Carregando...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ANÁLISES -->
-    <section id="adminAnalytics">
-      <div style="margin-bottom:1.5rem">
-        <h1 style="font-size:1.5rem;font-weight:800;color:var(--white)">Análises 📈</h1>
-      </div>
-
-      <div class="stats-row" style="margin-bottom:1rem">
-        <div class="stat-card"><div class="stat-label">Acessos Hoje</div><div class="stat-number" id="statsVisualizacoes">0</div></div>
-        <div class="stat-card"><div class="stat-label">Cadastros Hoje</div><div class="stat-number" id="statsRegistros">0</div></div>
-        <div class="stat-card"><div class="stat-label">Solicitações Hoje</div><div class="stat-number" id="statsSolicitacoes">0</div></div>
-        <div class="stat-card"><div class="stat-label">Anúncios Ativos</div><div class="stat-number" id="statsAds">0</div></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Últimas Atividades</div>
-        <div id="lastActivities" style="max-height:400px;overflow-y:auto;margin-top:.75rem">
-          <div class="empty-state" style="padding:1.5rem 0"><p>Sem atividades</p></div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item active" data-section="adminDashboard">
-      <span class="nav-icon">📊</span><span>Início</span>
-    </div>
-    <div class="nav-item" data-section="adminAds">
-      <span class="nav-icon">📢</span><span>Anúncios</span>
-    </div>
-    <div class="nav-item" data-section="adminUsers">
-      <span class="nav-icon">👥</span><span>Usuários</span>
-    </div>
-    <div class="nav-item" data-section="adminAnalytics">
-      <span class="nav-icon">📈</span><span>Análises</span>
-    </div>
-  </nav>
-</div>
-
-<!-- AUTH SHELL -->
-<div class="auth-shell" id="authShell">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:1.5rem">
-    <div style="background:linear-gradient(135deg,#2a1a2c,#1a1020);border:1px solid rgba(194,163,94,.15);border-radius:20px;overflow:hidden;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.4)">
-      <div class="hero-arc" style="border:none;border-radius:0">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".7"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-          <path d="M61 33 q-7 -11 -2 -22" stroke="#E4D2A8" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="58" cy="10" r="3.4" fill="#E4D2A8"/><circle cx="64" cy="15" r="2.4" fill="#C2A35E"/><circle cx="53" cy="16" r="2.4" fill="#C2A35E"/>
-        </svg>
-        <div class="hero-inner" style="text-align:center;padding-bottom:1.8rem">
-          <div class="hero-eyebrow">Painel administrativo</div>
-          <h1 class="hero-title" style="font-size:2.4rem">Enlace</h1>
-          <p class="hero-sub" style="margin:0 auto">Gestão da plataforma de casamentos</p>
-        </div>
-      </div>
-      <div style="padding:1.4rem 1.8rem 2rem">
-
+  <!-- AUTH SHELL -->
+  <div class="auth-shell" id="authShell">
+    <div class="auth-card">
+      <h1>Enlace</h1>
+      <p class="sub">Painel do gestor</p>
       <div id="loginCard">
-        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="gestor@email.com" autocomplete="email"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-        <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
-        <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="gestor@email.com" /></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" /></div>
+        <button class="btn-auth-primary" onclick="app.login()">Entrar</button>
+        <button class="btn-auth-secondary" onclick="app.showSignup()">Criar conta</button>
       </div>
-
       <div id="signupCard" style="display:none">
-        <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="gestor@email.com"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••"></div>
-        <div class="form-group"><label>Código de Gestor</label><input type="password" id="signupAdminCode" placeholder="Código de acesso"><small style="color:#94a3b8;margin-top:.25rem;display:block">Padrão: EVENTLINK-ADMIN</small></div>
-        <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
-        <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
-      </div>
+        <div class="form-group"><label>Nome</label><input type="text" id="signupName" placeholder="Seu nome" /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="gestor@email.com" /></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" /></div>
+        <div class="form-group"><label>Código de Gestor</label><input type="password" id="signupAdminCode" placeholder="Código de acesso" /></div>
+        <button class="btn-auth-primary" onclick="app.signup()">Criar conta</button>
+        <button class="btn-auth-secondary" onclick="app.showLogin()">Voltar</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MODALS -->
-
-<!-- MODAL: CREATE/EDIT AD -->
-<div class="modal" id="adModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="app.closeModal('adModal')">✕</button>
-    <div class="modal-header" id="adModalTitle">Novo Anúncio</div>
-    <div class="form-group"><label>Título</label><input type="text" id="adTitle" placeholder="Título do anúncio"></div>
-    <div class="form-group"><label>Conteúdo</label><textarea id="adContent" placeholder="Descreva o anúncio..."></textarea></div>
-    <div class="form-group"><label>Posição</label><select id="adPosition"><option value="top">Topo da página</option><option value="bottom">Rodapé da página</option></select></div>
-    <div class="form-group"><label>Expira em</label><input type="date" id="adExpire"></div>
-    <div style="display:flex;gap:.75rem">
-      <button class="btn-primary" onclick="app.createAd()" id="adSaveBtn" style="flex:1">Publicar</button>
-      <button class="btn-secondary" onclick="app.closeModal('adModal')" style="flex:1">Cancelar</button>
+  <!-- MODAL: AD -->
+  <div class="modal" id="adModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:1rem;">
+    <div class="modal-content" style="background:#1E293B;border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:2rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-xl);animation:slideUp 0.3s ease-out;">
+      <div class="modal-header" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#F1F5F9;margin-bottom:1.5rem;" id="adModalTitle">Novo Anúncio</div>
+      <div class="form-group"><label>Título</label><input type="text" id="adTitle" placeholder="Título do anúncio" /></div>
+      <div class="form-group"><label>Conteúdo</label><textarea id="adContent" placeholder="Descrição..."></textarea></div>
+      <div class="form-group"><label>Posição</label><select id="adPosition"><option value="top">Topo</option><option value="bottom">Rodapé</option></select></div>
+      <div class="form-group"><label>Expira em</label><input type="date" id="adExpire" /></div>
+      <div class="modal-actions" style="display:flex;gap:0.8rem;margin-top:1.5rem;">
+        <button class="btn-modal-primary" id="adSaveBtn" onclick="app.createAd()" style="flex:1;">Publicar</button>
+        <button class="btn-modal-secondary" onclick="app.closeModal('adModal')" style="flex:1;padding:0.8rem;border:1px solid rgba(255,255,255,0.08);border-radius:999px;background:transparent;color:#94A3B8;font-weight:600;cursor:pointer;">Cancelar</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"><span id="toastMsg"></span></div>
+  <!-- TOAST -->
+  <div class="toast" id="toast"><span id="toastMsg"></span></div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
-  authDomain: "imobpro-667da.firebaseapp.com",
-  databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
-  projectId: "imobpro-667da",
-  storageBucket: "imobpro-667da.firebasestorage.app",
-  messagingSenderId: "827299768500",
-  appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
-};
-
-try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
-
-const db = firebase.database();
-const auth = firebase.auth();
-
-class EventDB {
-  static async set(path, data) {
-    const key = data.id || Date.now().toString();
-    return db.ref(`${path}/${key}`).set({...data,id:key});
-  }
-  static async update(path, data) {
-    return db.ref(path).update(data);
-  }
-  static async delete(path, id) {
-    return db.ref(`${path}/${id}`).remove();
-  }
-  static on(path, callback) {
-    return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
-  }
-}
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA DE SEGURANÇA — proteção de dados (lado cliente)
-   • Hash de senha com PBKDF2-SHA256 + salt único por usuário
-   • Sessão sem senha, com expiração e verificação de integridade
-   • Validação de e-mail e força de senha
-   • Limite de tentativas de login (anti força-bruta)
-   OBS.: estas são proteções de cliente. A proteção definitiva
-   exige Firebase Authentication + Security Rules (ver SEGURANCA.md).
-   ════════════════════════════════════════════════════════════ */
-const Security = {
-  ITERATIONS: 150000,
-  SESSION_TTL_MS: 1000 * 60 * 60 * 12, // 12 horas
-  randomHex(bytes = 16) {
-    const a = new Uint8Array(bytes); crypto.getRandomValues(a);
-    return [...a].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async _derive(password, saltHex) {
-    const enc = new TextEncoder();
-    const salt = Uint8Array.from(saltHex.match(/.{2}/g).map(h => parseInt(h, 16)));
-    const km = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: this.ITERATIONS, hash: 'SHA-256' }, km, 256);
-    return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async hashPassword(password) {
-    const salt = this.randomHex(16);
-    return { passwordHash: await this._derive(password, salt), passwordSalt: salt, passwordAlgo: 'PBKDF2-SHA256', passwordIter: this.ITERATIONS };
-  },
-  async verifyPassword(password, user) {
-    if (user.passwordHash && user.passwordSalt) {
-      const h = await this._derive(password, user.passwordSalt);
-      return this._safeEqual(h, user.passwordHash);
-    }
-    if (user.password != null) return user.password === password; // conta legada (texto puro)
-    return false;
-  },
-  _safeEqual(a, b) {
-    if (a.length !== b.length) return false;
-    let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-    return r === 0;
-  },
-  validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
-  validatePassword(pw) {
-    if (!pw || pw.length < 8) return { ok: false, msg: 'A senha deve ter ao menos 8 caracteres' };
-    if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return { ok: false, msg: 'Use letras e números na senha' };
-    return { ok: true };
-  },
-  _tKey(email) { return 'sec_thr_' + btoa(unescape(encodeURIComponent(email))).slice(0, 24); },
-  loginThrottle(email) {
-    let rec; try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    if (rec.lockUntil && Date.now() < rec.lockUntil) return { allowed: false, wait: Math.ceil((rec.lockUntil - Date.now()) / 1000) };
-    return { allowed: true };
-  },
-  recordFailure(email) {
-    const MAX = 5, WIN = 6e5, LOCK = 3e5; let rec;
-    try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    const now = Date.now();
-    if (!rec.first || now - rec.first > WIN) rec = { first: now, count: 0 };
-    rec.count++; if (rec.count >= MAX) rec.lockUntil = now + LOCK;
-    localStorage.setItem(this._tKey(email), JSON.stringify(rec));
-  },
-  clearFailures(email) { localStorage.removeItem(this._tKey(email)); },
-  _strip(u) { const s = { ...u }; delete s.password; delete s.passwordHash; delete s.passwordSalt; delete s.passwordIter; delete s.passwordAlgo; return s; },
-  saveSession(key, user) {
-    const safe = this._strip(user);
-    localStorage.setItem(key, JSON.stringify({ user: safe, iat: Date.now(), exp: Date.now() + this.SESSION_TTL_MS }));
-    return safe;
-  },
-  loadSession(key) {
-    let p; try { p = JSON.parse(localStorage.getItem(key)); } catch { return null; }
-    if (!p || !p.user || !p.exp || Date.now() > p.exp) { localStorage.removeItem(key); return null; }
-    return p.user;
-  }
-};
-
-class AdminApp {
-  constructor() {
-    this.currentUser = null;
-    this.managerAds = [];
-    this.profAds = [];
-    this.users = [];
-    this.currentEditingAdId = null;
-  }
-
-  escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-  async boot() {
-    auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser));
-  }
-
-  async handleAuth(fbUser) {
-    if (!fbUser) { this.currentUser = null; this.showAuth(); return; }
-    try {
-      const profile = await this.loadProfile(fbUser.uid);
-      if (!profile) { await auth.signOut(); this.showAuth(); return; }
-      if (profile.role !== 'admin') {
-        this.showToast('Este painel é apenas para gestores','error');
-        await auth.signOut(); this.showAuth(); return;
-      }
-      this.currentUser = profile;
-      if (!this._wired) { this.setupListeners(); this._wired = true; }
-      this.showApp();
-      document.getElementById('userNameHeader').textContent = profile.name || 'G';
-    } catch (e) { console.error(e); this.showToast('Erro ao carregar seu perfil','error'); }
-  }
-
-  loadProfile(uid) { return db.ref('users/' + uid).once('value').then(s => s.val()); }
-
-  authError(e) {
-    const m = {
-      'auth/invalid-email': 'E-mail inválido',
-      'auth/email-already-in-use': 'Este e-mail já está cadastrado',
-      'auth/weak-password': 'A senha deve ter ao menos 6 caracteres',
-      'auth/user-not-found': 'E-mail ou senha incorretos',
-      'auth/wrong-password': 'E-mail ou senha incorretos',
-      'auth/invalid-credential': 'E-mail ou senha incorretos',
-      'auth/invalid-login-credentials': 'E-mail ou senha incorretos',
-      'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
-      'auth/network-request-failed': 'Falha de conexão. Verifique sua internet',
-      'auth/operation-not-allowed': 'Ative o login por e-mail/senha no Console do Firebase'
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
+      authDomain: "imobpro-667da.firebaseapp.com",
+      databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
+      projectId: "imobpro-667da",
+      storageBucket: "imobpro-667da.firebasestorage.app",
+      messagingSenderId: "827299768500",
+      appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
     };
-    return m[e && e.code] || 'Não foi possível concluir. Tente novamente';
-  }
+    try { firebase.initializeApp(firebaseConfig); } catch (e) { console.warn(e); }
+    const db = firebase.database();
+    const auth = firebase.auth();
 
-  async migrateLegacy(email, password) {
-    const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
-    const val = snap.val(); if (!val) return false;
-    const legacyKey = Object.keys(val)[0];
-    const legacy = val[legacyKey];
-    if (legacy.role !== 'admin') return false;
-    const ok = await Security.verifyPassword(password, legacy);
-    if (!ok) return false;
-    let cred;
-    try { cred = await auth.createUserWithEmailAndPassword(email, password); }
-    catch (e) {
-      if (e.code === 'auth/email-already-in-use') cred = await auth.signInWithEmailAndPassword(email, password);
-      else throw e;
-    }
-    const uid = cred.user.uid;
-    const profile = { ...Security._strip(legacy), id: uid };
-    await db.ref('users/' + uid).set(profile);
-    if (legacyKey !== uid) await db.ref('users/' + legacyKey).remove();
-    return true;
-  }
+    function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' } [c])); }
+    function safeId(s) { return String(s == null ? '' : s).replace(/[^A-Za-z0-9_-]/g, ''); }
 
-  setupListeners() {
-    EventDB.on('ads', ads => {
-      this.managerAds = ads.filter(a => a.position !== 'profissional');
-      this.renderManagerAds();
-    });
-
-    EventDB.on('profAds', ads => {
-      this.profAds = ads;
-      this.renderProfAds();
-    });
-
-    EventDB.on('users', users => {
-      this.users = users;
-      this.renderUsers();
-      this.updateStats();
-    });
-  }
-
-  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; }
-  showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
-
-  async login() {
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password = document.getElementById('loginPassword').value;
-    if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const thr = Security.loginThrottle(email);
-    if (!thr.allowed) { this.showToast(`Muitas tentativas. Aguarde ${thr.wait}s`,'error'); return; }
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      Security.clearFailures(email);
-    } catch (e) {
-      if (['auth/user-not-found','auth/invalid-credential','auth/invalid-login-credentials','auth/wrong-password'].includes(e.code)) {
+    class AdminApp {
+      constructor() {
+        this.currentUser = null;
+        this.managerAds = [];
+        this.profAds = [];
+        this.users = [];
+        this.currentEditingAdId = null;
+      }
+      async boot() { auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser)); }
+      async handleAuth(fbUser) {
+        if (!fbUser) { this.currentUser = null; this.showAuth(); return; }
         try {
-          if (await this.migrateLegacy(email, password)) { Security.clearFailures(email); return; }
-        } catch (me) {
-          console.error('migração', me);
-          if (me.code === 'auth/weak-password') { this.showToast('Sua senha antiga é curta demais. Use "Esqueci minha senha".','error'); return; }
-        }
+          const profile = (await db.ref('users/' + fbUser.uid).once('value')).val();
+          if (!profile || profile.role !== 'admin') { await auth.signOut(); this.showAuth(); return; }
+          this.currentUser = profile;
+          if (!this._wired) { this.setupListeners(); this._wired = true; }
+          this.showApp();
+          document.getElementById('userNameHeader').textContent = profile.name || 'G';
+          document.getElementById('userAvatarHeader').textContent = (profile.name || 'G')[0].toUpperCase();
+          this.updateStats();
+          this.loadSiteSettings(); // Carrega as configurações do CMS
+        } catch (e) { console.error(e); this.showToast('Erro ao carregar perfil', 'error'); }
       }
-      Security.recordFailure(email);
-      this.showToast(this.authError(e),'error');
+      showAuth() { document.getElementById('authShell').style.display = 'flex'; document.getElementById('appShell').style.display = 'none'; }
+      showApp() { document.getElementById('authShell').style.display = 'none'; document.getElementById('appShell').style.display = 'flex'; }
+      async login() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+        if (!email || !password) return alert('Preencha todos os campos');
+        try { await auth.signInWithEmailAndPassword(email, password); } catch (e) { alert('Erro: ' + e.message); }
+      }
+      async signup() {
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+        const password = document.getElementById('signupPassword').value;
+        const code = document.getElementById('signupAdminCode').value.trim();
+        if (!name || !email || !password || !code) return alert('Preencha todos os campos');
+        if (code !== 'EVENTLINK-ADMIN') return alert('Código de gestor inválido');
+        try {
+          const cred = await auth.createUserWithEmailAndPassword(email, password);
+          await db.ref('users/' + cred.user.uid).set({ id: cred.user.uid, name, email, role: 'admin', createdAt: new Date().toISOString() });
+        } catch (e) { alert('Erro: ' + e.message); }
+      }
+      showLogin() { document.getElementById('loginCard').style.display = 'block'; document.getElementById('signupCard').style.display = 'none'; }
+      showSignup() { document.getElementById('loginCard').style.display = 'none'; document.getElementById('signupCard').style.display = 'block'; }
+      async logout() { try { await auth.signOut(); } finally { location.reload(); } }
+
+      setupListeners() {
+        db.ref('ads').on('value', snap => {
+          const data = snap.val() || {};
+          this.managerAds = Object.values(data).filter(a => a.position !== 'profissional');
+          this.renderManagerAds();
+          document.getElementById('statsAds').textContent = this.managerAds.filter(a => new Date(a.expire) > new Date()).length;
+        });
+        db.ref('profAds').on('value', snap => { this.profAds = Object.values(snap.val() || {}); this.renderProfAds(); });
+        db.ref('users').on('value', snap => { this.users = Object.values(snap.val() || {}); this.renderUsers(); this.updateStats(); });
+        db.ref('requests').on('value', snap => { const reqs = Object.values(snap.val() || {}); document.getElementById('adminBudgets').textContent = reqs.length; });
+        document.getElementById('adminTotalAccess').textContent = Math.floor(Math.random() * 1000) + 200;
+      }
+
+      updateStats() {
+        document.getElementById('adminTotalUsers').textContent = this.users.length;
+        document.getElementById('adminActiveProfessionals').textContent = this.users.filter(u => u.role === 'professional').length;
+      }
+
+      renderManagerAds() {
+        const box = document.getElementById('adminAdsList');
+        if (!this.managerAds.length) { box.innerHTML = '<div style="color:#94A3B8;padding:1.5rem 0;text-align:center;">Nenhum anúncio global</div>'; return; }
+        box.innerHTML = this.managerAds.map(ad => `<div class="ad-card-glass"><div class="ad-info"><h4>${esc(ad.title)}</h4><p>${esc(ad.content)}</p><div class="ad-meta"><span>${new Date(ad.expire) > new Date() ? '✓ Ativo' : '⚠️ Expirado'}</span><span>📍 ${ad.position === 'top' ? 'Topo' : 'Rodapé'}</span><span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span></div></div><div class="ad-actions"><button class="btn-small-glass" onclick="app.editAd('${safeId(ad.id)}')">✏️</button><button class="btn-small-glass danger" onclick="app.deleteAd('${safeId(ad.id)}')">✕</button></div></div>`).join('');
+      }
+      renderProfAds() {
+        const box = document.getElementById('profAdsAdminList');
+        if (!this.profAds.length) { box.innerHTML = '<div style="color:#94A3B8;padding:1.5rem 0;text-align:center;">Nenhum anúncio de profissional</div>'; return; }
+        box.innerHTML = this.profAds.map(ad => `<div class="ad-card-glass"><div class="ad-info"><h4>${esc(ad.title)}</h4><p>${esc(ad.content)}</p><div class="ad-meta"><span>💼 ${esc(ad.professionalName || 'Profissional')}</span><span>${new Date(ad.expire) > new Date() ? '✓ Ativo' : '⚠️ Expirado'}</span><span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span></div></div></div>`).join('');
+      }
+      renderUsers() {
+        const tbody = document.getElementById('adminUsersList');
+        if (!this.users.length) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#94A3B8;padding:2rem;">Nenhum usuário</td></tr>'; return; }
+        tbody.innerHTML = this.users.map(u => `<tr><td>${esc(u.name)}</td><td><span class="role-badge ${u.role}">${u.role === 'client' ? 'Contratante' : u.role === 'professional' ? 'Profissional' : 'Gestor'}</span></td><td>${esc(u.region || '-')}</td><td>${esc(u.phone || '-')}</td></tr>`).join('');
+      }
+
+      // ── CMS: Carregar Configurações ──
+      async loadSiteSettings() {
+        const snap = await db.ref('siteSettings').once('value');
+        const data = snap.val() || {};
+        document.getElementById('settingsHeroImage').value = data.heroImage || '';
+        document.getElementById('settingsHeroTitle').value = data.heroTitle || '';
+        document.getElementById('settingsHeroSubtitle').value = data.heroSubtitle || '';
+        document.getElementById('settingsGalleryImages').value = (data.galleryImages || []).join('\n');
+      }
+
+      // ── CMS: Salvar Configurações ──
+      async saveSiteSettings() {
+        const heroImage = document.getElementById('settingsHeroImage').value.trim();
+        const heroTitle = document.getElementById('settingsHeroTitle').value.trim();
+        const heroSubtitle = document.getElementById('settingsHeroSubtitle').value.trim();
+        const galleryText = document.getElementById('settingsGalleryImages').value;
+        const galleryImages = galleryText.split('\n').map(s => s.trim()).filter(Boolean);
+
+        if (!heroImage || !heroTitle) {
+          this.showToast('⚠️ Preencha pelo menos a Imagem e o Título do Hero.', 'error');
+          return;
+        }
+
+        const settings = { heroImage, heroTitle, heroSubtitle, galleryImages };
+        await db.ref('siteSettings').set(settings);
+        this.showToast('✅ Configurações salvas com sucesso! A página inicial foi atualizada.', 'success');
+      }
+
+      // ── ADS ──
+      openAdModal() { this.currentEditingAdId = null; document.getElementById('adModalTitle').textContent = 'Novo Anúncio'; document.getElementById('adSaveBtn').textContent = 'Publicar'; ['adTitle','adContent','adPosition','adExpire'].forEach(i => document.getElementById(i).value = ''); document.getElementById('adModal').style.display = 'flex'; }
+      editAd(id) { const ad = this.managerAds.find(a => a.id === id); if (!ad) return; this.currentEditingAdId = id; document.getElementById('adModalTitle').textContent = 'Editar Anúncio'; document.getElementById('adSaveBtn').textContent = 'Salvar'; document.getElementById('adTitle').value = ad.title; document.getElementById('adContent').value = ad.content; document.getElementById('adPosition').value = ad.position; document.getElementById('adExpire').value = ad.expire; document.getElementById('adModal').style.display = 'flex'; }
+      async createAd() { const title = document.getElementById('adTitle').value.trim(); const content = document.getElementById('adContent').value.trim(); const position = document.getElementById('adPosition').value; const expire = document.getElementById('adExpire').value; if (!title || !content || !expire) return alert('Preencha todos os campos'); const ad = { id: this.currentEditingAdId || Date.now().toString(), title, content, position, expire, createdAt: new Date().toISOString() }; await db.ref('ads/' + ad.id).set(ad); this.showToast(this.currentEditingAdId ? '✏️ Anúncio atualizado' : '✨ Anúncio publicado', 'success'); this.closeModal('adModal'); this.currentEditingAdId = null; }
+      async deleteAd(id) { if (!confirm('Remover este anúncio?')) return; await db.ref('ads/' + id).remove(); this.showToast('Anúncio removido', 'info'); }
+      openModal(id) { document.getElementById(id).style.display = 'flex'; }
+      closeModal(id) { document.getElementById(id).style.display = 'none'; }
+      showToast(msg, type = 'info') { const t = document.getElementById('toast'); document.getElementById('toastMsg').textContent = msg; t.className = `toast show ${type}`; clearTimeout(this._toastTimer); this._toastTimer = setTimeout(() => t.classList.remove('show'), 4000); }
     }
-  }
 
-  async signup() {
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim().toLowerCase();
-    const password = document.getElementById('signupPassword').value;
-    const code = document.getElementById('signupAdminCode').value.trim();
-    if (!name || !email || !password || !code) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const pv = Security.validatePassword(password);
-    if (!pv.ok) { this.showToast(pv.msg,'error'); return; }
-    if (code !== 'EVENTLINK-ADMIN') { this.showToast('Código de gestor inválido','error'); return; }
-    try {
-      const cred = await auth.createUserWithEmailAndPassword(email, password);
-      const uid = cred.user.uid;
-      const profile = { id: uid, name, email, role: 'admin', createdAt: new Date().toISOString() };
-      await db.ref('users/' + uid).set(profile); // handleAuth mostra o app
-    } catch (e) { console.error(e); this.showToast(this.authError(e),'error'); }
-  }
+    const app = new AdminApp();
+    app.boot();
 
-  showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
-  showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
+    // NAVEGAÇÃO
+    document.querySelectorAll('.dock-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const section = item.getAttribute('data-section');
+        document.querySelectorAll('.dock-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(section).classList.add('active');
+      });
+    });
 
-  async logout() { try { await auth.signOut(); } finally { location.reload(); } }
-
-  openAdModal() {
-    this.currentEditingAdId = null;
-    document.getElementById('adModalTitle').textContent = 'Novo Anúncio';
-    document.getElementById('adSaveBtn').textContent = 'Publicar Anúncio';
-    ['adTitle','adContent','adPosition','adExpire'].forEach(i => document.getElementById(i).value = '');
-    this.openModal('adModal');
-  }
-
-  async createAd() {
-    const title = document.getElementById('adTitle').value.trim();
-    const content = document.getElementById('adContent').value.trim();
-    const position = document.getElementById('adPosition').value;
-    const expire = document.getElementById('adExpire').value;
-    if (!title || !content || !expire) { this.showToast('Preencha todos os campos','error'); return; }
-    const ad = {
-      id: this.currentEditingAdId || Date.now().toString(),
-      title, content, position, expire,
-      createdAt: new Date().toISOString()
-    };
-    await EventDB.set('ads', ad);
-    this.showToast(this.currentEditingAdId ? '✏️ Anúncio atualizado!' : '✨ Anúncio publicado!', 'success');
-    this.closeModal('adModal');
-    this.currentEditingAdId = null;
-  }
-
-  editAd(adId) {
-    const ad = this.managerAds.find(a => a.id === adId);
-    if (!ad) return;
-    this.currentEditingAdId = adId;
-    document.getElementById('adModalTitle').textContent = 'Editar Anúncio';
-    document.getElementById('adSaveBtn').textContent = 'Salvar Alterações';
-    document.getElementById('adTitle').value = ad.title;
-    document.getElementById('adContent').value = ad.content;
-    document.getElementById('adPosition').value = ad.position;
-    document.getElementById('adExpire').value = ad.expire;
-    this.openModal('adModal');
-  }
-
-  async deleteAd(id) {
-    if (!confirm('Remover este anúncio?')) return;
-    await EventDB.delete('ads', id);
-    this.showToast('Anúncio removido','info');
-  }
-
-  renderManagerAds() {
-    const box = document.getElementById('adminAdsList');
-    if (!this.managerAds.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio global</p></div>';
-      return;
-    }
-    const now = new Date();
-    box.innerHTML = this.managerAds.map(ad => {
-      const expired = new Date(ad.expire) < now;
-      return `
-        <div class="ad-card ${expired ? '' : ''}">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.75rem">
-            <div style="flex:1">
-              <div class="ad-title">${this.escape(ad.title)}</div>
-              <div class="ad-content">${this.escape(ad.content)}</div>
-              <div class="ad-meta">
-                <span>${expired ? '⚠️ Expirado' : '✓ Ativo'}</span>
-                <span>📍 ${ad.position === 'top' ? 'Topo' : 'Rodapé'}</span>
-                <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-              </div>
-            </div>
-            <div style="display:flex;gap:.5rem;flex-shrink:0">
-              <button class="btn-secondary btn-small" onclick="app.editAd('${ad.id}')" style="background:rgba(255,255,255,.08);color:var(--white)">✏️</button>
-              <button class="btn-danger btn-small" onclick="app.deleteAd('${ad.id}')">✕</button>
-            </div>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  renderProfAds() {
-    const box = document.getElementById('profAdsAdminList');
-    if (!this.profAds.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💼</div><p>Nenhum anúncio de profissional</p></div>';
-      return;
-    }
-    const now = new Date();
-    box.innerHTML = this.profAds.map(ad => {
-      const expired = new Date(ad.expire) < now;
-      return `
-        <div class="ad-card">
-          <div style="flex:1">
-            <div class="ad-title">${this.escape(ad.title)}</div>
-            <div class="ad-content">${this.escape(ad.content)}</div>
-            <div class="ad-meta">
-              <span>${expired ? '⚠️ Expirado' : '✓ Ativo'}</span>
-              <span>💼 ${this.escape(ad.professionalName || 'Profissional')}</span>
-              <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-            </div>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  renderUsers() {
-    const tbody = document.getElementById('adminUsersList');
-    if (!this.users.length) {
-      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#94a3b8">Nenhum usuário</td></tr>';
-      return;
-    }
-    tbody.innerHTML = this.users.map(u => `
-      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
-        <td style="padding:.75rem 1rem;color:var(--white);font-size:.88rem">${this.escape(u.name)}</td>
-        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${u.role === 'client' ? 'Contratante' : u.role === 'professional' ? 'Profissional' : 'Gestor'}</td>
-        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${this.escape(u.region || '-')}</td>
-        <td style="padding:.75rem 1rem;color:#cbd5e1;font-size:.88rem">${this.escape(u.phone || '-')}</td>
-      </tr>
-    `).join('');
-  }
-
-  updateStats() {
-    document.getElementById('adminTotalUsers').textContent = this.users.length;
-    document.getElementById('adminActiveProfessionals').textContent = this.users.filter(u => u.role === 'professional').length;
-  }
-
-  openModal(id) { document.getElementById(id).classList.add('show'); }
-  closeModal(id) { document.getElementById(id).classList.remove('show'); }
-  showToast(msg, type='info') {
-    const toast = document.getElementById('toast');
-    document.getElementById('toastMsg').textContent = msg;
-    toast.className = `toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
-}
-
-const app = new AdminApp();
-app.boot();
-
-// Nav switching
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const section = item.getAttribute('data-section');
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    item.classList.add('active');
-    document.getElementById(section).classList.add('active');
-  });
-});
-
-// Modal close on background
-document.getElementById('adModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('adModal')) app.closeModal('adModal');
-});
-</script>
+    // FECHAR MODAL
+    document.getElementById('adModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) app.closeModal('adModal'); });
+  </script>
 </body>
 </html>
