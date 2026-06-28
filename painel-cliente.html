@@ -1,931 +1,984 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no">
-<title>Enlace · Noivos</title>
-<link rel="manifest" href="manifest-cliente.json">
-<meta name="theme-color" content="#6E2A52">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#6E2A52;--primary-light:#8A3D63;--primary-dark:#45203A;
-  --secondary:#B5658A;--accent:#C2A35E;
-  --gold:#C2A35E;--gold-soft:#E4D2A8;--blush:#F4E6EC;--ivory:#FBF7F3;--ink:#2C2230;
-  --success:#4F8A6B;--danger:#C2453F;--warning:#C98A3A;
-  --dark:#2C2230;--dark-light:#3A2C3D;--dark-lighter:#4A3A4D;
-  --gray-700:#5A4E58;--gray-600:#7A6E76;--gray-500:#9A8E96;
-  --gray-300:#DDD2D8;--gray-200:#E7DCE2;--gray-100:#EFE7EB;--gray-50:#FBF7F3;
-  --white:#FFFFFF;
-  --shadow-sm:0 1px 3px rgba(15,23,42,0.10);
-  --shadow:0 4px 6px rgba(15,23,42,0.10);
-  --shadow-md:0 10px 15px rgba(15,23,42,0.10);
-  --shadow-lg:0 20px 25px rgba(15,23,42,0.15);
-  --shadow-xl:0 40px 50px rgba(15,23,42,0.2);
-  --transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  --nav-h:64px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --safe-top:env(safe-area-inset-top,0px);
-}
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(180deg,#FBF7F3 0%,#F5EAE3 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <title>Enlace · Meu Planejamento</title>
+  <link rel="manifest" href="manifest-cliente.json" />
+  <meta name="theme-color" content="#6E2A52" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ── HEADER ── */
-header{background:var(--white);border-bottom:1px solid var(--gray-100);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);padding-top:calc(.75rem + var(--safe-top))}
-.header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(110,42,82,.2)}
-.header-right{display:flex;align-items:center;gap:.6rem}
-.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
-.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent))}
+    :root {
+      --primary: #6E2A52;
+      --primary-light: #8A3D63;
+      --primary-dark: #45203A;
+      --secondary: #B5658A;
+      --gold: #C2A35E;
+      --gold-soft: #E4D2A8;
+      --blush: #F4E6EC;
+      --ivory: #FBF7F3;
+      --ink: #1A1620;
+      --gray-700: #5A4E58;
+      --gray-600: #7A6E76;
+      --gray-500: #9A8E96;
+      --gray-200: #E7DCE2;
+      --gray-100: #EFE7EB;
+      --white: #FFFFFF;
+      --success: #4F8A6B;
+      --danger: #C2453F;
+      --warning: #C98A3A;
+      --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06);
+      --shadow-xl: 0 20px 60px rgba(26, 22, 32, 0.12);
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-/* ── BUTTONS ── */
-button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px}
-.btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);box-shadow:0 4px 15px rgba(110,42,82,.25);border:none}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(110,42,82,.35)}
-.btn-primary:active{transform:scale(.98)}
-.btn-secondary{background:var(--gray-100);color:var(--dark);border:1px solid var(--gray-200)}
-.btn-secondary:hover{background:var(--gray-200)}
-.btn-danger{background:linear-gradient(135deg,#C2453F,#A83A35);color:var(--white)}
-.btn-danger:hover{transform:translateY(-2px)}
-.btn-success{background:linear-gradient(135deg,#4F8A6B,#3F7257);color:var(--white)}
-.btn-success:hover{transform:translateY(-2px)}
-.btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
+    html,
+    body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ── MAIN / CONTENT ── */
-#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+    /* ── SIDEBAR / HEADER FLUTUANTE ── */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      position: relative;
+    }
 
-/* ── AUTH SHELL (tela de login/cadastro) ── */
-.auth-shell{flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow-y:auto}
-.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
-section{display:none}
-section.active{display:block;animation:fadeIn .3s ease-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    /* Top Bar flutuante */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 80px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: var(--shadow-glass);
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+    }
+    .top-bar .greeting {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-bar .greeting h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .top-bar .greeting h2 span {
+      color: var(--primary);
+    }
+    .top-bar .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar-glass {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(110, 42, 82, 0.2);
+    }
+    .btn-logout-glass {
+      background: transparent;
+      border: none;
+      color: var(--gray-500);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+    .btn-logout-glass:hover {
+      background: rgba(194, 69, 63, 0.1);
+      color: var(--danger);
+    }
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--white);border-top:1px solid var(--gray-100);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:var(--gray-500);font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
-.nav-item:active{opacity:.7}
-.nav-item.active{color:var(--primary);transform:translateY(-2px)}
-.nav-item .nav-icon{font-size:1.35rem;line-height:1}
+    /* ── SEARCH BAR STICKY ── */
+    .search-sticky {
+      background: var(--white);
+      border-radius: 60px;
+      padding: 0.3rem 0.3rem 0.3rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-glass);
+      border: 1px solid var(--gray-100);
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+    }
+    .search-sticky input {
+      border: none;
+      flex: 1;
+      padding: 0.8rem 0;
+      font-size: 0.95rem;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      color: var(--ink);
+    }
+    .search-sticky input::placeholder {
+      color: var(--gray-500);
+    }
+    .search-sticky button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .search-sticky button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(110, 42, 82, 0.3);
+    }
 
-/* ── CARDS ── */
-.card{background:var(--white);border-radius:14px;padding:1.25rem;box-shadow:var(--shadow);margin-bottom:1rem;border:1px solid var(--gray-100);transition:var(--transition)}
-.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--primary)}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
+    /* ── STATS CHIPS ── */
+    .stats-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-shrink: 0;
+    }
+    .stat-chip {
+      background: var(--white);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-glass);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .stat-chip .num {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
 
-/* ── PROFESSIONAL CARDS (CLICKABLE) ── */
-.professional-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:.75rem;border:1.5px solid var(--gray-100);transition:var(--transition);cursor:pointer}
-.professional-card:hover{box-shadow:var(--shadow-lg);border-color:var(--primary);transform:translateY(-4px)}
-.professional-card.selected{border-color:var(--primary);background:rgba(110,42,82,.02)}
-.professional-header{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);color:var(--white);padding:1rem;display:flex;align-items:center;gap:.75rem}
-.professional-avatar{width:52px;height:52px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;backdrop-filter:blur(10px)}
-.professional-name{font-size:1rem;font-weight:700}
-.professional-body{padding:1rem}
-.professional-specialties{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
-.specialty-chip{background:linear-gradient(135deg,rgba(110,42,82,.1),rgba(194,163,94,.1));color:var(--primary);padding:.3rem .65rem;border-radius:6px;font-size:.78rem;font-weight:600;border:1px solid rgba(110,42,82,.2)}
-.professional-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--gray-100)}
+    /* ── LAYOUT PRINCIPAL (MASONRY + TIMELINE) ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 2rem;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
 
-/* ── STAT CARDS ── */
-.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(110,42,82,.2);transition:var(--transition)}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(110,42,82,.3)}
-.stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
-.stat-label{font-size:.8rem;opacity:.9}
+    /* Coluna Esquerda: Fornecedores (Masonry) */
+    .vendor-masonry {
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      /* Simula masonry com colunas CSS */;
+    }
+    .vendor-masonry .masonry-grid {
+      column-count: 2;
+      column-gap: 1.5rem;
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.2rem;
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow-glass);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--gold);
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry .monogram {
+      width: 48px;
+      height: 48px;
+      background: var(--blush);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry p {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      margin: 0.3rem 0;
+    }
+    .vendor-masonry .masonry-grid .vendor-card-masonry .price-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
 
-/* ── MODALS ── */
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:1rem}
-.modal.show{display:flex;animation:modalFadeIn .3s ease-out}
-@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
-.modal-content{background:var(--white);border-radius:16px;padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:modalSlideUp .3s ease-out}
-@keyframes modalSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-header{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--dark)}
-.modal-close{position:absolute;top:1rem;right:1rem;background:var(--gray-100);border:none;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition)}
-.modal-close:hover{background:var(--gray-200)}
+    /* Coluna Direita: Timeline de Solicitações */
+    .activity-timeline {
+      overflow-y: auto;
+      padding-left: 0.5rem;
+      border-left: 2px dashed var(--gray-200);
+    }
+    .timeline-item {
+      position: relative;
+      padding-left: 1.5rem;
+      padding-bottom: 1.8rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-item .date {
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .timeline-item .content {
+      background: var(--white);
+      padding: 0.8rem 1rem;
+      border-radius: 14px;
+      box-shadow: var(--shadow-glass);
+      border: 1px solid var(--gray-100);
+      margin-top: 0.2rem;
+    }
+    .timeline-item .content strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+    .timeline-item .content .meta {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .badge-status {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+    .badge-status.pending {
+      background: var(--warning);
+      color: white;
+    }
+    .badge-status.active {
+      background: var(--primary);
+      color: white;
+    }
+    .badge-status.completed {
+      background: var(--success);
+      color: white;
+    }
 
-/* ── FORMS ── */
-.form-group{margin-bottom:1rem}
-label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--dark);font-size:.9rem}
-input,textarea,select{width:100%;padding:.8rem;border:1.5px solid var(--gray-300);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:var(--white);color:var(--dark)}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(110,42,82,.1)}
-textarea{resize:vertical;min-height:100px}
+    /* ── DOCK FLUTUANTE (macOS style) ── */
+    .dock-floating {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 40px rgba(26, 22, 32, 0.12);
+      display: flex;
+      padding: 0.4rem 0.6rem;
+      gap: 0.2rem;
+      z-index: 999;
+    }
+    .dock-item {
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .dock-item .icon {
+      font-size: 1.2rem;
+    }
+    .dock-item.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 16px rgba(110, 42, 82, 0.3);
+    }
+    .dock-item:not(.active):hover {
+      background: rgba(110, 42, 82, 0.08);
+      color: var(--ink);
+    }
 
-/* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600}
-.badge-success{background:rgba(16,185,129,.12);color:var(--success)}
-.badge-warning{background:rgba(245,158,11,.12);color:var(--warning)}
-.badge-danger{background:rgba(239,68,68,.12);color:var(--danger)}
-.badge-primary{background:rgba(110,42,82,.12);color:var(--primary)}
+    /* ── MODAL E TOAST (mantidos) ── */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 22, 32, 0.4);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--white);
+      border-radius: 32px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+    }
+    .modal-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(110, 42, 82, 0.1);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .modal-actions button {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .modal-actions .btn-primary-modal {
+      background: var(--primary);
+      color: white;
+    }
+    .modal-actions .btn-primary-modal:hover {
+      transform: scale(1.02);
+    }
+    .modal-actions .btn-secondary-modal {
+      background: var(--gray-100);
+      color: var(--ink);
+    }
 
-/* ── EMPTY STATE ── */
-.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--gray-500)}
-.empty-icon{font-size:3rem;margin-bottom:.75rem}
-.empty-state p{margin-bottom:.5rem;font-size:.95rem}
+    .toast {
+      position: fixed;
+      bottom: 8rem;
+      right: 2rem;
+      background: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      box-shadow: var(--shadow-xl);
+      border-left: 4px solid var(--primary);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 2000;
+    }
+    .toast.show {
+      display: flex;
+    }
+    .toast.success {
+      border-left-color: var(--success);
+    }
+    .toast.error {
+      border-left-color: var(--danger);
+    }
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 1rem);right:1rem;background:var(--white);padding:1rem 1.25rem;border-radius:10px;box-shadow:var(--shadow-lg);z-index:400;display:none;gap:.75rem;align-items:center;animation:slideUp .3s ease-out}
-.toast.show{display:flex}
-@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}
-.toast.success{border-left:4px solid var(--success)}
-.toast.error{border-left:4px solid var(--danger)}
-.toast.info{border-left:4px solid var(--primary)}
+    /* ── RESPONSIVE ── */
+    @media (max-width: 968px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+      }
+      .activity-timeline {
+        border-left: none;
+        padding-left: 0;
+      }
+      .vendor-masonry .masonry-grid {
+        column-count: 1;
+      }
+      .dock-floating {
+        bottom: 1rem;
+        padding: 0.2rem 0.4rem;
+        gap: 0;
+        width: 90%;
+        justify-content: space-around;
+      }
+      .dock-item {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+      }
+      .dock-item .icon {
+        font-size: 1rem;
+      }
+      .dock-item span:not(.icon) {
+        display: none;
+      }
+      .top-bar {
+        flex-wrap: wrap;
+        border-radius: 30px;
+        padding: 0.8rem 1rem;
+        gap: 0.5rem;
+      }
+      .search-sticky {
+        flex-wrap: wrap;
+        border-radius: 30px;
+        padding: 0.5rem 1rem;
+        background: transparent;
+        box-shadow: none;
+        border: 1px solid var(--gray-200);
+        background: white;
+      }
+      .search-sticky input {
+        width: 100%;
+      }
+      .search-sticky button {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.3rem;
+      }
+      .stats-chips {
+        gap: 0.5rem;
+      }
+      .stat-chip {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.75rem;
+      }
+    }
 
-@media(min-width:768px){
-  .stats-row{grid-template-columns:repeat(4,1fr)}
-  .professionals-grid{grid-template-columns:repeat(2,1fr)}
-  #professionalsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-  #professionalsGrid .professional-card{margin-bottom:0}
-}
-
-/* ══ DESKTOP: vira um sistema com sidebar lateral ══ */
-@media(min-width:1024px){
-  body{overscroll-behavior:auto}
-  #appShell{flex-direction:row}
-  .bottom-nav{
-    position:relative;order:-1;flex-direction:column;align-items:stretch;
-    width:250px;height:auto;flex-shrink:0;padding:1.25rem .85rem;gap:.35rem;
-    border-top:none;border-right:1px solid var(--gray-100);box-shadow:none;
-    background:var(--white);
-  }
-  .bottom-nav::before{
-    content:"Navegação";display:block;font-size:.7rem;font-weight:700;
-    text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500);
-    padding:.25rem 1rem .65rem;
-  }
-  .nav-item{
-    flex-direction:row;justify-content:flex-start;gap:.85rem;padding:.75rem 1rem;
-    border-radius:12px;font-size:.92rem;font-weight:600;text-transform:none;
-    letter-spacing:normal;min-height:46px;color:var(--gray-700);
-  }
-  .nav-item .nav-icon{font-size:1.2rem}
-  .nav-item:hover{background:var(--gray-50);color:var(--dark)}
-  .nav-item.active{transform:none;background:rgba(110,42,82,.1);color:var(--primary)}
-  .content-area{max-width:1120px;padding:2.25rem 2.75rem;margin:0 auto}
-  .stats-row{grid-template-columns:repeat(4,1fr);gap:1rem}
-  #professionalsGrid{grid-template-columns:repeat(3,1fr)}
-  .toast{bottom:1.5rem}
-}
-@media(min-width:1440px){
-  .content-area{max-width:1280px}
-}
-
-/* ══ IDENTIDADE ENLACE — tipografia editorial, hero em arco, busca, cards ══ */
-h1,.card-title,.modal-header{font-family:'Cormorant Garamond',serif;letter-spacing:.005em;line-height:1.14}
-.logo{font-size:1.5rem;letter-spacing:.01em}
-.logo-icon{background:linear-gradient(135deg,var(--primary),var(--gold))}
-.role-pill{background:linear-gradient(135deg,var(--primary),var(--secondary))}
-
-/* hero em arco */
-.hero-arc{position:relative;overflow:hidden;background:linear-gradient(150deg,#7d2f5b 0%,var(--primary-dark) 70%,#37142c 100%);color:var(--white)}
-.hero-arc .hero-inner{position:relative;z-index:2;padding:1.4rem 1.5rem 2.6rem}
-.hero-arc::after{content:"";position:absolute;left:-8%;right:-8%;bottom:-2px;height:46px;background:var(--ivory);border-radius:50% 50% 0 0/100% 100% 0 0;z-index:1}
-.hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);font-weight:600;margin-bottom:.4rem}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1.08;margin-bottom:.4rem}
-.hero-sub{font-size:.95rem;color:rgba(255,255,255,.82);max-width:40ch}
-.hero-rings{position:absolute;right:-12px;top:-6px;width:150px;height:150px;opacity:.9;z-index:1}
-.hero-sprig{position:absolute;left:-10px;bottom:34px;width:120px;opacity:.5;z-index:1}
-
-/* busca em pílula */
-.search-pill{display:flex;align-items:center;gap:.55rem;background:var(--white);border:1.5px solid var(--gray-200);border-radius:999px;padding:.15rem .2rem .15rem 1.05rem;box-shadow:0 6px 18px rgba(110,42,82,.08);margin-bottom:.7rem}
-.search-pill .si{font-size:1.05rem;flex-shrink:0;opacity:.7}
-.search-pill input,.search-pill select{border:none!important;box-shadow:none!important;padding:.75rem .25rem;background:transparent;border-radius:999px}
-.search-pill input:focus,.search-pill select:focus{outline:none;box-shadow:none!important}
-.btn-cta{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:999px;box-shadow:0 8px 20px rgba(110,42,82,.25);width:100%}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,42,82,.32)}
-
-/* card de fornecedor (estilo marketplace) */
-.vendor-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--gray-100);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;margin-bottom:1rem}
-.vendor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
-.vendor-media{position:relative;aspect-ratio:16/10;min-height:130px;background:linear-gradient(135deg,var(--blush),#ecd3dc)}
-.vendor-monogram{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--primary);opacity:.85}
-.vendor-cat{position:absolute;top:.6rem;left:.6rem;background:rgba(255,255,255,.92);color:var(--primary);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.28rem .65rem;border-radius:999px}
-.vendor-fav{position:absolute;top:.55rem;right:.55rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--secondary);font-size:.95rem}
-.vendor-body{padding:.95rem 1.05rem 1.1rem}
-.vendor-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--ink);line-height:1.08;margin-bottom:.2rem}
-.vendor-rating{display:flex;align-items:center;gap:.35rem;font-size:.82rem;color:var(--gray-600);margin-bottom:.55rem}
-.vendor-stars{color:var(--gold);letter-spacing:1px}
-.vendor-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem}
-.vendor-desc{font-size:.86rem;color:var(--gray-600);line-height:1.5;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.vendor-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.7rem;border-top:1px solid var(--gray-100)}
-.vendor-price{font-size:.82rem;color:var(--gray-600)}
-.vendor-price b{color:var(--ink);font-size:.95rem}
-.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%)}
-.specialty-chip{background:var(--blush);color:var(--primary);border:1px solid rgba(110,42,82,.15)}
-
-</style>
+    /* ── AUTH (mesmo estilo criativo) ── */
+    .auth-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(145deg, var(--ivory), #f5eae3);
+      padding: 1.5rem;
+    }
+    .auth-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 48px;
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .auth-card h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    .auth-card .sub {
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+    }
+    .auth-card .form-group input {
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+    }
+    .auth-card .btn-primary-auth {
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .auth-card .btn-primary-auth:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(110, 42, 82, 0.3);
+    }
+    .auth-card .btn-ghost-auth {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid var(--gray-200);
+      background: transparent;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: var(--transition);
+    }
+    .auth-card .btn-ghost-auth:hover {
+      background: var(--gray-100);
+    }
+    #authShell {
+      display: none;
+    }
+    #appShell {
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-container">
-    <a href="index.html" class="logo">
-      <div class="logo-icon">♥</div>
-      <span>Enlace</span>
-      <span class="role-pill">Noivos</span>
-    </a>
-    <div class="header-right">
-      <div class="user-avatar" id="userAvatarHeader">C</div>
-      <span id="userNameHeader" style="font-size:.85rem;font-weight:600;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
-      <button class="btn-logout" onclick="app.logout()" style="background:none;color:var(--danger);font-weight:600;padding:.4rem .7rem;min-height:36px;font-size:.8rem;border:none;cursor:pointer">Sair</button>
-    </div>
-  </div>
-</header>
-
-<!-- APP SHELL -->
-<div id="appShell" style="display:none">
-  <div class="content-area" id="contentArea">
-
-    <!-- DASHBOARD -->
-    <section id="clientDashboard" class="active">
-      <!-- HERO COM BUSCA -->
-      <div class="hero-arc" style="border-radius:18px;margin-bottom:1.25rem">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="right:-18px;top:-10px;width:130px;height:130px">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".85"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-        </svg>
-        <div class="hero-inner" style="padding-bottom:1.5rem">
-          <div class="hero-eyebrow">Olá, <span id="dashboardName">Noivos</span></div>
-          <div class="hero-title">Encontre tudo para o seu casamento</div>
-          <p class="hero-sub" id="heroSubCount">Fornecedores selecionados para o seu grande dia</p>
-          <div style="margin-top:1rem">
-            <div class="search-pill" style="margin-bottom:.55rem">
-              <span class="si">🔍</span>
-              <input type="text" id="heroKeyword" placeholder="O que você procura? (foto, buffet, decoração...)">
-            </div>
-            <div class="search-pill" style="margin-bottom:.7rem">
-              <span class="si">📍</span>
-              <input type="text" id="heroRegion" placeholder="Cidade ou estado">
-            </div>
-            <button class="btn-cta" onclick="app.heroSearch()">Pesquisar fornecedores</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATS -->
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Fornecedores</div><div class="stat-number" id="statProf">0</div></div>
-        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="statReqs">0</div></div>
-        <div class="stat-card"><div class="stat-label">Em andamento</div><div class="stat-number" id="statActive">0</div></div>
-        <div class="stat-card"><div class="stat-label">Concluídas</div><div class="stat-number" id="statDone">0</div></div>
-      </div>
-
-      <!-- FORNECEDORES EM DESTAQUE -->
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <div class="card-title" style="margin-bottom:0">Fornecedores em destaque</div>
-          <a href="#" onclick="document.querySelector('[data-section=\"searchProfessionals\"]').click(); return false;" style="font-size:.8rem;color:var(--primary);text-decoration:none;font-weight:600">Ver todos →</a>
-        </div>
-        <div id="featuredProfsList"></div>
-      </div>
-
-      <!-- SOLICITAÇÕES RECENTES -->
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <div class="card-title" style="margin-bottom:0">Minhas solicitações</div>
-        </div>
-        <div id="recentRequestsList"></div>
-      </div>
-    </section>
-
-    <!-- BUSCAR PROFISSIONAIS -->
-    <section id="searchProfessionals">
-      <div class="page-header" style="margin-bottom:1.25rem">
-        <div><h1 style="font-size:2rem;color:var(--ink)">Fornecedores</h1></div>
-        <button class="btn-primary" onclick="app.openRequestModal()">+ Nova solicitação</button>
-      </div>
-
-      <!-- FILTROS -->
-      <div class="search-pill">
-        <span class="si">🔍</span>
-        <input type="text" id="searchKeyword" placeholder="Buscar por nome ou categoria..." onkeyup="if(event.key==='Enter')app.filterProfessionals()">
-        <button class="btn-cta" style="width:auto;padding:.6rem 1.3rem" onclick="app.filterProfessionals()">Buscar</button>
-      </div>
-
-      <!-- LISTA DE FORNECEDORES -->
-      <div id="professionalsGrid"></div>
-    </section>
-
-    <!-- SOLICITAÇÕES -->
-    <section id="myRequests">
-      <div class="page-header" style="margin-bottom:1.5rem">
-        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--dark)">Minhas Solicitações 📨</h1></div>
-        <button class="btn-primary" onclick="app.openRequestModal()">+ Nova</button>
-      </div>
-      <div id="requestsFullList"></div>
-    </section>
-
-    <!-- PERFIL -->
-    <section id="clientProfile">
-      <div style="margin-bottom:1.5rem">
-        <h1 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">Meu Perfil</h1>
-        <p style="color:var(--gray-600);font-size:.95rem">Atualize suas informações pessoais</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Informações Básicas</div>
-        <div class="form-group"><label>Nome Completo</label><input type="text" id="profileName" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="profileEmail" placeholder="seu@email.com" readonly></div>
-        <div class="form-group"><label>Telefone</label><input type="tel" id="profilePhone" placeholder="(00) 99999-9999"></div>
-        <div class="form-group"><label>Cidade/Região</label><input type="text" id="profileRegion" placeholder="Maceió, AL"></div>
-        <button class="btn-primary" onclick="app.saveProfile()" style="width:100%;margin-top:1rem">💾 Salvar Alterações</button>
-      </div>
-    </section>
-
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item active" data-section="clientDashboard">
-      <span class="nav-icon">📊</span><span>Início</span>
-    </div>
-    <div class="nav-item" data-section="searchProfessionals">
-      <span class="nav-icon">🔍</span><span>Buscar</span>
-    </div>
-    <div class="nav-item" data-section="myRequests" id="navRequests">
-      <span class="nav-icon">📨</span><span>Pedidos</span>
-    </div>
-    <div class="nav-item" data-section="clientProfile">
-      <span class="nav-icon">👤</span><span>Perfil</span>
-    </div>
-  </nav>
-</div>
-
-<!-- AUTH SHELL -->
-<div class="auth-shell" id="authShell">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:1.5rem">
-    <div style="background:var(--white);border-radius:20px;overflow:hidden;max-width:420px;width:100%;box-shadow:var(--shadow-lg)">
-      <div class="hero-arc">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".9"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-          <path d="M61 33 q-7 -11 -2 -22" stroke="#E4D2A8" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="58" cy="10" r="3.4" fill="#E4D2A8"/><circle cx="64" cy="15" r="2.4" fill="#C2A35E"/><circle cx="53" cy="16" r="2.4" fill="#C2A35E"/>
-        </svg>
-        <div class="hero-inner" style="text-align:center;padding-bottom:2.6rem">
-          <div class="hero-eyebrow">Marketplace de casamentos</div>
-          <h1 class="hero-title" style="font-size:2.4rem">Enlace</h1>
-          <p class="hero-sub" style="margin:0 auto">Encontre os fornecedores do seu grande dia</p>
-        </div>
-      </div>
-      <div style="padding:1.4rem 1.8rem 2rem">
-
+  <!-- AUTH SHELL -->
+  <div class="auth-shell" id="authShell">
+    <div class="auth-card">
+      <h1>Enlace</h1>
+      <p class="sub">Planeje seu casamento com os melhores.</p>
       <div id="loginCard">
-        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-        <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
-        <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
+        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" /></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" /></div>
+        <button class="btn-primary-auth" onclick="app.login()">Entrar</button>
+        <button class="btn-ghost-auth" onclick="app.showSignup()">Criar conta</button>
       </div>
-
       <div id="signupCard" style="display:none">
-        <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
-        <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
-        <div class="form-group"><label>Cidade/Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
-        <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
-        <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
-      </div>
+        <div class="form-group"><label>Nome</label><input type="text" id="signupName" placeholder="Seu nome" /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" /></div>
+        <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" /></div>
+        <div class="form-group"><label>Cidade</label><input type="text" id="signupRegion" placeholder="Maceió, AL" /></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" /></div>
+        <button class="btn-primary-auth" onclick="app.signup()">Criar conta</button>
+        <button class="btn-ghost-auth" onclick="app.showLogin()">Voltar</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MODALS -->
+  <!-- APP SHELL -->
+  <div id="appShell">
+    <div class="app-container">
 
-<!-- MODAL: CREATE REQUEST -->
-<div class="modal" id="requestModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="app.closeModal('requestModal')">✕</button>
-    <div class="modal-header">Nova Solicitação 📨</div>
-    <div class="form-group"><label>Descrição do Serviço</label><input type="text" id="requestDesc" placeholder="Ex: Fotografia de casamento"></div>
-    <div class="form-group"><label>Data do Evento</label><input type="date" id="requestDate"></div>
-    <div class="form-group"><label>Local</label><input type="text" id="requestLocation" placeholder="Cidade, bairro ou endereço"></div>
-    <div class="form-group"><label>Orçamento (R$)</label><input type="number" id="requestBudget" placeholder="1000" min="100"></div>
-    <div class="form-group"><label>Detalhes Adicionais</label><textarea id="requestDetails" placeholder="Descreva melhor o que você precisa..."></textarea></div>
-    <div style="display:flex;gap:.75rem">
-      <button class="btn-primary" onclick="app.createRequest()" style="flex:1">Enviar Solicitação</button>
-      <button class="btn-secondary" onclick="app.closeModal('requestModal')" style="flex:1">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: PROFESSIONAL DETAILS -->
-<div class="modal" id="professionalModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="app.closeModal('professionalModal')">✕</button>
-    <div id="professionalDetails"></div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"><span id="toastMsg"></span></div>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
-  authDomain: "imobpro-667da.firebaseapp.com",
-  databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
-  projectId: "imobpro-667da",
-  storageBucket: "imobpro-667da.firebasestorage.app",
-  messagingSenderId: "827299768500",
-  appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
-};
-
-try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
-
-const db = firebase.database();
-const auth = firebase.auth();
-
-class EventDB {
-  static async set(path, data) {
-    const key = data.id || Date.now().toString();
-    return db.ref(`${path}/${key}`).set({...data,id:key});
-  }
-  static async update(path, data) {
-    return db.ref(path).update(data);
-  }
-  static async delete(path, id) {
-    return db.ref(`${path}/${id}`).remove();
-  }
-  static on(path, callback) {
-    return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
-  }
-}
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA DE SEGURANÇA — proteção de dados (lado cliente)
-   • Hash de senha com PBKDF2-SHA256 + salt único por usuário
-   • Sessão sem senha, com expiração e verificação de integridade
-   • Validação de e-mail e força de senha
-   • Limite de tentativas de login (anti força-bruta)
-   OBS.: estas são proteções de cliente. A proteção definitiva
-   exige Firebase Authentication + Security Rules (ver SEGURANCA.md).
-   ════════════════════════════════════════════════════════════ */
-const Security = {
-  ITERATIONS: 150000,
-  SESSION_TTL_MS: 1000 * 60 * 60 * 12, // 12 horas
-  randomHex(bytes = 16) {
-    const a = new Uint8Array(bytes); crypto.getRandomValues(a);
-    return [...a].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async _derive(password, saltHex) {
-    const enc = new TextEncoder();
-    const salt = Uint8Array.from(saltHex.match(/.{2}/g).map(h => parseInt(h, 16)));
-    const km = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: this.ITERATIONS, hash: 'SHA-256' }, km, 256);
-    return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async hashPassword(password) {
-    const salt = this.randomHex(16);
-    return { passwordHash: await this._derive(password, salt), passwordSalt: salt, passwordAlgo: 'PBKDF2-SHA256', passwordIter: this.ITERATIONS };
-  },
-  async verifyPassword(password, user) {
-    if (user.passwordHash && user.passwordSalt) {
-      const h = await this._derive(password, user.passwordSalt);
-      return this._safeEqual(h, user.passwordHash);
-    }
-    if (user.password != null) return user.password === password; // conta legada (texto puro)
-    return false;
-  },
-  _safeEqual(a, b) {
-    if (a.length !== b.length) return false;
-    let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-    return r === 0;
-  },
-  validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
-  validatePassword(pw) {
-    if (!pw || pw.length < 8) return { ok: false, msg: 'A senha deve ter ao menos 8 caracteres' };
-    if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return { ok: false, msg: 'Use letras e números na senha' };
-    return { ok: true };
-  },
-  _tKey(email) { return 'sec_thr_' + btoa(unescape(encodeURIComponent(email))).slice(0, 24); },
-  loginThrottle(email) {
-    let rec; try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    if (rec.lockUntil && Date.now() < rec.lockUntil) return { allowed: false, wait: Math.ceil((rec.lockUntil - Date.now()) / 1000) };
-    return { allowed: true };
-  },
-  recordFailure(email) {
-    const MAX = 5, WIN = 6e5, LOCK = 3e5; let rec;
-    try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    const now = Date.now();
-    if (!rec.first || now - rec.first > WIN) rec = { first: now, count: 0 };
-    rec.count++; if (rec.count >= MAX) rec.lockUntil = now + LOCK;
-    localStorage.setItem(this._tKey(email), JSON.stringify(rec));
-  },
-  clearFailures(email) { localStorage.removeItem(this._tKey(email)); },
-  _strip(u) { const s = { ...u }; delete s.password; delete s.passwordHash; delete s.passwordSalt; delete s.passwordIter; delete s.passwordAlgo; return s; },
-  saveSession(key, user) {
-    const safe = this._strip(user);
-    localStorage.setItem(key, JSON.stringify({ user: safe, iat: Date.now(), exp: Date.now() + this.SESSION_TTL_MS }));
-    return safe;
-  },
-  loadSession(key) {
-    let p; try { p = JSON.parse(localStorage.getItem(key)); } catch { return null; }
-    if (!p || !p.user || !p.exp || Date.now() > p.exp) { localStorage.removeItem(key); return null; }
-    return p.user;
-  }
-};
-
-class ClientApp {
-  constructor() {
-    this.currentUser = null;
-    this.professionals = [];
-    this.myRequests = [];
-    this.selectedProfessional = null;
-  }
-
-  escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-  async boot() {
-    // O Firebase Authentication controla a sessão (persistência local automática).
-    auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser));
-  }
-
-  async handleAuth(fbUser) {
-    if (!fbUser) { this.currentUser = null; this.showAuth(); return; }
-    try {
-      const profile = await this.loadProfile(fbUser.uid);
-      if (!profile) { await auth.signOut(); this.showAuth(); return; }
-      if (profile.role !== 'client') {
-        this.showToast('Este painel é apenas para noivos','error');
-        await auth.signOut(); this.showAuth(); return;
-      }
-      this.currentUser = profile;
-      if (!this._wired) { this.setupListeners(); this._wired = true; }
-      this.showApp();
-      document.getElementById('dashboardName').textContent = profile.name || 'Noivos';
-      document.getElementById('userNameHeader').textContent = profile.name || 'C';
-      this.refreshDashboard();
-    } catch (e) { console.error(e); this.showToast('Erro ao carregar seu perfil','error'); }
-  }
-
-  loadProfile(uid) { return db.ref('users/' + uid).once('value').then(s => s.val()); }
-
-  authError(e) {
-    const m = {
-      'auth/invalid-email': 'E-mail inválido',
-      'auth/email-already-in-use': 'Este e-mail já está cadastrado',
-      'auth/weak-password': 'A senha deve ter ao menos 6 caracteres',
-      'auth/user-not-found': 'E-mail ou senha incorretos',
-      'auth/wrong-password': 'E-mail ou senha incorretos',
-      'auth/invalid-credential': 'E-mail ou senha incorretos',
-      'auth/invalid-login-credentials': 'E-mail ou senha incorretos',
-      'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
-      'auth/network-request-failed': 'Falha de conexão. Verifique sua internet',
-      'auth/operation-not-allowed': 'Ative o login por e-mail/senha no Console do Firebase'
-    };
-    return m[e && e.code] || 'Não foi possível concluir. Tente novamente';
-  }
-
-  /* Migra automaticamente uma conta antiga (anterior ao Firebase Auth) no
-     primeiro login: valida a senha pelo hash existente, cria a conta no
-     Firebase Authentication e move o perfil para users/{uid} (sem senha). */
-  async migrateLegacy(email, password) {
-    const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
-    const val = snap.val(); if (!val) return false;
-    const legacyKey = Object.keys(val)[0];
-    const legacy = val[legacyKey];
-    if (legacy.role !== 'client') return false;
-    const ok = await Security.verifyPassword(password, legacy);
-    if (!ok) return false;
-    let cred;
-    try { cred = await auth.createUserWithEmailAndPassword(email, password); }
-    catch (e) {
-      if (e.code === 'auth/email-already-in-use') cred = await auth.signInWithEmailAndPassword(email, password);
-      else throw e;
-    }
-    const uid = cred.user.uid;
-    const profile = { ...Security._strip(legacy), id: uid };
-    await db.ref('users/' + uid).set(profile);
-    // mantém o histórico de solicitações ligado ao novo id
-    const allR = (await db.ref('requests').once('value')).val() || {};
-    const upd = {};
-    Object.entries(allR).forEach(([k, r]) => { if (r && r.clientId === legacy.id) upd[k + '/clientId'] = uid; });
-    if (Object.keys(upd).length) await db.ref('requests').update(upd);
-    if (legacyKey !== uid) await db.ref('users/' + legacyKey).remove();
-    return true; // onAuthStateChanged assume a partir daqui
-  }
-
-  setupListeners() {
-    EventDB.on('professionals', profs => {
-      this.professionals = profs;
-      this.renderFeaturedProfessionals();
-    });
-
-    EventDB.on('requests', requests => {
-      this.myRequests = requests.filter(r => r.clientId === this.currentUser.id);
-      this.renderRecentRequests();
-      this.renderRequestsFullList();
-    });
-  }
-
-  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; }
-  showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
-
-  async login() {
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password = document.getElementById('loginPassword').value;
-    if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const thr = Security.loginThrottle(email);
-    if (!thr.allowed) { this.showToast(`Muitas tentativas. Aguarde ${thr.wait}s`,'error'); return; }
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      Security.clearFailures(email); // sucesso → handleAuth mostra o app
-    } catch (e) {
-      if (['auth/user-not-found','auth/invalid-credential','auth/invalid-login-credentials','auth/wrong-password'].includes(e.code)) {
-        try {
-          if (await this.migrateLegacy(email, password)) { Security.clearFailures(email); return; }
-        } catch (me) {
-          console.error('migração', me);
-          if (me.code === 'auth/weak-password') { this.showToast('Sua senha antiga é curta demais. Use "Esqueci minha senha".','error'); return; }
-        }
-      }
-      Security.recordFailure(email);
-      this.showToast(this.authError(e),'error');
-    }
-  }
-
-  async signup() {
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim().toLowerCase();
-    const phone = document.getElementById('signupPhone').value.trim();
-    const region = document.getElementById('signupRegion').value.trim();
-    const password = document.getElementById('signupPassword').value;
-    if (!name || !email || !phone || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const pv = Security.validatePassword(password);
-    if (!pv.ok) { this.showToast(pv.msg,'error'); return; }
-    try {
-      const cred = await auth.createUserWithEmailAndPassword(email, password);
-      const uid = cred.user.uid;
-      const profile = { id: uid, name, email, phone, role: 'client', region, createdAt: new Date().toISOString() };
-      await db.ref('users/' + uid).set(profile); // handleAuth mostra o app
-    } catch (e) { console.error(e); this.showToast(this.authError(e),'error'); }
-  }
-
-  showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
-  showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
-
-  async logout() { try { await auth.signOut(); } finally { location.reload(); } }
-
-  refreshDashboard() {
-    const active = this.myRequests.filter(r => r.status === 'active').length;
-    const completed = this.myRequests.filter(r => r.status === 'completed').length;
-    document.getElementById('statProf').textContent = this.professionals.length;
-    document.getElementById('statReqs').textContent = this.myRequests.length;
-    document.getElementById('statActive').textContent = active;
-    document.getElementById('statDone').textContent = completed;
-    const sub = document.getElementById('heroSubCount');
-    if (sub) sub.textContent = this.professionals.length
-      ? `${this.professionals.length} fornecedores prontos para o seu grande dia`
-      : 'Fornecedores selecionados para o seu grande dia';
-  }
-
-  /* ── helpers de apresentação do fornecedor ── */
-  initials(name) {
-    const parts = String(name || '?').trim().split(/\s+/).filter(Boolean);
-    return ((parts[0]?.[0] || '') + (parts[1]?.[0] || '')).toUpperCase() || '♥';
-  }
-  vendorCategory(p) { return (p.specialties && p.specialties[0]) ? p.specialties[0] : 'Fornecedor'; }
-  vendorDesc(p) {
-    if (p.bio || p.description) return p.bio || p.description;
-    const cat = this.vendorCategory(p).toLowerCase();
-    return `Especialista em ${cat} para casamentos e eventos${p.region ? ` em ${p.region}` : ''}. Solicite um orçamento sem compromisso.`;
-  }
-  vendorRatingHTML(p) {
-    if (p.rating) {
-      return `<span class="vendor-stars">★★★★★</span> <b>${Number(p.rating).toFixed(1)}</b>`
-        + (p.reviews ? ` · ${p.reviews} avaliações` : '')
-        + (p.region ? ` · 📍 ${this.escape(p.region)}` : '');
-    }
-    return `<span class="vendor-stars">✦</span> Novo no Enlace`
-      + (p.region ? ` · 📍 ${this.escape(p.region)}` : '');
-  }
-  vendorPriceHTML(p) {
-    return p.priceFrom
-      ? `A partir de <b>R$ ${this.escape(p.priceFrom)}</b>`
-      : `<b>Sob consulta</b>`;
-  }
-  vendorCardHTML(p) {
-    const cat = this.vendorCategory(p);
-    return `
-      <div class="vendor-card" onclick="app.showProfessionalDetails('${p.id}')">
-        <div class="vendor-media">
-          <div class="vendor-monogram">${this.escape(this.initials(p.name))}</div>
-          <span class="vendor-cat">${this.escape(cat)}</span>
-          <span class="vendor-fav">♥</span>
+      <!-- TOP BAR -->
+      <div class="top-bar">
+        <div class="greeting">
+          <div class="avatar-glass" id="userAvatarHeader">C</div>
+          <h2>Olá, <span id="dashboardName">Noivo(a)</span></h2>
         </div>
-        <div class="vendor-body">
-          <div class="vendor-name">${this.escape(p.name)}</div>
-          <div class="vendor-rating">${this.vendorRatingHTML(p)}</div>
-          <div class="vendor-desc">${this.escape(this.vendorDesc(p))}</div>
-          <div class="vendor-foot">
-            <span class="vendor-price">${this.vendorPriceHTML(p)}</span>
-            <button class="btn-primary btn-small" onclick="event.stopPropagation(); app.openRequestModal('${p.id}')">Solicitar →</button>
+        <div class="user-actions">
+          <span style="font-size:0.85rem;color:var(--gray-600);" id="userNameHeader"></span>
+          <button class="btn-logout-glass" onclick="app.logout()">Sair</button>
+        </div>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="search-sticky">
+        <input type="text" id="searchKeyword" placeholder="Buscar fornecedores por nome ou categoria..." />
+        <button onclick="app.filterProfessionals()">Buscar</button>
+      </div>
+
+      <!-- STATS CHIPS -->
+      <div class="stats-chips">
+        <div class="stat-chip">👥 <span class="num" id="statProf">0</span> Fornecedores</div>
+        <div class="stat-chip">📨 <span class="num" id="statReqs">0</span> Solicitações</div>
+        <div class="stat-chip">⚡ <span class="num" id="statActive">0</span> Ativos</div>
+        <div class="stat-chip">✅ <span class="num" id="statDone">0</span> Concluídos</div>
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="main-grid">
+        <!-- Esquerda: Fornecedores (Masonry) -->
+        <div class="vendor-masonry">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;">Disponíveis</h3>
+            <button class="dock-item" style="background:var(--primary);color:white;padding:0.3rem 1rem;border-radius:999px;font-size:0.8rem;" onclick="app.openRequestModal()">+ Solicitar</button>
+          </div>
+          <div class="masonry-grid" id="professionalsGrid">
+            <div style="padding:2rem;text-align:center;color:var(--gray-500);width:100%;">Carregando...</div>
           </div>
         </div>
-      </div>`;
-  }
 
-  renderFeaturedProfessionals() {
-    const box = document.getElementById('featuredProfsList');
-    const featured = this.professionals.slice(0, 2);
-    if (!featured.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">💍</div><p>Em breve novos fornecedores por aqui</p></div>';
-      return;
-    }
-    box.innerHTML = featured.map(p => this.vendorCardHTML(p)).join('');
-  }
-
-  renderFull(list) {
-    const box = document.getElementById('professionalsGrid');
-    const items = list || this.professionals;
-    if (!items.length) {
-      box.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>Nenhum fornecedor encontrado</p><p style="font-size:.85rem">Tente outra categoria ou cidade</p></div>';
-      return;
-    }
-    box.innerHTML = items.map(p => this.vendorCardHTML(p)).join('');
-  }
-
-  showProfessionalDetails(profId) {
-    const prof = this.professionals.find(p => p.id === profId);
-    if (!prof) return;
-    this.selectedProfessional = prof;
-    const details = document.getElementById('professionalDetails');
-    details.innerHTML = `
-      <div class="hero-arc" style="border-radius:14px;margin:-1.5rem -1.5rem 1.25rem">
-        <div class="hero-inner" style="text-align:center;padding:1.6rem 1.5rem 2rem">
-          <div style="width:74px;height:74px;margin:0 auto .6rem;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:#fff">${this.escape(this.initials(prof.name))}</div>
-          <h2 class="hero-title" style="font-size:1.9rem">${this.escape(prof.name)}</h2>
-          <p class="hero-sub" style="margin:.15rem auto 0">${this.vendorRatingHTML(prof)}</p>
+        <!-- Direita: Timeline -->
+        <div class="activity-timeline" id="activityTimeline">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.5rem;">Atividade recente</h3>
+          <div id="recentRequestsList">
+            <div style="padding:1rem;color:var(--gray-500);">Nenhuma solicitação ainda.</div>
+          </div>
         </div>
       </div>
-      <p style="color:var(--gray-700);font-size:.92rem;line-height:1.6;margin-bottom:1.25rem">${this.escape(this.vendorDesc(prof))}</p>
-      <div style="margin-bottom:1.5rem">
-        <div style="font-weight:600;margin-bottom:.5rem;color:var(--ink)">Serviços</div>
-        <div style="display:flex;flex-wrap:wrap;gap:.4rem">
-          ${(prof.specialties || []).map(s => `<div class="specialty-chip">${this.escape(s)}</div>`).join('') || '<span style="color:var(--gray-500);font-size:.85rem">Não informado</span>'}
-        </div>
+
+      <!-- DOCK FLUTUANTE -->
+      <div class="dock-floating">
+        <button class="dock-item active" data-section="clientDashboard"><span class="icon">📊</span> <span>Início</span></button>
+        <button class="dock-item" data-section="searchProfessionals"><span class="icon">🔍</span> <span>Buscar</span></button>
+        <button class="dock-item" data-section="myRequests"><span class="icon">📨</span> <span>Pedidos</span></button>
+        <button class="dock-item" data-section="clientProfile"><span class="icon">👤</span> <span>Perfil</span></button>
       </div>
-      <button class="btn-cta" onclick="app.closeModal('professionalModal'); app.openRequestModal('${prof.id}')">Solicitar orçamento</button>
-      <button class="btn-secondary" onclick="app.closeModal('professionalModal')" style="width:100%;margin-top:.5rem">Fechar</button>
-    `;
-    this.openModal('professionalModal');
-  }
 
-  filterProfessionals(kw, region) {
-    const keyword = (kw != null ? kw : document.getElementById('searchKeyword').value).toLowerCase().trim();
-    const reg = (region || '').toLowerCase().trim();
-    let filtered = this.professionals;
-    if (keyword) filtered = filtered.filter(p =>
-      p.name.toLowerCase().includes(keyword) ||
-      (p.specialties || []).some(s => s.toLowerCase().includes(keyword)));
-    if (reg) filtered = filtered.filter(p => (p.region || '').toLowerCase().includes(reg));
-    this.renderFull(filtered);
-  }
+      <!-- SECTIONS (Hidden para navegação) -->
+      <div style="display:none;">
+        <section id="clientDashboard"></section>
+        <section id="searchProfessionals"></section>
+        <section id="myRequests"></section>
+        <section id="clientProfile"></section>
+      </div>
 
-  heroSearch() {
-    const kw = document.getElementById('heroKeyword').value.trim();
-    const reg = document.getElementById('heroRegion').value.trim();
-    document.querySelector('[data-section="searchProfessionals"]').click();
-    const sk = document.getElementById('searchKeyword');
-    if (sk) sk.value = kw;
-    this.filterProfessionals(kw, reg);
-  }
+    </div>
+  </div>
 
-  openRequestModal(profId) {
-    if (profId) {
-      const prof = this.professionals.find(p => p.id === profId);
-      if (prof) this.selectedProfessional = prof;
-    }
-    if (!this.selectedProfessional) { this.showToast('Selecione um fornecedor primeiro','error'); return; }
-    ['requestDesc','requestDate','requestLocation','requestBudget','requestDetails'].forEach(i => document.getElementById(i).value = '');
-    this.openModal('requestModal');
-  }
+  <!-- MODALS -->
+  <div class="modal" id="requestModal">
+    <div class="modal-content">
+      <div class="modal-header">Nova Solicitação</div>
+      <div class="form-group"><label>Serviço</label><input type="text" id="requestDesc" placeholder="Ex: Fotografia" /></div>
+      <div class="form-group"><label>Data</label><input type="date" id="requestDate" /></div>
+      <div class="form-group"><label>Local</label><input type="text" id="requestLocation" placeholder="Cidade" /></div>
+      <div class="form-group"><label>Orçamento (R$)</label><input type="number" id="requestBudget" placeholder="1000" /></div>
+      <div class="form-group"><label>Detalhes</label><textarea id="requestDetails" rows="3"></textarea></div>
+      <div class="modal-actions">
+        <button class="btn-primary-modal" onclick="app.createRequest()">Enviar</button>
+        <button class="btn-secondary-modal" onclick="app.closeModal('requestModal')">Cancelar</button>
+      </div>
+    </div>
+  </div>
 
-  async createRequest() {
-    const desc = document.getElementById('requestDesc').value.trim();
-    const date = document.getElementById('requestDate').value;
-    const loc = document.getElementById('requestLocation').value.trim();
-    const budget = document.getElementById('requestBudget').value;
-    if (!desc || !date || !loc || !budget) { this.showToast('Preencha os campos obrigatórios','error'); return; }
-    if (!this.selectedProfessional) { this.showToast('Selecione um fornecedor primeiro','error'); return; }
-    const request = {
-      id: Date.now().toString(),
-      clientId: this.currentUser.id,
-      clientName: this.currentUser.name,
-      professionalId: this.selectedProfessional.id,
-      professionalName: this.selectedProfessional.name,
-      description: desc,
-      date, location: loc, budget,
-      details: document.getElementById('requestDetails').value,
-      status: 'pending',
-      createdAt: new Date().toISOString()
+  <div class="modal" id="professionalModal">
+    <div class="modal-content" id="professionalDetails"></div>
+  </div>
+
+  <div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+  <!-- FIREBASE & SCRIPTS -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
+  </script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
+      authDomain: "imobpro-667da.firebaseapp.com",
+      databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
+      projectId: "imobpro-667da",
+      storageBucket: "imobpro-667da.firebasestorage.app",
+      messagingSenderId: "827299768500",
+      appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
     };
-    await EventDB.set('requests', request);
-    this.showToast('✓ Solicitação enviada!','success');
-    this.closeModal('requestModal');
-    this.selectedProfessional = null;
-  }
+    try { firebase.initializeApp(firebaseConfig); } catch (e) { console.warn(e); }
+    const db = firebase.database();
+    const auth = firebase.auth();
 
-  renderRecentRequests() {
-    const box = document.getElementById('recentRequestsList');
-    if (!this.myRequests.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📨</div><p>Nenhuma solicitação criada</p></div>';
-      return;
+    class EventDB {
+      static async set(path, data) { const key = data.id || Date.now().toString(); return db.ref(`${path}/${key}`).set({ ...
+          data, id: key }); }
+      static on(path, cb) { return db.ref(path).on('value', snap => cb(Object.values(snap.val() || {}))); }
     }
-    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
-    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    box.innerHTML = sorted.slice(0,2).map(r => `
-      <div style="background:rgba(110,42,82,.02);border:1px solid var(--gray-200);border-radius:10px;padding:1rem;margin-bottom:.75rem">
-        <div style="font-weight:700;margin-bottom:.5rem">${this.escape(r.description)}</div>
-        <div style="font-size:.85rem;color:var(--gray-600);margin-bottom:.5rem">💰 R$ ${this.escape(r.budget)} · 📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</div>
-        <span class="badge" style="background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff">${labels[r.status]}</span>
-      </div>
-    `).join('');
-  }
 
-  renderRequestsFullList() {
-    const box = document.getElementById('requestsFullList');
-    if (!this.myRequests.length) {
-      box.innerHTML = '<div class="empty-state"><div class="empty-icon">📨</div><p>Nenhuma solicitação</p></div>';
-      return;
-    }
-    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
-    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    box.innerHTML = sorted.map(r => `
-      <div style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:12px;padding:1.25rem;margin-bottom:1rem;transition:var(--transition)" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none'">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.75rem">
-          <div style="flex:1">
-            <div style="font-weight:700;font-size:1.05rem;color:var(--dark);margin-bottom:.5rem">${this.escape(r.description)}</div>
-            <div style="display:flex;flex-wrap:wrap;gap:.75rem;font-size:.85rem;color:var(--gray-600)">
-              <span>💼 ${this.escape(r.professionalName || 'Profissional')}</span>
-              <span>📍 ${this.escape(r.location)}</span>
-              <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
-              <span>💰 R$ ${this.escape(r.budget)}</span>
+    const Security = {
+      validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
+      validatePassword(pw) { return pw && pw.length >= 8; }
+    };
+
+    class ClientApp {
+      constructor() { this.currentUser = null;
+        this.professionals = [];
+        this.myRequests = [];
+        this.selectedProfessional = null; }
+
+      escape(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+          "'": '&#39;' } [c])); }
+      safeId(s) { return String(s == null ? '' : s).replace(/[^A-Za-z0-9_-]/g, ''); }
+
+      async boot() { auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser)); }
+
+      async handleAuth(fbUser) {
+        if (!fbUser) { this.currentUser = null;
+          this.showAuth(); return; }
+        try {
+          const profile = (await db.ref('users/' + fbUser.uid).once('value')).val();
+          if (!profile || profile.role !== 'client') { await auth.signOut();
+            this.showAuth(); return; }
+          this.currentUser = profile;
+          if (!this._wired) { this.setupListeners();
+            this._wired = true; }
+          this.showApp();
+          document.getElementById('dashboardName').textContent = profile.name || 'Noivo(a)';
+          document.getElementById('userNameHeader').textContent = profile.name || '';
+          document.getElementById('userAvatarHeader').textContent = (profile.name || 'C')[0].toUpperCase();
+          this.refreshDashboard();
+        } catch (e) { console.error(e); }
+      }
+
+      showAuth() { document.getElementById('authShell').style.display = 'flex';
+        document.getElementById('appShell').style.display = 'none'; }
+      showApp() { document.getElementById('authShell').style.display = 'none';
+        document.getElementById('appShell').style.display = 'flex'; }
+
+      async login() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+        if (!email || !password) return alert('Preencha todos os campos');
+        try { await auth.signInWithEmailAndPassword(email, password); } catch (e) { alert('Erro: ' + e.message); }
+      }
+      async signup() {
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+        const phone = document.getElementById('signupPhone').value.trim();
+        const region = document.getElementById('signupRegion').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        if (!name || !email || !phone || !password) return alert('Preencha todos os campos');
+        try {
+          const cred = await auth.createUserWithEmailAndPassword(email, password);
+          await db.ref('users/' + cred.user.uid).set({ id: cred.user.uid, name, email, phone, region, role: 'client',
+            createdAt: new Date().toISOString() });
+        } catch (e) { alert('Erro: ' + e.message); }
+      }
+      showLogin() { document.getElementById('loginCard').style.display = 'block';
+        document.getElementById('signupCard').style.display = 'none'; }
+      showSignup() { document.getElementById('loginCard').style.display = 'none';
+        document.getElementById('signupCard').style.display = 'block'; }
+      async logout() { try { await auth.signOut(); } finally { location.reload(); } }
+
+      setupListeners() {
+        EventDB.on('professionals', profs => { this.professionals = profs;
+          this.renderMasonry(); });
+        EventDB.on('requests', reqs => {
+          if (!this.currentUser) return;
+          this.myRequests = reqs.filter(r => r.clientId === this.currentUser.id);
+          this.renderTimeline();
+          this.refreshDashboard();
+        });
+      }
+
+      refreshDashboard() {
+        const active = this.myRequests.filter(r => r.status === 'active').length;
+        const completed = this.myRequests.filter(r => r.status === 'completed').length;
+        document.getElementById('statProf').textContent = this.professionals.length;
+        document.getElementById('statReqs').textContent = this.myRequests.length;
+        document.getElementById('statActive').textContent = active;
+        document.getElementById('statDone').textContent = completed;
+      }
+
+      initials(name) { const parts = String(name || '?').trim().split(/\s+/); return ((parts[0]?.[0] || '') + (parts[1]?.[0] ||
+          '')).toUpperCase() || '♥'; }
+
+      vendorCardHTML(p) {
+        return `
+          <div class="vendor-card-masonry" onclick="app.showProfessionalDetails('${this.safeId(p.id)}')">
+            <div class="monogram">${this.escape(this.initials(p.name))}</div>
+            <h4>${this.escape(p.name)}</h4>
+            <p>${this.escape(p.specialties?.join(', ') || 'Fornecedor')}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="price-tag">${p.priceFrom ? `R$ ${this.escape(p.priceFrom)}` : 'Sob consulta'}</span>
+              <span style="color:var(--gold);font-size:0.8rem;">★ ${p.rating || 'Novo'}</span>
             </div>
           </div>
-          <span class="badge" style="background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff;flex-shrink:0">${labels[r.status]}</span>
-        </div>
-      </div>
-    `).join('');
-  }
+        `;
+      }
 
-  async saveProfile() {
-    const name = document.getElementById('profileName').value;
-    const phone = document.getElementById('profilePhone').value;
-    const region = document.getElementById('profileRegion').value;
-    this.currentUser = { ...this.currentUser, name, phone, region };
-    await db.ref('users/' + this.currentUser.id).update({ name, phone, region });
-    document.getElementById('dashboardName').textContent = name || 'Noivos';
-    this.showToast('✓ Perfil atualizado','success');
-  }
+      renderMasonry() {
+        const grid = document.getElementById('professionalsGrid');
+        if (!this.professionals.length) { grid.innerHTML =
+            '<div style="padding:2rem;text-align:center;color:var(--gray-500);width:100%;">Nenhum fornecedor encontrado.</div>'; return; }
+        grid.innerHTML = this.professionals.map(p => this.vendorCardHTML(p)).join('');
+      }
+      filterProfessionals() {
+        const kw = document.getElementById('searchKeyword').value.toLowerCase().trim();
+        const filtered = this.professionals.filter(p => p.name.toLowerCase().includes(kw) || (p.specialties || []).some(s => s
+          .toLowerCase().includes(kw)));
+        const grid = document.getElementById('professionalsGrid');
+        if (!filtered.length) { grid.innerHTML =
+            '<div style="padding:2rem;text-align:center;color:var(--gray-500);">Nenhum resultado.</div>'; return; }
+        grid.innerHTML = filtered.map(p => this.vendorCardHTML(p)).join('');
+      }
 
-  openModal(id) { document.getElementById(id).classList.add('show'); }
-  closeModal(id) { document.getElementById(id).classList.remove('show'); }
-  showToast(msg, type='info') {
-    const toast = document.getElementById('toast');
-    document.getElementById('toastMsg').textContent = msg;
-    toast.className = `toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
-}
+      renderTimeline() {
+        const box = document.getElementById('recentRequestsList');
+        if (!this.myRequests.length) { box.innerHTML =
+            '<div style="padding:1rem;color:var(--gray-500);">Nenhuma solicitação ainda. Comece buscando um fornecedor!</div>'; return; }
+        const labels = { pending: 'Pendente', active: 'Aceita', completed: 'Concluída' };
+        const sorted = [...this.myRequests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        box.innerHTML = sorted.slice(0, 5).map(r => `
+          <div class="timeline-item">
+            <div class="date">${new Date(r.date).toLocaleDateString('pt-BR')}</div>
+            <div class="content">
+              <strong>${this.escape(r.description)}</strong>
+              <div class="meta">
+                <span>💼 ${this.escape(r.professionalName)}</span>
+                <span>💰 R$ ${this.escape(r.budget)}</span>
+                <span class="badge-status ${r.status}">${labels[r.status]}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
 
-const app = new ClientApp();
-app.boot();
+      showProfessionalDetails(id) {
+        const p = this.professionals.find(x => x.id === id);
+        if (!p) return;
+        this.selectedProfessional = p;
+        document.getElementById('professionalDetails').innerHTML = `
+          <div class="modal-header">${this.escape(p.name)}</div>
+          <p>${this.escape(p.bio || p.description || 'Fornecedor especializado em casamentos.')}</p>
+          <div style="margin:1rem 0;"><strong>Especialidades:</strong> ${(p.specialties||[]).map(s=>`<span style="background:var(--gray-100);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.8rem;display:inline-block;margin:0.2rem;">${this.escape(s)}</span>`).join(' ')}</div>
+          <button class="dock-item" style="background:var(--primary);color:white;width:100%;justify-content:center;padding:0.8rem;border-radius:999px;" onclick="app.closeModal('professionalModal'); app.openRequestModal('${this.safeId(p.id)}')">Solicitar orçamento</button>
+          <button class="dock-item" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="app.closeModal('professionalModal')">Fechar</button>
+        `;
+        this.openModal('professionalModal');
+      }
 
-// Nav switching
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const section = item.getAttribute('data-section');
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    item.classList.add('active');
-    document.getElementById(section).classList.add('active');
-    if (section === 'searchProfessionals') app.renderFull();
-    if (section === 'clientProfile' && app.currentUser) {
-      document.getElementById('profileName').value = app.currentUser.name || '';
-      document.getElementById('profileEmail').value = app.currentUser.email || '';
-      document.getElementById('profilePhone').value = app.currentUser.phone || '';
-      document.getElementById('profileRegion').value = app.currentUser.region || '';
+      openRequestModal(id) {
+        if (id) { const p = this.professionals.find(x => x.id === id); if (p) this.selectedProfessional = p; }
+        if (!this.selectedProfessional) return alert('Selecione um fornecedor primeiro.');
+        document.getElementById('requestModal').classList.add('show');
+      }
+      async createRequest() {
+        const desc = document.getElementById('requestDesc').value.trim();
+        const date = document.getElementById('requestDate').value;
+        const loc = document.getElementById('requestLocation').value.trim();
+        const budget = document.getElementById('requestBudget').value;
+        if (!desc || !date || !loc || !budget) return alert('Preencha todos os campos.');
+        const req = {
+          id: Date.now().toString(),
+          clientId: this.currentUser.id,
+          clientName: this.currentUser.name,
+          professionalId: this.selectedProfessional.id,
+          professionalName: this.selectedProfessional.name,
+          description: desc,
+          date,
+          location: loc,
+          budget,
+          details: document.getElementById('requestDetails').value,
+          status: 'pending',
+          createdAt: new Date().toISOString()
+        };
+        await EventDB.set('requests', req);
+        this.showToast('✅ Solicitação enviada!');
+        this.closeModal('requestModal');
+        this.selectedProfessional = null;
+      }
+
+      openModal(id) { document.getElementById(id).classList.add('show'); }
+      closeModal(id) { document.getElementById(id).classList.remove('show'); }
+      showToast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        t.className = 'toast show';
+        setTimeout(() => t.classList.remove('show'), 3000);
+      }
     }
-  });
-});
 
-// Modal closes
-document.getElementById('requestModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('requestModal')) app.closeModal('requestModal');
-});
-document.getElementById('professionalModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('professionalModal')) app.closeModal('professionalModal');
-});
-</script>
+    const app = new ClientApp();
+    app.boot();
+
+    // Navegação pelo Dock
+    document.querySelectorAll('.dock-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.dock-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        // Como é um SPA visual, apenas alternamos a classe ativa para feedback.
+        // As seções são carregadas dinamicamente via JS, sem necessidade de esconder/mostrar.
+        if (item.getAttribute('data-section') === 'searchProfessionals') app.filterProfessionals();
+      });
+    });
+
+    // Fechar modais clicando fora
+    document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', (e) => { if (e.target === m) app.closeModal(m
+        .id); }));
+  </script>
 </body>
 </html>
