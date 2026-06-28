@@ -1,971 +1,1300 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no">
-<title>Enlace · Fornecedor</title>
-<link rel="manifest" href="manifest-profissional.json">
-<meta name="theme-color" content="#B5658A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#6E2A52;--primary-light:#8A3D63;--primary-dark:#45203A;
-  --secondary:#B5658A;--accent:#C2A35E;
-  --gold:#C2A35E;--gold-soft:#E4D2A8;--blush:#F4E6EC;--ivory:#FBF7F3;--ink:#2C2230;
-  --success:#4F8A6B;--danger:#C2453F;--warning:#C98A3A;
-  --dark:#2C2230;--dark-light:#3A2C3D;--dark-lighter:#4A3A4D;
-  --gray-700:#5A4E58;--gray-600:#7A6E76;--gray-500:#9A8E96;
-  --gray-300:#DDD2D8;--gray-200:#E7DCE2;--gray-100:#EFE7EB;--gray-50:#FBF7F3;
-  --white:#FFFFFF;
-  --shadow-sm:0 1px 3px rgba(15,23,42,0.10);
-  --shadow:0 4px 6px rgba(15,23,42,0.10);
-  --shadow-md:0 10px 15px rgba(15,23,42,0.10);
-  --shadow-lg:0 20px 25px rgba(15,23,42,0.15);
-  --shadow-xl:0 40px 50px rgba(15,23,42,0.2);
-  --transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-  --nav-h:64px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --safe-top:env(safe-area-inset-top,0px);
-}
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(180deg,#FBF7F3 0%,#F5EAE3 100%);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-body{display:flex;flex-direction:column;-webkit-tap-highlight-color:transparent}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <title>Enlace · Fornecedor</title>
+  <link rel="manifest" href="manifest-profissional.json" />
+  <meta name="theme-color" content="#B5658A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ── HEADER ── */
-header{background:var(--white);border-bottom:1px solid var(--gray-100);padding:.75rem 1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow-sm);padding-top:calc(.75rem + var(--safe-top))}
-.header-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.logo{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;background:linear-gradient(135deg,var(--secondary),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:0 4px 12px rgba(181,101,138,.2)}
-.header-right{display:flex;align-items:center;gap:.6rem}
-.user-avatar{width:34px;height:34px;background:linear-gradient(135deg,var(--secondary),var(--primary));border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.85rem;flex-shrink:0}
-.role-pill{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .6rem;border-radius:999px;color:var(--white);flex-shrink:0;background:linear-gradient(135deg,var(--secondary),var(--primary))}
+    :root {
+      --primary: #6E2A52;
+      --primary-light: #8A3D63;
+      --secondary: #B5658A;
+      --gold: #C2A35E;
+      --gold-soft: #E4D2A8;
+      --blush: #F4E6EC;
+      --ivory: #FBF7F3;
+      --ink: #1A1620;
+      --gray-700: #5A4E58;
+      --gray-600: #7A6E76;
+      --gray-500: #9A8E96;
+      --gray-200: #E7DCE2;
+      --gray-100: #EFE7EB;
+      --white: #FFFFFF;
+      --success: #4F8A6B;
+      --danger: #C2453F;
+      --warning: #C98A3A;
 
-/* ── BUTTONS ── */
-button{padding:.65rem 1.25rem;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;white-space:nowrap;min-height:44px;text-transform:none}
-.btn-primary{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);box-shadow:0 4px 15px rgba(181,101,138,.25);border:none}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(181,101,138,.35)}
-.btn-primary:active{transform:scale(.98)}
-.btn-secondary{background:var(--gray-100);color:var(--dark);border:1px solid var(--gray-200)}
-.btn-secondary:hover{background:var(--gray-200)}
-.btn-danger{background:linear-gradient(135deg,#C2453F,#A83A35);color:var(--white)}
-.btn-danger:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,68,68,.25)}
-.btn-success{background:linear-gradient(135deg,#4F8A6B,#3F7257);color:var(--white)}
-.btn-success:hover{transform:translateY(-2px)}
-.btn-small{padding:.45rem .9rem;font-size:.8rem;min-height:36px}
-.btn-icon{width:44px;height:44px;padding:0;border-radius:10px}
+      --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06);
+      --shadow-xl: 0 20px 60px rgba(26, 22, 32, 0.1);
+      --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --radius: 24px;
+      --radius-sm: 14px;
+      --nav-h: 68px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+    }
 
-/* ── MAIN / CONTENT ── */
-#appShell{flex:1;display:flex;flex-direction:column;overflow:hidden}
+    html,
+    body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ── AUTH SHELL (tela de login/cadastro) ── */
-.auth-shell{flex:1;width:100%;display:flex;align-items:center;justify-content:center;overflow-y:auto}
-.content-area{flex:1;overflow-y:auto;padding:1rem 1rem calc(var(--nav-h) + var(--safe-bottom) + 1rem);max-width:900px;margin:0 auto;width:100%}
-section{display:none}
-section.active{display:block;animation:fadeIn .3s ease-out}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    /* ── HEADER FLUTUANTE ── */
+    .header-glass-light {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: calc(0.8rem + var(--safe-top));
+      box-shadow: var(--shadow-glass);
+    }
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + var(--safe-bottom));background:var(--white);border-top:1px solid var(--gray-100);display:flex;align-items:flex-start;padding-top:.5rem;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;cursor:pointer;padding:.3rem .25rem;transition:var(--transition);color:var(--gray-500);font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;position:relative;min-height:48px}
-.nav-item:active{opacity:.7}
-.nav-item.active{color:var(--primary);transform:translateY(-2px)}
-.nav-item .nav-icon{font-size:1.35rem;line-height:1}
+    .logo-creative-light {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .logo-creative-light .badge-ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      box-shadow: 0 4px 16px rgba(181, 101, 138, 0.2);
+    }
+    .role-pill-light {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--secondary);
+      color: var(--white);
+    }
 
-/* ── CARDS ── */
-.card{background:var(--white);border-radius:14px;padding:1.25rem;box-shadow:var(--shadow);margin-bottom:1rem;border:1px solid var(--gray-100);transition:var(--transition)}
-.card:hover{box-shadow:var(--shadow-lg);border-color:var(--primary);transform:translateY(-2px)}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem}
+    .header-right-light {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .user-avatar-light {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(181, 101, 138, 0.15);
+    }
+    .user-name-light {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .btn-logout-light {
+      background: transparent;
+      border: none;
+      color: var(--gray-500);
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: 999px;
+    }
+    .btn-logout-light:hover {
+      color: var(--danger);
+      background: rgba(194, 69, 63, 0.08);
+    }
 
-/* ── ANNOUNCEMENT CARDS ── */
-.announcement-card{background:linear-gradient(135deg,rgba(181,101,138,.05) 0%,rgba(110,42,82,.05) 100%);border:1.5px solid var(--secondary);border-radius:14px;padding:1.25rem;margin-bottom:1rem;transition:var(--transition);cursor:pointer}
-.announcement-card:hover{border-color:var(--primary);box-shadow:0 8px 20px rgba(181,101,138,.15);transform:translateY(-2px)}
-.announcement-card.admin{border-color:#FFB347;background:linear-gradient(135deg,rgba(255,179,71,.05) 0%,rgba(255,193,7,.05) 100%)}
-.announcement-card.admin:hover{border-color:#FF9500;box-shadow:0 8px 20px rgba(255,179,71,.2)}
-.announcement-title{font-weight:700;font-size:1rem;color:var(--dark);margin-bottom:.4rem}
-.announcement-content{color:var(--gray-600);font-size:.9rem;margin-bottom:.6rem;line-height:1.5}
-.announcement-meta{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.8rem;color:var(--gray-500)}
-.announcement-meta span{display:flex;align-items:center;gap:.2rem}
+    /* ── APP SHELL ── */
+    #appShell {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-/* ── REQUEST CARDS ── */
-.request-card{background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:1.25rem;margin-bottom:.75rem;transition:var(--transition);cursor:pointer}
-.request-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.request-card.active{border-color:var(--primary);background:rgba(110,42,82,.02)}
-.request-card.completed{border-color:var(--success);background:rgba(16,185,129,.02)}
-.request-card.cancelled{border-color:var(--danger);background:rgba(239,68,68,.02)}
+    .content-area-light {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.5rem calc(var(--nav-h) + var(--safe-bottom) + 2rem);
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
-/* ── STAT CARDS ── */
-.stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem}
-.stat-card{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);color:var(--white);padding:1.1rem;border-radius:12px;text-align:center;box-shadow:0 4px 15px rgba(181,101,138,.2);transition:var(--transition)}
-.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(181,101,138,.3)}
-.stat-number{font-size:1.75rem;font-weight:800;margin:.2rem 0}
-.stat-label{font-size:.8rem;opacity:.9}
+    section {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    section.active {
+      display: block;
+    }
 
-/* ── MODALS ── */
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:1rem}
-.modal.show{display:flex;animation:modalFadeIn .3s ease-out}
-@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
-.modal-content{background:var(--white);border-radius:16px;padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:modalSlideUp .3s ease-out}
-@keyframes modalSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-header{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--dark)}
-.modal-close{position:absolute;top:1rem;right:1rem;background:var(--gray-100);border:none;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition)}
-.modal-close:hover{background:var(--gray-200)}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-/* ── FORMS ── */
-.form-group{margin-bottom:1rem}
-label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--dark);font-size:.9rem}
-input,textarea,select{width:100%;padding:.8rem;border:1.5px solid var(--gray-300);border-radius:10px;font-family:inherit;font-size:.95rem;transition:var(--transition);background:var(--white);color:var(--dark)}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--secondary);box-shadow:0 0 0 3px rgba(181,101,138,.1)}
-textarea{resize:vertical;min-height:100px}
+    /* ── DOCK FLUTUANTE ── */
+    .dock-floating-light {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 40px rgba(44, 34, 48, 0.08);
+      display: flex;
+      padding: 0.3rem 0.4rem;
+      gap: 0.1rem;
+      z-index: 999;
+      width: auto;
+      max-width: 95%;
+      flex-wrap: nowrap;
+    }
+    .dock-item-light {
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .dock-item-light .icon {
+      font-size: 1.1rem;
+    }
+    .dock-item-light.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(181, 101, 138, 0.25);
+    }
+    .dock-item-light:not(.active):hover {
+      background: rgba(181, 101, 138, 0.05);
+      color: var(--primary);
+    }
 
-/* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:600}
-.badge-success{background:rgba(16,185,129,.12);color:var(--success)}
-.badge-warning{background:rgba(245,158,11,.12);color:var(--warning)}
-.badge-danger{background:rgba(239,68,68,.12);color:var(--danger)}
-.badge-primary{background:rgba(110,42,82,.12);color:var(--primary)}
-.badge-secondary{background:rgba(181,101,138,.12);color:var(--secondary)}
+    /* ── CARDS ── */
+    .card-glass-light {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-glass);
+      transition: var(--transition);
+      margin-bottom: 1.5rem;
+    }
+    .card-glass-light:hover {
+      box-shadow: var(--shadow-xl);
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+    .card-title-light {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
 
-/* ── EMPTY STATE ── */
-.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--gray-500)}
-.empty-icon{font-size:3rem;margin-bottom:.75rem}
-.empty-state p{margin-bottom:.5rem;font-size:.95rem}
+    /* ── STATS ── */
+    .stats-grid-light {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card-rose {
+      background: linear-gradient(135deg, rgba(181, 101, 138, 0.08), rgba(110, 42, 82, 0.04));
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .stat-card-rose:hover {
+      transform: translateY(-4px);
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-glass);
+    }
+    .stat-number-rose {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .stat-label-rose {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-500);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 1rem);right:1rem;background:var(--white);padding:1rem 1.25rem;border-radius:10px;box-shadow:var(--shadow-lg);z-index:400;display:none;gap:.75rem;align-items:center;animation:slideUp .3s ease-out}
-.toast.show{display:flex}
-@keyframes slideUp{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}
-.toast.success{border-left:4px solid var(--success)}
-.toast.error{border-left:4px solid var(--danger)}
-.toast.info{border-left:4px solid var(--primary)}
+    /* ── ANÚNCIOS E PEDIDOS ── */
+    .announcement-card-rose {
+      background: rgba(181, 101, 138, 0.03);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .announcement-card-rose:hover {
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-glass);
+      transform: translateY(-2px);
+    }
+    .announcement-card-rose .ad-info {
+      flex: 1;
+    }
+    .announcement-card-rose .ad-info h4 {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+    .announcement-card-rose .ad-info p {
+      color: var(--gray-600);
+      font-size: 0.85rem;
+      margin: 0.2rem 0 0.3rem;
+    }
+    .announcement-card-rose .ad-meta {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-@media(min-width:768px){
-  .stats-row{grid-template-columns:repeat(4,1fr)}
-  .professionals-grid{grid-template-columns:repeat(2,1fr)}
-}
+    .request-card-rose {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      transition: var(--transition);
+    }
+    .request-card-rose:hover {
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-glass);
+      transform: translateY(-2px);
+    }
+    .request-card-rose .req-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .request-card-rose .req-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .request-card-rose .req-meta {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin: 0.3rem 0;
+    }
+    .badge-status-rose {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      color: var(--white);
+    }
+    .badge-status-rose.pending {
+      background: var(--warning);
+    }
+    .badge-status-rose.active {
+      background: var(--secondary);
+    }
+    .badge-status-rose.completed {
+      background: var(--success);
+    }
+    .badge-status-rose.cancelled {
+      background: var(--danger);
+    }
 
-/* ══ DESKTOP: vira um sistema com sidebar lateral ══ */
-@media(min-width:1024px){
-  body{overscroll-behavior:auto}
-  #appShell{flex-direction:row}
-  .bottom-nav{
-    position:relative;order:-1;flex-direction:column;align-items:stretch;
-    width:250px;height:auto;flex-shrink:0;padding:1.25rem .85rem;gap:.35rem;
-    border-top:none;border-right:1px solid var(--gray-100);box-shadow:none;background:var(--white);
-  }
-  .bottom-nav::before{
-    content:"Navegação";display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;
-    letter-spacing:.06em;color:var(--gray-500);padding:.25rem 1rem .65rem;
-  }
-  .nav-item{
-    flex-direction:row;justify-content:flex-start;gap:.85rem;padding:.75rem 1rem;border-radius:12px;
-    font-size:.92rem;font-weight:600;text-transform:none;letter-spacing:normal;min-height:46px;color:var(--gray-700);
-  }
-  .nav-item .nav-icon{font-size:1.2rem}
-  .nav-item:hover{background:var(--gray-50);color:var(--dark)}
-  .nav-item.active{transform:none;background:rgba(181,101,138,.12);color:var(--secondary)}
-  .content-area{max-width:1120px;padding:2.25rem 2.75rem;margin:0 auto}
-  .stats-row{grid-template-columns:repeat(4,1fr);gap:1rem}
-  .toast{bottom:1.5rem}
-}
-@media(min-width:1440px){ .content-area{max-width:1280px} }
+    .btn-small-rose {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-small-rose.primary {
+      background: var(--secondary);
+      color: var(--white);
+    }
+    .btn-small-rose.primary:hover {
+      box-shadow: 0 4px 12px rgba(181, 101, 138, 0.3);
+    }
+    .btn-small-rose.success {
+      background: var(--success);
+      color: var(--white);
+    }
+    .btn-small-rose.danger {
+      background: var(--danger);
+      color: var(--white);
+    }
+    .btn-small-rose.secondary {
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+    .btn-small-rose.secondary:hover {
+      background: var(--gray-200);
+    }
 
-/* ══ IDENTIDADE ENLACE — tipografia editorial, hero em arco, busca, cards ══ */
-h1,.card-title,.modal-header{font-family:'Cormorant Garamond',serif;letter-spacing:.005em;line-height:1.14}
-.logo{font-size:1.5rem;letter-spacing:.01em}
-.logo-icon{background:linear-gradient(135deg,var(--primary),var(--gold))}
-.role-pill{background:linear-gradient(135deg,var(--primary),var(--secondary))}
+    /* ── ESPECIALIDADES CHIPS ── */
+    .chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--blush);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .chip-item .remove-chip {
+      background: none;
+      border: none;
+      color: var(--gray-500);
+      cursor: pointer;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+    .chip-item .remove-chip:hover {
+      color: var(--danger);
+    }
 
-/* hero em arco */
-.hero-arc{position:relative;overflow:hidden;background:linear-gradient(150deg,#7d2f5b 0%,var(--primary-dark) 70%,#37142c 100%);color:var(--white)}
-.hero-arc .hero-inner{position:relative;z-index:2;padding:1.4rem 1.5rem 2.6rem}
-.hero-arc::after{content:"";position:absolute;left:-8%;right:-8%;bottom:-2px;height:46px;background:var(--ivory);border-radius:50% 50% 0 0/100% 100% 0 0;z-index:1}
-.hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);font-weight:600;margin-bottom:.4rem}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1.08;margin-bottom:.4rem}
-.hero-sub{font-size:.95rem;color:rgba(255,255,255,.82);max-width:40ch}
-.hero-rings{position:absolute;right:-12px;top:-6px;width:150px;height:150px;opacity:.9;z-index:1}
-.hero-sprig{position:absolute;left:-10px;bottom:34px;width:120px;opacity:.5;z-index:1}
+    /* ── MODAL ── */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content-light {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      animation: slideUp 0.3s ease-out;
+    }
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .modal-header-light {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .form-group-light {
+      margin-bottom: 1rem;
+    }
+    .form-group-light label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      margin-bottom: 0.3rem;
+    }
+    .form-group-light input,
+    .form-group-light textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .form-group-light input:focus,
+    .form-group-light textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(181, 101, 138, 0.1);
+    }
+    .form-group-light textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .modal-actions-light {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .btn-modal-primary-light {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: var(--white);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-modal-primary-light:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(181, 101, 138, 0.3);
+    }
+    .btn-modal-secondary-light {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--gray-600);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-modal-secondary-light:hover {
+      background: var(--gray-50);
+    }
 
-/* busca em pílula */
-.search-pill{display:flex;align-items:center;gap:.55rem;background:var(--white);border:1.5px solid var(--gray-200);border-radius:999px;padding:.15rem .2rem .15rem 1.05rem;box-shadow:0 6px 18px rgba(110,42,82,.08);margin-bottom:.7rem}
-.search-pill .si{font-size:1.05rem;flex-shrink:0;opacity:.7}
-.search-pill input,.search-pill select{border:none!important;box-shadow:none!important;padding:.75rem .25rem;background:transparent;border-radius:999px}
-.search-pill input:focus,.search-pill select:focus{outline:none;box-shadow:none!important}
-.btn-cta{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:999px;box-shadow:0 8px 20px rgba(110,42,82,.25);width:100%}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,42,82,.32)}
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 6rem;
+      right: 1.5rem;
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      box-shadow: var(--shadow-xl);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--ink);
+      border-left: 4px solid var(--secondary);
+    }
+    .toast.show {
+      display: flex;
+    }
+    .toast.success {
+      border-left-color: var(--success);
+    }
+    .toast.error {
+      border-left-color: var(--danger);
+    }
 
-/* card de fornecedor (estilo marketplace) */
-.vendor-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--gray-100);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;margin-bottom:1rem}
-.vendor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
-.vendor-media{position:relative;aspect-ratio:16/10;min-height:130px;background:linear-gradient(135deg,var(--blush),#ecd3dc)}
-.vendor-monogram{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--primary);opacity:.85}
-.vendor-cat{position:absolute;top:.6rem;left:.6rem;background:rgba(255,255,255,.92);color:var(--primary);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:.28rem .65rem;border-radius:999px}
-.vendor-fav{position:absolute;top:.55rem;right:.55rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--secondary);font-size:.95rem}
-.vendor-body{padding:.95rem 1.05rem 1.1rem}
-.vendor-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--ink);line-height:1.08;margin-bottom:.2rem}
-.vendor-rating{display:flex;align-items:center;gap:.35rem;font-size:.82rem;color:var(--gray-600);margin-bottom:.55rem}
-.vendor-stars{color:var(--gold);letter-spacing:1px}
-.vendor-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.6rem}
-.vendor-desc{font-size:.86rem;color:var(--gray-600);line-height:1.5;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.vendor-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.7rem;border-top:1px solid var(--gray-100)}
-.vendor-price{font-size:.82rem;color:var(--gray-600)}
-.vendor-price b{color:var(--ink);font-size:.95rem}
-.stat-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%)}
-.specialty-chip{background:var(--blush);color:var(--primary);border:1px solid rgba(110,42,82,.15)}
+    /* ── AUTH ── */
+    .auth-shell {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, var(--ivory), #f5eae3);
+    }
+    .auth-card-light {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+    }
+    .auth-card-light h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .auth-card-light .sub {
+      color: var(--gray-500);
+      margin-bottom: 2rem;
+    }
+    .auth-card-light .form-group-light input {
+      border-radius: 999px;
+      padding: 0.9rem 1.5rem;
+    }
+    .btn-auth-primary-light {
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-auth-primary-light:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(181, 101, 138, 0.2);
+    }
+    .btn-auth-secondary-light {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--gray-600);
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: var(--transition);
+    }
+    .btn-auth-secondary-light:hover {
+      background: var(--gray-50);
+    }
 
-</style>
+    #authShell {
+      display: flex;
+    }
+    #appShell {
+      display: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 768px) {
+      .stats-grid-light {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .dock-floating-light {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 220px;
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 0.8rem 0.5rem;
+        gap: 0.2rem;
+        box-shadow: var(--shadow-glass);
+        margin-right: 1.5rem;
+        height: fit-content;
+        flex-shrink: 0;
+      }
+      #appShell {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+      .content-area-light {
+        padding: 0;
+        max-width: none;
+        flex: 1;
+      }
+      .dock-item-light {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        border-radius: var(--radius-sm);
+        justify-content: flex-start;
+      }
+      .dock-item-light .icon {
+        font-size: 1.2rem;
+      }
+      .dock-item-light.active {
+        background: rgba(181, 101, 138, 0.1);
+        color: var(--secondary);
+        box-shadow: none;
+      }
+      .dock-item-light:not(.active):hover {
+        background: rgba(181, 101, 138, 0.03);
+      }
+      .toast {
+        bottom: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dock-item-light span:not(.icon) {
+        display: none;
+      }
+      .dock-item-light {
+        padding: 0.5rem 0.8rem;
+      }
+      .user-name-light {
+        display: none;
+      }
+      .stats-grid-light {
+        gap: 0.5rem;
+      }
+      .stat-number-rose {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-container">
-    <a href="index.html" class="logo">
-      <div class="logo-icon">♥</div>
-      <span>Enlace</span>
-      <span class="role-pill">Fornecedor</span>
+  <!-- HEADER -->
+  <header class="header-glass-light">
+    <a href="index.html" class="logo-creative-light">
+      <span class="badge-ring">♥</span>
+      Enlace
+      <span class="role-pill-light">Fornecedor</span>
     </a>
-    <div class="header-right">
-      <div class="user-avatar" id="userAvatarHeader">P</div>
-      <span id="userNameHeader" style="font-size:.85rem;font-weight:600;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none"></span>
-      <button class="btn-logout" onclick="app.logout()" style="background:none;color:var(--danger);font-weight:600;padding:.4rem .7rem;min-height:36px;font-size:.8rem;border:none;cursor:pointer">Sair</button>
+    <div class="header-right-light">
+      <div class="user-avatar-light" id="userAvatarHeader">P</div>
+      <span class="user-name-light" id="userNameHeader"></span>
+      <button class="btn-logout-light" onclick="app.logout()">Sair</button>
+    </div>
+  </header>
+
+  <!-- APP SHELL -->
+  <div id="appShell">
+    <!-- DOCK -->
+    <nav class="dock-floating-light" id="mainDock">
+      <button class="dock-item-light active" data-section="profDashboard">
+        <span class="icon">📊</span><span>Dashboard</span>
+      </button>
+      <button class="dock-item-light" data-section="profAdsSection">
+        <span class="icon">✨</span><span>Anúncios</span>
+      </button>
+      <button class="dock-item-light" data-section="profRequestsSection">
+        <span class="icon">📨</span><span>Pedidos</span>
+      </button>
+      <button class="dock-item-light" data-section="profProfile">
+        <span class="icon">👤</span><span>Perfil</span>
+      </button>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="content-area-light" id="contentArea">
+
+      <!-- DASHBOARD -->
+      <section id="profDashboard" class="active">
+        <div style="margin-bottom:1.5rem">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--ink);">Olá, <span id="dashboardName">Fornecedor</span></h1>
+          <p style="color:var(--gray-600);">Gerencie seus serviços e pedidos</p>
+        </div>
+
+        <div class="stats-grid-light">
+          <div class="stat-card-rose"><div class="stat-number-rose" id="statAds">0</div><div class="stat-label-rose">Anúncios</div></div>
+          <div class="stat-card-rose"><div class="stat-number-rose" id="statRequests">0</div><div class="stat-label-rose">Solicitações</div></div>
+          <div class="stat-card-rose"><div class="stat-number-rose" id="statActive">0</div><div class="stat-label-rose">Em andamento</div></div>
+          <div class="stat-card-rose"><div class="stat-number-rose" id="statCompleted">0</div><div class="stat-label-rose">Concluídas</div></div>
+        </div>
+
+        <!-- Anúncios da plataforma -->
+        <div class="card-glass-light" id="managerAdsContainer">
+          <div class="card-title-light">📢 Anúncios da Plataforma</div>
+          <div id="managerAdsList" style="color:var(--gray-600);">Carregando...</div>
+        </div>
+
+        <!-- Meus anúncios -->
+        <div class="card-glass-light" id="profAdsContainer">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
+            <div class="card-title-light" style="margin-bottom:0;">✨ Meus Anúncios</div>
+            <button class="btn-small-rose primary" onclick="app.openAdModal()">+ Novo</button>
+          </div>
+          <div id="profAdsList"></div>
+        </div>
+
+        <!-- Solicitações -->
+        <div class="card-glass-light">
+          <div class="card-title-light">📨 Solicitações Recentes</div>
+          <div id="profRequestsList"></div>
+        </div>
+      </section>
+
+      <!-- ANÚNCIOS (full) -->
+      <section id="profAdsSection">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem">
+          <div>
+            <h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--ink);">Meus Anúncios</h1>
+            <p style="color:var(--gray-600);">Mostre seus serviços aos noivos</p>
+          </div>
+          <button class="btn-small-rose primary" onclick="app.openAdModal()">+ Novo</button>
+        </div>
+        <div id="profAdsFullList"></div>
+      </section>
+
+      <!-- PEDIDOS (full) -->
+      <section id="profRequestsSection">
+        <div style="margin-bottom:1.5rem">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--ink);">Solicitações</h1>
+          <p style="color:var(--gray-600);">Acompanhe todos os pedidos dos clientes</p>
+        </div>
+        <div id="profRequestsFullList"></div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="profProfile">
+        <div style="margin-bottom:1.5rem">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--ink);">Meu Perfil</h1>
+          <p style="color:var(--gray-600);">Mantenha suas informações atualizadas</p>
+        </div>
+
+        <div class="card-glass-light">
+          <div class="card-title-light">Informações Básicas</div>
+          <div class="form-group-light"><label>Nome</label><input type="text" id="profileName" placeholder="Seu nome" /></div>
+          <div class="form-group-light"><label>Email</label><input type="email" id="profileEmail" placeholder="seu@email.com" readonly /></div>
+          <div class="form-group-light"><label>Telefone</label><input type="tel" id="profilePhone" placeholder="(00) 99999-9999" /></div>
+          <div class="form-group-light"><label>Região</label><input type="text" id="profileRegion" placeholder="Maceió, AL" /></div>
+          <button class="btn-modal-primary-light" onclick="app.saveProfile()" style="width:100%;">💾 Salvar</button>
+        </div>
+
+        <div class="card-glass-light">
+          <div class="card-title-light">Especialidades</div>
+          <div id="specialtiesContainer" class="chip-container"></div>
+          <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
+            <input type="text" id="newSpecialty" placeholder="Nova especialidade" style="flex:1;padding:0.6rem 1rem;border:1px solid var(--gray-200);border-radius:999px;font-family:inherit;" />
+            <button class="btn-small-rose primary" onclick="app.addSpecialty()">+</button>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-</header>
 
-<!-- APP SHELL -->
-<div id="appShell" style="display:none">
-  <div class="content-area" id="contentArea">
-
-    <!-- DASHBOARD -->
-    <section id="profDashboard" class="active">
-      <div class="hero-arc" style="border-radius:18px;margin-bottom:1.25rem">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="right:-18px;top:-10px;width:130px;height:130px">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".85"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-        </svg>
-        <div class="hero-inner" style="padding-bottom:1.5rem">
-          <div class="hero-eyebrow">Olá, <span id="dashboardName">Fornecedor</span></div>
-          <div class="hero-title">Sua vitrine de casamentos</div>
-          <p class="hero-sub">Acompanhe seus anúncios, pedidos de orçamento e oportunidades</p>
-        </div>
-      </div>
-
-      <!-- STATS -->
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Anúncios</div><div class="stat-number" id="statAds">0</div></div>
-        <div class="stat-card"><div class="stat-label">Solicitações</div><div class="stat-number" id="statRequests">0</div></div>
-        <div class="stat-card"><div class="stat-label">Em andamento</div><div class="stat-number" id="statActive">0</div></div>
-        <div class="stat-card"><div class="stat-label">Concluídas</div><div class="stat-number" id="statCompleted">0</div></div>
-      </div>
-
-      <!-- ANÚNCIOS DO GESTOR PARA O PROFISSIONAL VER -->
-      <div class="card" id="managerAdsContainer">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <div class="card-title" style="margin-bottom:0">📢 Anúncios da Plataforma</div>
-        </div>
-        <div id="managerAdsList"></div>
-      </div>
-
-      <!-- ANÚNCIOS DO PROFISSIONAL -->
-      <div class="card" id="profAdsContainer">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <div class="card-title" style="margin-bottom:0">✨ Meus Anúncios</div>
-          <button class="btn-primary btn-small" onclick="app.openAdModal()">+ Novo</button>
-        </div>
-        <div id="profAdsList"></div>
-      </div>
-
-      <!-- SOLICITAÇÕES PARA O PROFISSIONAL -->
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <div class="card-title" style="margin-bottom:0">📨 Solicitações de Clientes</div>
-        </div>
-        <div id="profRequestsList"></div>
-      </div>
-    </section>
-
-    <!-- MEUS ANÚNCIOS -->
-    <section id="profAdsSection">
-      <div class="page-header" style="margin-bottom:1.5rem">
-        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--dark)">Meus Anúncios ✨</h1></div>
-        <button class="btn-primary" onclick="app.openAdModal()">+ Novo Anúncio</button>
-      </div>
-      <div id="profAdsFullList"></div>
-    </section>
-
-    <!-- SOLICITAÇÕES -->
-    <section id="profRequestsSection">
-      <div class="page-header" style="margin-bottom:1.5rem">
-        <div><h1 style="font-size:1.5rem;font-weight:800;color:var(--dark)">Solicitações 📨</h1></div>
-      </div>
-      <div id="profRequestsFullList"></div>
-    </section>
-
-    <!-- PERFIL -->
-    <section id="profProfile">
-      <div style="margin-bottom:1.5rem">
-        <h1 style="font-size:1.5rem;font-weight:800;color:var(--dark);margin-bottom:.25rem">Meu Perfil</h1>
-        <p style="color:var(--gray-600);font-size:.95rem">Atualize suas informações profissionais</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Informações Básicas</div>
-        <div class="form-group"><label>Nome Completo</label><input type="text" id="profileName" placeholder="Seu nome"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="profileEmail" placeholder="seu@email.com" readonly></div>
-        <div class="form-group"><label>Telefone</label><input type="tel" id="profilePhone" placeholder="(00) 99999-9999"></div>
-        <div class="form-group"><label>Região/Cidade</label><input type="text" id="profileRegion" placeholder="Maceió, AL"></div>
-        <button class="btn-primary" onclick="app.saveProfile()" style="width:100%;margin-top:1rem">💾 Salvar Alterações</button>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Especialidades</div>
-        <div id="specialtiesContainer"></div>
-        <input type="text" id="newSpecialty" placeholder="Nova especialidade" style="margin-top:1rem">
-        <button class="btn-secondary" onclick="app.addSpecialty()" style="width:100%;margin-top:.5rem">+ Adicionar</button>
-      </div>
-    </section>
-
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item active" data-section="profDashboard">
-      <span class="nav-icon">📊</span><span>Início</span>
-    </div>
-    <div class="nav-item" data-section="profAdsSection">
-      <span class="nav-icon">✨</span><span>Anúncios</span>
-    </div>
-    <div class="nav-item" data-section="profRequestsSection" id="navRequests">
-      <span class="nav-icon">📨</span><span>Pedidos</span>
-    </div>
-    <div class="nav-item" data-section="profProfile">
-      <span class="nav-icon">👤</span><span>Perfil</span>
-    </div>
-  </nav>
-</div>
-
-<!-- AUTH SHELL -->
-<div class="auth-shell" id="authShell">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:1.5rem">
-    <div style="background:var(--white);border-radius:20px;overflow:hidden;max-width:420px;width:100%;box-shadow:var(--shadow-lg)">
-      <div class="hero-arc">
-        <svg class="hero-rings" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="49" cy="62" r="25" stroke="#E4D2A8" stroke-width="4" opacity=".9"/>
-          <circle cx="73" cy="62" r="25" stroke="#C2A35E" stroke-width="4"/>
-          <path d="M61 33 q-7 -11 -2 -22" stroke="#E4D2A8" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="58" cy="10" r="3.4" fill="#E4D2A8"/><circle cx="64" cy="15" r="2.4" fill="#C2A35E"/><circle cx="53" cy="16" r="2.4" fill="#C2A35E"/>
-        </svg>
-        <div class="hero-inner" style="text-align:center;padding-bottom:2.6rem">
-          <div class="hero-eyebrow">Área do fornecedor</div>
-          <h1 class="hero-title" style="font-size:2.4rem">Enlace</h1>
-          <p class="hero-sub" style="margin:0 auto">Divulgue seus serviços para noivos de toda a região</p>
-        </div>
-      </div>
-      <div style="padding:1.4rem 1.8rem 2rem">
-
+  <!-- AUTH SHELL -->
+  <div class="auth-shell" id="authShell">
+    <div class="auth-card-light">
+      <h1>Enlace</h1>
+      <p class="sub">Área do fornecedor</p>
       <div id="loginCard">
-        <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
-        <button class="btn-primary" onclick="app.login()" style="width:100%;margin-bottom:.75rem">Entrar</button>
-        <button class="btn-secondary" onclick="app.showSignup()" style="width:100%">Criar conta</button>
+        <div class="form-group-light"><label>Email</label><input type="email" id="loginEmail" placeholder="seu@email.com" /></div>
+        <div class="form-group-light"><label>Senha</label><input type="password" id="loginPassword" placeholder="••••••••" /></div>
+        <button class="btn-auth-primary-light" onclick="app.login()">Entrar</button>
+        <button class="btn-auth-secondary-light" onclick="app.showSignup()">Criar conta</button>
       </div>
-
       <div id="signupCard" style="display:none">
-        <div class="form-group"><label>Nome completo</label><input type="text" id="signupName" placeholder="Seu nome" autocomplete="name"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" autocomplete="email"></div>
-        <div class="form-group"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" autocomplete="tel"></div>
-        <div class="form-group"><label>Especialidade</label><input type="text" id="signupSpecialty" placeholder="Ex: Fotografia, Buffet, Decoração"></div>
-        <div class="form-group"><label>Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password"></div>
-        <button class="btn-primary" onclick="app.signup()" style="width:100%;margin-bottom:.75rem">Criar conta</button>
-        <button class="btn-secondary" onclick="app.showLogin()" style="width:100%">Voltar</button>
-      </div>
+        <div class="form-group-light"><label>Nome</label><input type="text" id="signupName" placeholder="Seu nome" /></div>
+        <div class="form-group-light"><label>Email</label><input type="email" id="signupEmail" placeholder="seu@email.com" /></div>
+        <div class="form-group-light"><label>Telefone</label><input type="tel" id="signupPhone" placeholder="(00) 99999-9999" /></div>
+        <div class="form-group-light"><label>Especialidade</label><input type="text" id="signupSpecialty" placeholder="Ex: Fotografia" /></div>
+        <div class="form-group-light"><label>Região</label><input type="text" id="signupRegion" placeholder="Maceió, AL" /></div>
+        <div class="form-group-light"><label>Senha</label><input type="password" id="signupPassword" placeholder="••••••••" /></div>
+        <button class="btn-auth-primary-light" onclick="app.signup()">Criar conta</button>
+        <button class="btn-auth-secondary-light" onclick="app.showLogin()">Voltar</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MODALS -->
-
-<!-- MODAL: CREATE/EDIT AD -->
-<div class="modal" id="profAdModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="app.closeModal('profAdModal')">✕</button>
-    <div class="modal-header" id="adModalTitle">Novo Anúncio</div>
-    <div class="form-group"><label>Título</label><input type="text" id="profAdTitle" placeholder="Título do anúncio"></div>
-    <div class="form-group"><label>Descrição</label><textarea id="profAdContent" placeholder="Descreva seu anúncio..."></textarea></div>
-    <div class="form-group"><label>Expira em</label><input type="date" id="profAdExpire"></div>
-    <div style="display:flex;gap:.75rem">
-      <button class="btn-primary" onclick="app.createProfAd()" id="adSaveBtn" style="flex:1">Publicar Anúncio</button>
-      <button class="btn-secondary" onclick="app.closeModal('profAdModal')" style="flex:1">Cancelar</button>
+  <!-- MODAL: AD -->
+  <div class="modal" id="profAdModal">
+    <div class="modal-content-light">
+      <div class="modal-header-light" id="adModalTitle">Novo Anúncio</div>
+      <div class="form-group-light"><label>Título</label><input type="text" id="profAdTitle" placeholder="Título" /></div>
+      <div class="form-group-light"><label>Descrição</label><textarea id="profAdContent" placeholder="Descreva seu serviço..."></textarea></div>
+      <div class="form-group-light"><label>Expira em</label><input type="date" id="profAdExpire" /></div>
+      <div class="modal-actions-light">
+        <button class="btn-modal-primary-light" id="adSaveBtn" onclick="app.createProfAd()">Publicar</button>
+        <button class="btn-modal-secondary-light" onclick="app.closeModal('profAdModal')">Cancelar</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"><span id="toastMsg"></span></div>
+  <!-- TOAST -->
+  <div class="toast" id="toast"><span id="toastMsg"></span></div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
-  authDomain: "imobpro-667da.firebaseapp.com",
-  databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
-  projectId: "imobpro-667da",
-  storageBucket: "imobpro-667da.firebasestorage.app",
-  messagingSenderId: "827299768500",
-  appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
-};
-
-try { firebase.initializeApp(firebaseConfig); } catch(e) { console.warn('Firebase error:', e); }
-
-const db = firebase.database();
-const auth = firebase.auth();
-
-class EventDB {
-  static async set(path, data) {
-    const key = data.id || Date.now().toString();
-    return db.ref(`${path}/${key}`).set({...data,id:key});
-  }
-  static async update(path, data) {
-    return db.ref(path).update(data);
-  }
-  static async delete(path, id) {
-    return db.ref(`${path}/${id}`).remove();
-  }
-  static on(path, callback) {
-    return db.ref(path).on('value', snap => callback(Object.values(snap.val() || {})));
-  }
-}
-
-/* ════════════════════════════════════════════════════════════
-   CAMADA DE SEGURANÇA — proteção de dados (lado cliente)
-   • Hash de senha com PBKDF2-SHA256 + salt único por usuário
-   • Sessão sem senha, com expiração e verificação de integridade
-   • Validação de e-mail e força de senha
-   • Limite de tentativas de login (anti força-bruta)
-   OBS.: estas são proteções de cliente. A proteção definitiva
-   exige Firebase Authentication + Security Rules (ver SEGURANCA.md).
-   ════════════════════════════════════════════════════════════ */
-const Security = {
-  ITERATIONS: 150000,
-  SESSION_TTL_MS: 1000 * 60 * 60 * 12, // 12 horas
-  randomHex(bytes = 16) {
-    const a = new Uint8Array(bytes); crypto.getRandomValues(a);
-    return [...a].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async _derive(password, saltHex) {
-    const enc = new TextEncoder();
-    const salt = Uint8Array.from(saltHex.match(/.{2}/g).map(h => parseInt(h, 16)));
-    const km = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: this.ITERATIONS, hash: 'SHA-256' }, km, 256);
-    return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, '0')).join('');
-  },
-  async hashPassword(password) {
-    const salt = this.randomHex(16);
-    return { passwordHash: await this._derive(password, salt), passwordSalt: salt, passwordAlgo: 'PBKDF2-SHA256', passwordIter: this.ITERATIONS };
-  },
-  async verifyPassword(password, user) {
-    if (user.passwordHash && user.passwordSalt) {
-      const h = await this._derive(password, user.passwordSalt);
-      return this._safeEqual(h, user.passwordHash);
-    }
-    if (user.password != null) return user.password === password; // conta legada (texto puro)
-    return false;
-  },
-  _safeEqual(a, b) {
-    if (a.length !== b.length) return false;
-    let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-    return r === 0;
-  },
-  validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
-  validatePassword(pw) {
-    if (!pw || pw.length < 8) return { ok: false, msg: 'A senha deve ter ao menos 8 caracteres' };
-    if (!/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw)) return { ok: false, msg: 'Use letras e números na senha' };
-    return { ok: true };
-  },
-  _tKey(email) { return 'sec_thr_' + btoa(unescape(encodeURIComponent(email))).slice(0, 24); },
-  loginThrottle(email) {
-    let rec; try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    if (rec.lockUntil && Date.now() < rec.lockUntil) return { allowed: false, wait: Math.ceil((rec.lockUntil - Date.now()) / 1000) };
-    return { allowed: true };
-  },
-  recordFailure(email) {
-    const MAX = 5, WIN = 6e5, LOCK = 3e5; let rec;
-    try { rec = JSON.parse(localStorage.getItem(this._tKey(email))) || {}; } catch { rec = {}; }
-    const now = Date.now();
-    if (!rec.first || now - rec.first > WIN) rec = { first: now, count: 0 };
-    rec.count++; if (rec.count >= MAX) rec.lockUntil = now + LOCK;
-    localStorage.setItem(this._tKey(email), JSON.stringify(rec));
-  },
-  clearFailures(email) { localStorage.removeItem(this._tKey(email)); },
-  _strip(u) { const s = { ...u }; delete s.password; delete s.passwordHash; delete s.passwordSalt; delete s.passwordIter; delete s.passwordAlgo; return s; },
-  saveSession(key, user) {
-    const safe = this._strip(user);
-    localStorage.setItem(key, JSON.stringify({ user: safe, iat: Date.now(), exp: Date.now() + this.SESSION_TTL_MS }));
-    return safe;
-  },
-  loadSession(key) {
-    let p; try { p = JSON.parse(localStorage.getItem(key)); } catch { return null; }
-    if (!p || !p.user || !p.exp || Date.now() > p.exp) { localStorage.removeItem(key); return null; }
-    return p.user;
-  }
-};
-
-class ProfessionalApp {
-  constructor() {
-    this.currentUser = null;
-    this.myAds = [];
-    this.myRequests = [];
-    this.managerAds = [];
-    this.currentEditingAdId = null;
-  }
-
-  escape(s) { return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-  async boot() {
-    auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser));
-  }
-
-  publicListing(p) {
-    return { id: p.id, name: p.name || '', phone: p.phone || '', region: p.region || '',
-             specialties: p.specialties || [], role: 'professional',
-             createdAt: p.createdAt || new Date().toISOString() };
-  }
-
-  async handleAuth(fbUser) {
-    if (!fbUser) { this.currentUser = null; this.showAuth(); return; }
-    try {
-      const profile = await this.loadProfile(fbUser.uid);
-      if (!profile) { await auth.signOut(); this.showAuth(); return; }
-      if (profile.role !== 'professional') {
-        this.showToast('Este painel é apenas para fornecedores','error');
-        await auth.signOut(); this.showAuth(); return;
-      }
-      this.currentUser = profile;
-      await db.ref('professionals/' + profile.id).update(this.publicListing(profile)); // vitrine pública sem credenciais
-      if (!this._wired) { this.setupListeners(); this._wired = true; }
-      this.showApp();
-      document.getElementById('dashboardName').textContent = profile.name || 'Fornecedor';
-      document.getElementById('userNameHeader').textContent = profile.name || 'P';
-      this.refreshDashboard();
-    } catch (e) { console.error(e); this.showToast('Erro ao carregar seu perfil','error'); }
-  }
-
-  loadProfile(uid) { return db.ref('users/' + uid).once('value').then(s => s.val()); }
-
-  authError(e) {
-    const m = {
-      'auth/invalid-email': 'E-mail inválido',
-      'auth/email-already-in-use': 'Este e-mail já está cadastrado',
-      'auth/weak-password': 'A senha deve ter ao menos 6 caracteres',
-      'auth/user-not-found': 'E-mail ou senha incorretos',
-      'auth/wrong-password': 'E-mail ou senha incorretos',
-      'auth/invalid-credential': 'E-mail ou senha incorretos',
-      'auth/invalid-login-credentials': 'E-mail ou senha incorretos',
-      'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
-      'auth/network-request-failed': 'Falha de conexão. Verifique sua internet',
-      'auth/operation-not-allowed': 'Ative o login por e-mail/senha no Console do Firebase'
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
+  </script>
+  <script>
+    // ════════════════════════════════════════════════
+    // FIREBASE CONFIG & APP (mantido integralmente)
+    // ════════════════════════════════════════════════
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjVxdq2AGRh68Qa_YdbkMEdIRL7E06N8M",
+      authDomain: "imobpro-667da.firebaseapp.com",
+      databaseURL: "https://imobpro-667da-default-rtdb.firebaseio.com",
+      projectId: "imobpro-667da",
+      storageBucket: "imobpro-667da.firebasestorage.app",
+      messagingSenderId: "827299768500",
+      appId: "1:827299768500:web:5935f6ebfd863d376a8fe1"
     };
-    return m[e && e.code] || 'Não foi possível concluir. Tente novamente';
-  }
+    try { firebase.initializeApp(firebaseConfig); } catch (e) { console.warn(e); }
+    const db = firebase.database();
+    const auth = firebase.auth();
 
-  async migrateLegacy(email, password) {
-    const snap = await db.ref('users').orderByChild('email').equalTo(email).once('value');
-    const val = snap.val(); if (!val) return false;
-    const legacyKey = Object.keys(val)[0];
-    const legacy = val[legacyKey];
-    if (legacy.role !== 'professional') return false;
-    const ok = await Security.verifyPassword(password, legacy);
-    if (!ok) return false;
-    let cred;
-    try { cred = await auth.createUserWithEmailAndPassword(email, password); }
-    catch (e) {
-      if (e.code === 'auth/email-already-in-use') cred = await auth.signInWithEmailAndPassword(email, password);
-      else throw e;
-    }
-    const uid = cred.user.uid;
-    const profile = { ...Security._strip(legacy), id: uid };
-    await db.ref('users/' + uid).set(profile);
-    await db.ref('professionals/' + uid).set(this.publicListing(profile));
-    const allR = (await db.ref('requests').once('value')).val() || {};
-    const ru = {}; Object.entries(allR).forEach(([k, r]) => { if (r && r.professionalId === legacy.id) ru[k + '/professionalId'] = uid; });
-    if (Object.keys(ru).length) await db.ref('requests').update(ru);
-    const allA = (await db.ref('profAds').once('value')).val() || {};
-    const au = {}; Object.entries(allA).forEach(([k, a]) => { if (a && a.professionalId === legacy.id) au[k + '/professionalId'] = uid; });
-    if (Object.keys(au).length) await db.ref('profAds').update(au);
-    if (legacyKey !== uid) await db.ref('users/' + legacyKey).remove();
-    if (legacy.id && legacy.id !== uid) await db.ref('professionals/' + legacy.id).remove();
-    return true;
-  }
+    // ── HELPERS ──
+    function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+        "'": '&#39;' } [c])); }
 
-  setupListeners() {
-    EventDB.on('profAds', ads => {
-      this.myAds = ads.filter(a => a.professionalId === this.currentUser.id);
-      this.renderProfAds();
-      this.renderProfAdsFullList();
-    });
+    function safeId(s) { return String(s == null ? '' : s).replace(/[^A-Za-z0-9_-]/g, ''); }
 
-    EventDB.on('ads', ads => {
-      const now = new Date();
-      this.managerAds = ads.filter(a => new Date(a.expire) > now);
-      this.renderManagerAds();
-    });
+    const Security = {
+      validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); },
+      validatePassword(pw) { return pw && pw.length >= 8; }
+    };
 
-    EventDB.on('requests', requests => {
-      this.myRequests = requests.filter(r => r.professionalId === this.currentUser.id);
-      this.renderRequests();
-      this.renderRequestsFullList();
-    });
-  }
+    // ── APP ──
+    class ProfessionalApp {
+      constructor() {
+        this.currentUser = null;
+        this.myAds = [];
+        this.myRequests = [];
+        this.managerAds = [];
+        this.currentEditingAdId = null;
+      }
 
-  showAuth() { document.getElementById('authShell').style.display='flex'; document.getElementById('appShell').style.display='none'; }
-  showApp() { document.getElementById('authShell').style.display='none'; document.getElementById('appShell').style.display='flex'; }
+      async boot() { auth.onAuthStateChanged(fbUser => this.handleAuth(fbUser)); }
 
-  async login() {
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password = document.getElementById('loginPassword').value;
-    if (!email || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const thr = Security.loginThrottle(email);
-    if (!thr.allowed) { this.showToast(`Muitas tentativas. Aguarde ${thr.wait}s`,'error'); return; }
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      Security.clearFailures(email);
-    } catch (e) {
-      if (['auth/user-not-found','auth/invalid-credential','auth/invalid-login-credentials','auth/wrong-password'].includes(e.code)) {
+      async handleAuth(fbUser) {
+        if (!fbUser) { this.currentUser = null;
+          this.showAuth(); return; }
         try {
-          if (await this.migrateLegacy(email, password)) { Security.clearFailures(email); return; }
-        } catch (me) {
-          console.error('migração', me);
-          if (me.code === 'auth/weak-password') { this.showToast('Sua senha antiga é curta demais. Use "Esqueci minha senha".','error'); return; }
-        }
+          const profile = (await db.ref('users/' + fbUser.uid).once('value')).val();
+          if (!profile || profile.role !== 'professional') { await auth.signOut();
+            this.showAuth(); return; }
+          this.currentUser = profile;
+          // Publicar na vitrine
+          const pub = { id: profile.id, name: profile.name, phone: profile.phone, region: profile.region,
+            specialties: profile.specialties || [] };
+          await db.ref('professionals/' + profile.id).update(pub);
+          if (!this._wired) { this.setupListeners();
+            this._wired = true; }
+          this.showApp();
+          document.getElementById('dashboardName').textContent = profile.name || 'Fornecedor';
+          document.getElementById('userNameHeader').textContent = profile.name || '';
+          document.getElementById('userAvatarHeader').textContent = (profile.name || 'P')[0].toUpperCase();
+          this.refreshDashboard();
+          this.renderSpecialties();
+        } catch (e) { console.error(e);
+          this.showToast('Erro ao carregar perfil', 'error'); }
       }
-      Security.recordFailure(email);
-      this.showToast(this.authError(e),'error');
-    }
-  }
 
-  async signup() {
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim().toLowerCase();
-    const phone = document.getElementById('signupPhone').value.trim();
-    const specialty = document.getElementById('signupSpecialty').value.trim();
-    const region = document.getElementById('signupRegion').value.trim();
-    const password = document.getElementById('signupPassword').value;
-    if (!name || !email || !phone || !password) { this.showToast('Preencha todos os campos','error'); return; }
-    if (!Security.validateEmail(email)) { this.showToast('E-mail inválido','error'); return; }
-    const pv = Security.validatePassword(password);
-    if (!pv.ok) { this.showToast(pv.msg,'error'); return; }
-    try {
-      const cred = await auth.createUserWithEmailAndPassword(email, password);
-      const uid = cred.user.uid;
-      const profile = { id: uid, name, email, phone, role: 'professional', region, specialties: specialty ? [specialty] : [], createdAt: new Date().toISOString() };
-      await db.ref('users/' + uid).set(profile);
-      await db.ref('professionals/' + uid).set(this.publicListing(profile)); // handleAuth mostra o app
-    } catch (e) { console.error(e); this.showToast(this.authError(e),'error'); }
-  }
+      showAuth() { document.getElementById('authShell').style.display = 'flex';
+        document.getElementById('appShell').style.display = 'none'; }
+      showApp() { document.getElementById('authShell').style.display = 'none';
+        document.getElementById('appShell').style.display = 'flex'; }
 
-  showLogin() { document.getElementById('loginCard').style.display='block'; document.getElementById('signupCard').style.display='none'; }
-  showSignup() { document.getElementById('loginCard').style.display='none'; document.getElementById('signupCard').style.display='block'; }
+      async login() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+        if (!email || !password) return alert('Preencha todos os campos');
+        try { await auth.signInWithEmailAndPassword(email, password); } catch (e) { alert('Erro: ' + e.message); }
+      }
+      async signup() {
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+        const phone = document.getElementById('signupPhone').value.trim();
+        const specialty = document.getElementById('signupSpecialty').value.trim();
+        const region = document.getElementById('signupRegion').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        if (!name || !email || !phone || !password) return alert('Preencha todos os campos');
+        try {
+          const cred = await auth.createUserWithEmailAndPassword(email, password);
+          const uid = cred.user.uid;
+          const profile = { id: uid, name, email, phone, role: 'professional', region, specialties: specialty ? [specialty] :
+              [], createdAt: new Date().toISOString() };
+          await db.ref('users/' + uid).set(profile);
+          await db.ref('professionals/' + uid).set({ id: uid, name, phone, region, specialties: profile.specialties });
+        } catch (e) { alert('Erro: ' + e.message); }
+      }
+      showLogin() { document.getElementById('loginCard').style.display = 'block';
+        document.getElementById('signupCard').style.display = 'none'; }
+      showSignup() { document.getElementById('loginCard').style.display = 'none';
+        document.getElementById('signupCard').style.display = 'block'; }
+      async logout() { try { await auth.signOut(); } finally { location.reload(); } }
 
-  async logout() { try { await auth.signOut(); } finally { location.reload(); } }
+      setupListeners() {
+        db.ref('profAds').on('value', snap => {
+          const data = snap.val() || {};
+          this.myAds = Object.values(data).filter(a => a.professionalId === this.currentUser.id);
+          this.renderProfAds();
+          this.renderProfAdsFullList();
+          this.refreshDashboard();
+        });
+        db.ref('ads').on('value', snap => {
+          const data = snap.val() || {};
+          this.managerAds = Object.values(data).filter(a => new Date(a.expire) > new Date());
+          this.renderManagerAds();
+        });
+        db.ref('requests').on('value', snap => {
+          const data = snap.val() || {};
+          this.myRequests = Object.values(data).filter(r => r.professionalId === this.currentUser.id);
+          this.renderRequests();
+          this.renderRequestsFullList();
+          this.refreshDashboard();
+        });
+      }
 
-  refreshDashboard() {
-    const now = new Date();
-    const active = this.myRequests.filter(r => r.status === 'active').length;
-    const completed = this.myRequests.filter(r => r.status === 'completed').length;
-    document.getElementById('statAds').textContent = this.myAds.length;
-    document.getElementById('statRequests').textContent = this.myRequests.length;
-    document.getElementById('statActive').textContent = active;
-    document.getElementById('statCompleted').textContent = completed;
-  }
+      refreshDashboard() {
+        const active = this.myRequests.filter(r => r.status === 'active').length;
+        const completed = this.myRequests.filter(r => r.status === 'completed').length;
+        document.getElementById('statAds').textContent = this.myAds.length;
+        document.getElementById('statRequests').textContent = this.myRequests.length;
+        document.getElementById('statActive').textContent = active;
+        document.getElementById('statCompleted').textContent = completed;
+      }
 
-  renderManagerAds() {
-    const box = document.getElementById('managerAdsList');
-    if (!this.managerAds.length) { 
-      box.innerHTML = '<div class="empty-state" style="padding:2rem 0"><div class="empty-icon">📢</div><p>Nenhum anúncio da plataforma no momento</p></div>';
-      return;
-    }
-    box.innerHTML = this.managerAds.map(ad => `
-      <div class="announcement-card admin" onclick="app.selectManagerAd('${ad.id}')">
-        <div class="announcement-title">${this.escape(ad.title)}</div>
-        <div class="announcement-content">${this.escape(ad.content)}</div>
-        <div class="announcement-meta">
-          <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
-          <span>♥ De: Enlace</span>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  selectManagerAd(adId) {
-    const ad = this.managerAds.find(a => a.id === adId);
-    if (ad) this.showToast(`Anúncio: ${ad.title}`,'info');
-  }
-
-  openAdModal() {
-    this.currentEditingAdId = null;
-    document.getElementById('adModalTitle').textContent = 'Novo Anúncio';
-    document.getElementById('adSaveBtn').textContent = 'Publicar Anúncio';
-    ['profAdTitle','profAdContent','profAdExpire'].forEach(i => document.getElementById(i).value = '');
-    this.openModal('profAdModal');
-  }
-
-  async createProfAd() {
-    const title = document.getElementById('profAdTitle').value.trim();
-    const content = document.getElementById('profAdContent').value.trim();
-    const expire = document.getElementById('profAdExpire').value;
-    if (!title || !content || !expire) { this.showToast('Preencha todos os campos','error'); return; }
-    
-    const ad = {
-      id: this.currentEditingAdId || Date.now().toString(),
-      title, content, expire,
-      professionalId: this.currentUser.id,
-      professionalName: this.currentUser.name,
-      specialties: this.currentUser.specialties || [],
-      region: this.currentUser.region || '',
-      createdAt: new Date().toISOString()
-    };
-    
-    await EventDB.set('profAds', ad);
-    this.showToast(this.currentEditingAdId ? '✏️ Anúncio atualizado!' : '✨ Anúncio publicado!', 'success');
-    this.closeModal('profAdModal');
-    this.currentEditingAdId = null;
-  }
-
-  renderProfAds() {
-    const box = document.getElementById('profAdsList');
-    if (!this.myAds.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">✨</div><p>Nenhum anúncio criado</p><p style="font-size:.85rem;margin-top:.5rem">Crie anúncios para aparecer nas buscas</p></div>';
-      return;
-    }
-    const now = new Date();
-    box.innerHTML = this.myAds.slice(0,3).map(ad => {
-      const expired = new Date(ad.expire) < now;
-      return `
-        <div class="announcement-card" onclick="app.selectAd('${ad.id}')">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
-            <div style="flex:1">
-              <div class="announcement-title">${this.escape(ad.title)}</div>
-              <div class="announcement-content">${this.escape(ad.content)}</div>
-              <div style="font-size:.75rem;color:var(--gray-500);margin-top:.5rem">
-                ${expired ? '<span style="color:var(--danger)">⚠️ Expirado</span>' : '<span style="color:var(--success)">✓ Ativo</span>'}
-                · ${new Date(ad.expire).toLocaleDateString('pt-BR')}
+      renderManagerAds() {
+        const box = document.getElementById('managerAdsList');
+        if (!this.managerAds.length) {
+          box.innerHTML = '<div style="color:var(--gray-500);padding:1rem 0;">Nenhum anúncio da plataforma no momento</div>';
+          return;
+        }
+        box.innerHTML = this.managerAds.map(ad => `
+          <div class="announcement-card-rose" style="border-color:var(--gold);background:rgba(194,163,94,0.04);">
+            <div class="ad-info">
+              <h4>${esc(ad.title)}</h4>
+              <p>${esc(ad.content)}</p>
+              <div class="ad-meta">
+                <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
+                <span>♥ Enlace</span>
               </div>
             </div>
-            <button class="btn-danger btn-small" onclick="event.stopPropagation(); app.deleteProfAd('${ad.id}')" style="flex-shrink:0">✕</button>
           </div>
-        </div>`;
-    }).join('');
-  }
+        `).join('');
+      }
 
-  renderProfAdsFullList() {
-    const box = document.getElementById('profAdsFullList');
-    if (!this.myAds.length) {
-      box.innerHTML = '<div class="empty-state"><div class="empty-icon">✨</div><p>Nenhum anúncio criado</p></div>';
-      return;
-    }
-    const now = new Date();
-    box.innerHTML = this.myAds.map(ad => {
-      const expired = new Date(ad.expire) < now;
-      return `
-        <div class="announcement-card" onclick="app.selectAd('${ad.id}')">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem">
-            <div style="flex:1">
-              <div class="announcement-title">${this.escape(ad.title)}</div>
-              <div class="announcement-content">${this.escape(ad.content)}</div>
-              <div style="font-size:.75rem;color:var(--gray-500);margin-top:.5rem">
-                ${expired ? '<span style="color:var(--danger);font-weight:600">⚠️ Expirado</span>' : '<span style="color:var(--success);font-weight:600">✓ Ativo</span>'}
-                · Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}
+      openAdModal() {
+        this.currentEditingAdId = null;
+        document.getElementById('adModalTitle').textContent = 'Novo Anúncio';
+        document.getElementById('adSaveBtn').textContent = 'Publicar';
+        ['profAdTitle', 'profAdContent', 'profAdExpire'].forEach(i => document.getElementById(i).value = '');
+        document.getElementById('profAdModal').classList.add('show');
+      }
+
+      async createProfAd() {
+        const title = document.getElementById('profAdTitle').value.trim();
+        const content = document.getElementById('profAdContent').value.trim();
+        const expire = document.getElementById('profAdExpire').value;
+        if (!title || !content || !expire) return alert('Preencha todos os campos');
+        const ad = {
+          id: this.currentEditingAdId || Date.now().toString(),
+          title,
+          content,
+          expire,
+          professionalId: this.currentUser.id,
+          professionalName: this.currentUser.name,
+          specialties: this.currentUser.specialties || [],
+          region: this.currentUser.region || '',
+          createdAt: new Date().toISOString()
+        };
+        await db.ref('profAds/' + ad.id).set(ad);
+        this.showToast(this.currentEditingAdId ? '✏️ Anúncio atualizado' : '✨ Anúncio publicado', 'success');
+        this.closeModal('profAdModal');
+        this.currentEditingAdId = null;
+      }
+
+      editProfAd(id) {
+        const ad = this.myAds.find(a => a.id === id);
+        if (!ad) return;
+        this.currentEditingAdId = id;
+        document.getElementById('adModalTitle').textContent = 'Editar Anúncio';
+        document.getElementById('adSaveBtn').textContent = 'Salvar';
+        document.getElementById('profAdTitle').value = ad.title;
+        document.getElementById('profAdContent').value = ad.content;
+        document.getElementById('profAdExpire').value = ad.expire;
+        document.getElementById('profAdModal').classList.add('show');
+      }
+
+      async deleteProfAd(id) {
+        if (!confirm('Remover este anúncio?')) return;
+        await db.ref('profAds/' + id).remove();
+        this.showToast('Anúncio removido', 'info');
+      }
+
+      renderProfAds() {
+        const box = document.getElementById('profAdsList');
+        if (!this.myAds.length) {
+          box.innerHTML = '<div style="color:var(--gray-500);padding:1rem 0;text-align:center;">Nenhum anúncio criado</div>';
+          return;
+        }
+        box.innerHTML = this.myAds.slice(0, 3).map(ad => `
+          <div class="announcement-card-rose">
+            <div class="ad-info">
+              <h4>${esc(ad.title)}</h4>
+              <p>${esc(ad.content)}</p>
+              <div class="ad-meta">
+                <span>${new Date(ad.expire) > new Date() ? '✓ Ativo' : '⚠️ Expirado'}</span>
+                <span>📅 ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
               </div>
             </div>
-            <div style="display:flex;gap:.5rem;flex-shrink:0">
-              <button class="btn-secondary btn-small" onclick="event.stopPropagation(); app.editProfAd('${ad.id}')">✏️</button>
-              <button class="btn-danger btn-small" onclick="event.stopPropagation(); app.deleteProfAd('${ad.id}')">✕</button>
+            <div style="display:flex;gap:0.4rem;">
+              <button class="btn-small-rose secondary" onclick="app.editProfAd('${safeId(ad.id)}')">✏️</button>
+              <button class="btn-small-rose danger" onclick="app.deleteProfAd('${safeId(ad.id)}')">✕</button>
             </div>
           </div>
-        </div>`;
-    }).join('');
-  }
+        `).join('');
+      }
 
-  selectAd(adId) {
-    const ad = this.myAds.find(a => a.id === adId);
-    if (ad) this.showToast(`${ad.title}`,'info');
-  }
-
-  editProfAd(adId) {
-    const ad = this.myAds.find(a => a.id === adId);
-    if (!ad) return;
-    this.currentEditingAdId = adId;
-    document.getElementById('adModalTitle').textContent = 'Editar Anúncio';
-    document.getElementById('adSaveBtn').textContent = 'Salvar Alterações';
-    document.getElementById('profAdTitle').value = ad.title;
-    document.getElementById('profAdContent').value = ad.content;
-    document.getElementById('profAdExpire').value = ad.expire;
-    this.openModal('profAdModal');
-  }
-
-  async deleteProfAd(id) {
-    if (!confirm('Remover este anúncio?')) return;
-    await EventDB.delete('profAds', id);
-    this.showToast('Anúncio removido','info');
-  }
-
-  renderRequests() {
-    const box = document.getElementById('profRequestsList');
-    if (!this.myRequests.length) {
-      box.innerHTML = '<div class="empty-state" style="padding:1.5rem 0"><div class="empty-icon">📨</div><p>Nenhuma solicitação ainda</p><p style="font-size:.85rem;margin-top:.5rem">Complete seu perfil para aparecer nas buscas</p></div>';
-      return;
-    }
-    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
-    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    box.innerHTML = sorted.slice(0,3).map(r => `
-      <div class="request-card ${r.status}" onclick="app.selectRequest('${r.id}')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.5rem">
-          <div style="flex:1">
-            <div style="font-weight:700;color:var(--dark);margin-bottom:.25rem">${this.escape(r.description)}</div>
-            <div style="font-size:.85rem;color:var(--gray-600)">💰 R$ ${this.escape(r.budget)}</div>
+      renderProfAdsFullList() {
+        const box = document.getElementById('profAdsFullList');
+        if (!this.myAds.length) {
+          box.innerHTML = '<div style="color:var(--gray-500);padding:2rem;text-align:center;">Nenhum anúncio</div>';
+          return;
+        }
+        box.innerHTML = this.myAds.map(ad => `
+          <div class="announcement-card-rose">
+            <div class="ad-info">
+              <h4>${esc(ad.title)}</h4>
+              <p>${esc(ad.content)}</p>
+              <div class="ad-meta">
+                <span>${new Date(ad.expire) > new Date() ? '✓ Ativo' : '⚠️ Expirado'}</span>
+                <span>📅 Expira: ${new Date(ad.expire).toLocaleDateString('pt-BR')}</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.4rem;">
+              <button class="btn-small-rose secondary" onclick="app.editProfAd('${safeId(ad.id)}')">✏️</button>
+              <button class="btn-small-rose danger" onclick="app.deleteProfAd('${safeId(ad.id)}')">✕</button>
+            </div>
           </div>
-          <span class="badge" style="flex-shrink:0;background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff">${labels[r.status]}</span>
-        </div>
-        <div style="font-size:.8rem;color:var(--gray-500)">👤 ${this.escape(r.clientName)} · 📍 ${this.escape(r.location)}</div>
-        <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap">
-          ${r.status === 'pending' ? `<button class="btn-success btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','active')">✓ Aceitar</button><button class="btn-danger btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','cancelled')">✕ Recusar</button>` : ''}
-          ${r.status === 'active' ? `<button class="btn-primary btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','completed')">🏁 Concluir</button>` : ''}
-        </div>
-      </div>`).join('');
-  }
+        `).join('');
+      }
 
-  renderRequestsFullList() {
-    const box = document.getElementById('profRequestsFullList');
-    if (!this.myRequests.length) {
-      box.innerHTML = '<div class="empty-state"><div class="empty-icon">📨</div><p>Nenhuma solicitação</p></div>';
-      return;
-    }
-    const labels = {pending:'Pendente',active:'Aceita',cancelled:'Recusada',completed:'Concluída'};
-    const sorted = [...this.myRequests].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-    box.innerHTML = sorted.map(r => `
-      <div class="request-card ${r.status}" onclick="app.selectRequest('${r.id}')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.75rem">
-          <div style="flex:1">
-            <div style="font-weight:700;color:var(--dark);margin-bottom:.5rem;font-size:1.05rem">${this.escape(r.description)}</div>
-            <div style="display:flex;flex-wrap:wrap;gap:.75rem;font-size:.85rem;color:var(--gray-600)">
-              <span>👤 ${this.escape(r.clientName)}</span>
-              <span>📍 ${this.escape(r.location)}</span>
+      renderRequests() {
+        const box = document.getElementById('profRequestsList');
+        if (!this.myRequests.length) {
+          box.innerHTML = '<div style="color:var(--gray-500);padding:1rem 0;text-align:center;">Nenhuma solicitação ainda</div>';
+          return;
+        }
+        const labels = { pending: 'Pendente', active: 'Aceita', cancelled: 'Recusada', completed: 'Concluída' };
+        const sorted = [...this.myRequests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        box.innerHTML = sorted.slice(0, 3).map(r => `
+          <div class="request-card-rose">
+            <div class="req-header">
+              <div class="req-title">${esc(r.description)}</div>
+              <span class="badge-status-rose ${r.status}">${labels[r.status]}</span>
+            </div>
+            <div class="req-meta">
+              <span>💰 R$ ${esc(r.budget)}</span>
+              <span>👤 ${esc(r.clientName)}</span>
+              <span>📍 ${esc(r.location)}</span>
+            </div>
+            <div style="margin-top:0.5rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+              ${r.status === 'pending' ? `<button class="btn-small-rose success" onclick="app.respondRequest('${safeId(r.id)}','active')">✓ Aceitar</button><button class="btn-small-rose danger" onclick="app.respondRequest('${safeId(r.id)}','cancelled')">✕ Recusar</button>` : ''}
+              ${r.status === 'active' ? `<button class="btn-small-rose primary" onclick="app.respondRequest('${safeId(r.id)}','completed')">🏁 Concluir</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      renderRequestsFullList() {
+        const box = document.getElementById('profRequestsFullList');
+        if (!this.myRequests.length) {
+          box.innerHTML = '<div style="color:var(--gray-500);padding:2rem;text-align:center;">Nenhuma solicitação</div>';
+          return;
+        }
+        const labels = { pending: 'Pendente', active: 'Aceita', cancelled: 'Recusada', completed: 'Concluída' };
+        const sorted = [...this.myRequests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        box.innerHTML = sorted.map(r => `
+          <div class="request-card-rose">
+            <div class="req-header">
+              <div class="req-title">${esc(r.description)}</div>
+              <span class="badge-status-rose ${r.status}">${labels[r.status]}</span>
+            </div>
+            <div class="req-meta">
+              <span>💰 R$ ${esc(r.budget)}</span>
+              <span>👤 ${esc(r.clientName)}</span>
+              <span>📍 ${esc(r.location)}</span>
               <span>📅 ${new Date(r.date).toLocaleDateString('pt-BR')}</span>
-              <span>💰 R$ ${this.escape(r.budget)}</span>
+            </div>
+            <div style="margin-top:0.5rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+              ${r.status === 'pending' ? `<button class="btn-small-rose success" onclick="app.respondRequest('${safeId(r.id)}','active')">✓ Aceitar</button><button class="btn-small-rose danger" onclick="app.respondRequest('${safeId(r.id)}','cancelled')">✕ Recusar</button>` : ''}
+              ${r.status === 'active' ? `<button class="btn-small-rose primary" onclick="app.respondRequest('${safeId(r.id)}','completed')">🏁 Concluir</button>` : ''}
+              <button class="btn-small-rose secondary" onclick="app.showToast('💬 Chat em breve','info')">💬 Chat</button>
             </div>
           </div>
-          <span class="badge" style="flex-shrink:0;background:${({pending:'#C98A3A',active:'#8A3D63',cancelled:'#C2453F',completed:'#4F8A6B'}[r.status])};color:#fff">${labels[r.status]}</span>
-        </div>
-        <div style="margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap">
-          ${r.status === 'pending' ? `<button class="btn-success btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','active')">✓ Aceitar</button><button class="btn-danger btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','cancelled')">✕ Recusar</button>` : ''}
-          ${r.status === 'active' ? `<button class="btn-primary btn-small" onclick="event.stopPropagation(); app.respondRequest('${r.id}','completed')">🏁 Concluir</button>` : ''}
-          <button class="btn-secondary btn-small" onclick="event.stopPropagation(); app.showToast('💬 Abrir chat com cliente','info')">💬 Chat</button>
-        </div>
-      </div>`).join('');
-  }
+        `).join('');
+      }
 
-  selectRequest(requestId) {
-    const r = this.myRequests.find(x => x.id === requestId);
-    if (r) this.showToast(`${r.description} - R$ ${r.budget}`,'info');
-  }
+      async respondRequest(id, status) {
+        await db.ref('requests/' + id).update({ status });
+        const msg = { active: '✓ Solicitação aceita!', cancelled: '✕ Solicitação recusada', completed: '🏁 Serviço concluído!' };
+        this.showToast(msg[status] || 'Atualizado', 'success');
+      }
 
-  async respondRequest(requestId, status) {
-    await EventDB.update(`requests/${requestId}`, { status });
-    const msg = {active:'✓ Solicitação aceita!',cancelled:'✕ Solicitação recusada',completed:'🏁 Serviço concluído!'};
-    this.showToast(msg[status] || 'Atualizado', status === 'cancelled' ? 'info' : 'success');
-  }
+      async saveProfile() {
+        const name = document.getElementById('profileName').value.trim();
+        const phone = document.getElementById('profilePhone').value.trim();
+        const region = document.getElementById('profileRegion').value.trim();
+        if (!name) return alert('Nome é obrigatório');
+        this.currentUser = { ...this.currentUser, name, phone, region };
+        await db.ref('users/' + this.currentUser.id).update({ name, phone, region });
+        await db.ref('professionals/' + this.currentUser.id).update({ name, phone, region });
+        this.showToast('✓ Perfil atualizado', 'success');
+      }
 
-  async saveProfile() {
-    const name = document.getElementById('profileName').value;
-    const phone = document.getElementById('profilePhone').value;
-    const region = document.getElementById('profileRegion').value;
-    this.currentUser = { ...this.currentUser, name, phone, region };
-    await EventDB.update(`users/${this.currentUser.id}`, { name, phone, region });
-    await EventDB.update(`professionals/${this.currentUser.id}`, { name, phone, region });
-    this.showToast('✓ Perfil atualizado','success');
-  }
+      async addSpecialty() {
+        const input = document.getElementById('newSpecialty');
+        const val = input.value.trim();
+        if (!val) return;
+        if (!this.currentUser.specialties) this.currentUser.specialties = [];
+        this.currentUser.specialties.push(val);
+        input.value = '';
+        await db.ref('users/' + this.currentUser.id).update({ specialties: this.currentUser.specialties });
+        await db.ref('professionals/' + this.currentUser.id).update({ specialties: this.currentUser.specialties });
+        this.renderSpecialties();
+        this.showToast('✓ Especialidade adicionada', 'success');
+      }
 
-  async addSpecialty() {
-    const input = document.getElementById('newSpecialty');
-    const specialty = input.value.trim();
-    if (!specialty) return;
-    if (!this.currentUser.specialties) this.currentUser.specialties = [];
-    this.currentUser.specialties.push(specialty);
-    input.value = '';
-    await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
-    await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
-    this.renderSpecialties();
-    this.showToast('✓ Especialidade adicionada','success');
-  }
+      async removeSpecialty(index) {
+        this.currentUser.specialties.splice(index, 1);
+        await db.ref('users/' + this.currentUser.id).update({ specialties: this.currentUser.specialties });
+        await db.ref('professionals/' + this.currentUser.id).update({ specialties: this.currentUser.specialties });
+        this.renderSpecialties();
+      }
 
-  renderSpecialties() {
-    const container = document.getElementById('specialtiesContainer');
-    if (!this.currentUser.specialties || !this.currentUser.specialties.length) {
-      container.innerHTML = '<p style="color:var(--gray-500);font-size:.9rem">Nenhuma especialidade adicionada</p>';
-      return;
+      renderSpecialties() {
+        const container = document.getElementById('specialtiesContainer');
+        if (!this.currentUser.specialties || !this.currentUser.specialties.length) {
+          container.innerHTML = '<div style="color:var(--gray-500);font-size:0.9rem;">Nenhuma especialidade</div>';
+          return;
+        }
+        container.innerHTML = this.currentUser.specialties.map((s, i) => `
+          <span class="chip-item">
+            ${esc(s)}
+            <button class="remove-chip" onclick="app.removeSpecialty(${i})">✕</button>
+          </span>
+        `).join('');
+      }
+
+      openModal(id) { document.getElementById(id).classList.add('show'); }
+      closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+      showToast(msg, type = 'info') {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        t.className = `toast show ${type}`;
+        clearTimeout(this._toastTimer);
+        this._toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+      }
     }
-    container.innerHTML = this.currentUser.specialties.map((s,i) => `
-      <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem;background:var(--gray-100);border-radius:8px;margin-right:.5rem;margin-bottom:.5rem">
-        <span>${this.escape(s)}</span>
-        <button style="background:none;border:none;cursor:pointer;color:var(--danger);font-weight:700" onclick="app.removeSpecialty(${i})">✕</button>
-      </div>`).join('');
-  }
 
-  async removeSpecialty(index) {
-    this.currentUser.specialties.splice(index, 1);
-    await EventDB.update(`users/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
-    await EventDB.update(`professionals/${this.currentUser.id}`, { specialties: this.currentUser.specialties });
-    this.renderSpecialties();
-  }
+    const app = new ProfessionalApp();
+    app.boot();
 
-  openModal(id) { document.getElementById(id).classList.add('show'); }
-  closeModal(id) { document.getElementById(id).classList.remove('show'); }
-  showToast(msg, type='info') {
-    const toast = document.getElementById('toast');
-    document.getElementById('toastMsg').textContent = msg;
-    toast.className = `toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
-}
+    // Navegação
+    document.querySelectorAll('.dock-item-light').forEach(item => {
+      item.addEventListener('click', () => {
+        const section = item.getAttribute('data-section');
+        document.querySelectorAll('.dock-item-light').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(section).classList.add('active');
+        // Carregar perfil quando ativo
+        if (section === 'profProfile' && app.currentUser) {
+          document.getElementById('profileName').value = app.currentUser.name || '';
+          document.getElementById('profileEmail').value = app.currentUser.email || '';
+          document.getElementById('profilePhone').value = app.currentUser.phone || '';
+          document.getElementById('profileRegion').value = app.currentUser.region || '';
+          app.renderSpecialties();
+        }
+      });
+    });
 
-const app = new ProfessionalApp();
-app.boot();
-
-// Nav switching
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const section = item.getAttribute('data-section');
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    item.classList.add('active');
-    document.getElementById(section).classList.add('active');
-  });
-});
-
-// Modal close on background click
-document.getElementById('profAdModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('profAdModal')) app.closeModal('profAdModal');
-});
-
-// Load profile on profile section
-const observer = new MutationObserver(() => {
-  if (document.getElementById('profProfile').classList.contains('active')) {
-    if (app.currentUser) {
-      document.getElementById('profileName').value = app.currentUser.name || '';
-      document.getElementById('profileEmail').value = app.currentUser.email || '';
-      document.getElementById('profilePhone').value = app.currentUser.phone || '';
-      document.getElementById('profileRegion').value = app.currentUser.region || '';
-      app.renderSpecialties();
-    }
-  }
-});
-observer.observe(document.getElementById('contentArea'), { attributes: true, subtree: true, attributeFilter: ['class'] });
-</script>
+    // Fechar modal
+    document.getElementById('profAdModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) app.closeModal('profAdModal');
+    });
+  </script>
 </body>
 </html>
